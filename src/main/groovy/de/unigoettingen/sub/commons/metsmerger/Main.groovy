@@ -85,8 +85,8 @@ class Main {
             input = new File(opt.i).toURL()
             log.trace('Input: ' + input.toString())
             //No input, just ruleset
-        } else {
-            log.trace('No input file!')
+        } else if(opt.r) {
+            log.trace('No input file, assuming ruleset transformation')
             inFormat = FORMAT.RULESET
             outFormat = FORMAT.XSL
         }
@@ -150,8 +150,6 @@ class Main {
      */
     static void start () {
         //Open input
-        def inputDoc = loadDocument(input)
-
         AbstractTransformer converter
         switch (inFormat) {
         case FORMAT.TEI:
@@ -159,10 +157,12 @@ class Main {
             break
         case FORMAT.DFG:
             converter = new MetsConverter(ruleset, input)
+            break
         case FORMAT.RULESET:
             converter = new RulesetConverter(ruleset)
+            break
         default:
-            log.warn('Format not supported as input!')
+            log.warn('Format ' + inFormat.name + ' not supported as input!')
             System.exit(4)
                 
         }
@@ -190,20 +190,22 @@ class Main {
         if (merge == null) {
             converter.transform()
         } else {
-            //otherwise merge
+            converter = new MetsMerger(ruleset, input)
+            converter.transform()
             
         }
         
         if (inFormat == FORMAT.TEI) {
             //Check which METS should be created
             if (outFormat == FORMAT.GOOBI) {
-                
+                converter = new MetsConverter(ruleset, input)
+                converter.transform()
             }
         }
         
         switch (outFormat) {
         case FORMAT.GOOBI:
-            converter = new MetsConverter(ruleset, input)
+            
             break
         case FORMAT.DFG:
             break
