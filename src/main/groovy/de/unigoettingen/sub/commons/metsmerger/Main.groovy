@@ -61,6 +61,11 @@ class Main {
         cli.v(longOpt: 'verbose', 'verbose output')
         
         def opt = cli.parse(args)
+        if(opt.v) {
+            verbose = true
+            log.setLevel(Level.TRACE)
+        }
+        
         if(!opt) {
             cli.usage()
             return
@@ -68,25 +73,26 @@ class Main {
 
         if(opt.h) {
             cli.usage()
+            log.trace('Help requested')
             return
         }
         
-        if(opt.v) {
-            verbose = true
-            log.setLevel(Level.INFO)
-        }
         if(opt.r) {
             ruleset = new File(opt.r).toURL()
+            log.trace('Ruleset: ' + ruleset.toString())
         }
         if(opt.i) {
             input = new File(opt.i).toURL()
+            log.trace('Input: ' + input.toString())
             //No input, just ruleset
         } else {
+            log.trace('No input file!')
             inFormat = FORMAT.RULESET
             outFormat = FORMAT.XSL
         }
         if (opt.o && opt.o != '-') {
             outputFile = new File(opt.o)
+            log.trace('Input: ' + outputFile.toString())
             output = new FileOutputStream(outputFile)
         }
 
@@ -100,18 +106,25 @@ class Main {
             output = System.out
         }
         
+        //Check if there is something to work with
+        if (ruleset == null && input == null) {
+            println "Neither input file nor ruleset given"
+            cli.usage()
+            System.exit(1)
+        }
+        
         //Check formats
         if(opt.j && FORMAT.fromString(opt.j) != null) {
             inFormat = FORMAT.fromString(opt.j)
-        } else {
-            log.info('Can\'t parse format' + opt.j)
+        } else if (opt.j) {
+            log.trace('Can\'t parse input format' + opt.j)
             println 'Format must be one of ' + FORMAT.getFormats()
             System.exit(5)
         }
         if(opt.p && FORMAT.fromString(opt.p) != null) {
             outFormat = FORMAT.fromString(opt.p)
-        } else {
-            log.info('Can\'t parse format' + opt.p)
+        } else if (opt.p) {
+            log.info('Can\'t parse output format' + opt.p)
             println 'Format must be one of ' + FORMAT.getFormats()
             System.exit(5)
         }
