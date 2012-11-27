@@ -1,0 +1,11 @@
+ ------
+ SUB METS Merger
+ ------
+ Christian Mahnke 
+ <mailto:mahnke@sub.uni-goettingen.de>
+ ------
+ 2012-11-27
+ ------
+Overview
+
+ This package contains some XSL stylesheets and a Groovy wrapper developed for the Archao18 project. It's main purpose the the transformation from TEI to METS and the import of the results (and thus any DFG Viewer compatiple METS) into the Goobi Workflow component.

@@ -1,0 +1,34 @@
+ ------
+ Offene Punkte, die noch gemacht / verbessert werden können
+ ------
+ Christian Mahnke 
+ <mailto:mahnke@sub.uni-goettingen.de>
+ ------
+ 2012-11-27
+ ------
+
+CLI
+
+ * Parameter der Stylessheets können nicht über die Kommandozeile gesteuert werden
+
+ * Typ der Eingabedatei automatisch erkennen
+
+XSLT
+
+* Goobi METS Merger
+
+ * IDs sollten überprüft und ggf umgeschrieben werden 
+
+ * Namespace Prefix "mets" and "METS" vereinheitlichen
+
+ * StructLinks funktionieren nicht, da der Name der Strukturelement Teil des Regelsatzes ist.
+
+ * DMD Sektionen werden für jedes strukturelles Element benötigt, besser als Teil des Regelsatzkonverters lösen
+
+   * ORDERLABEL's werden nicht kopiert
+
+* Ruleset2XSLT
+
+ * Die Doppelkreuze (#) in den Pseude XPath sind noch problematisch
+
+ * Validierung ist noch nicht mit eingebaut

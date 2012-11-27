@@ -1,0 +1,47 @@
+ ------
+ Dokumentation des Kommandozeilenwerkzeugs
+ ------
+ Christian Mahnke 
+ <mailto:mahnke@sub.uni-goettingen.de>
+ ------
+ 2012-11-27
+ ------
+
+Parameter
+
+  -c / --check Validierung der Ergebnisse\
+  -h / --help Hilfe\
+  -i / --input Eingabedatei\
+  -j / --input-format Eingabedateiformat (muss nur angegeben werden wenn nicht DFG Viewer METS)\
+  -m / --mergeDatei, die mit der Eingabedatei zusammengeführt werden soll\
+  -o / --output Ausgabedatei\
+  -p / --output-format Ausgabedateiformat (muss nur angegeben werden wenn nicht Goobi METS, oder nur ein Regelsatz als Parameter angegeben wurde)\
+  -r / --ruleset Regelsatzdatei\
+  -v / --verbose Weitergehende Ausgabe\
+
+
+Beispiele
+
+* Stylesheet aus Regelsatz erstellen
+
++-----+
+java -jar mets-merger.jar -r archaeo18.xml -o stylesheet.xsl
++-----+
+
+* TEI in DFG Viewer METS umwandeln
+
++-----+
+java -jar mets-merger.jar -i doc.tei.xml -j tei -o tei.mets.xml -p dfg
++-----+
+
+* DFG Viewer METS in Goobi internes METS umwandeln (benötigt Regelsatz)
+
++-----+
+java -jar mets-merger.jar -r ruleset.xml -i dfg.mets.xml -o goobi.mets.xml
++-----+
+
+* Zwei METS Dateien zusammenführen
+
++-----+
+java -jar mets-merger.jar -i dfg.mets.xml -m goobi.mets.xml -o goobi.mets.xml
++-----+

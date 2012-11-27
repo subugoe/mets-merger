@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="METS Merger">
+    <body>
+        <menu name="METS Merger">
+            <item name="Übersicht" href="index.html"/>
+            <item name="Benutzung" href="usage.html"/>
+            <item name="METS Konvertierung" href="mets-conversion.html"/>
+            <item name="Todo" href="todo.html"/>
+            <item name="GroovyDoc" href="./groovydoc/index.html"/>
+        </menu>
+        <menu ref="reports"/>
+    </body>
+</project>

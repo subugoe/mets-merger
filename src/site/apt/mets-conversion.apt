@@ -1,0 +1,218 @@
+ ------
+ Dokumentation der METS Umwandlung
+ ------
+ Christian Mahnke 
+ <mailto:mahnke@sub.uni-goettingen.de>
+ ------
+ 2012-11-27
+ ------
+
+Einleitung
+
+ Um zu vermeiden das für den Betrieb der Archaeo18 Webseite die Funktionalität des GDZ Repositories (wie OAI Anbindung, PDF Erstellung, Umrechnen der Digitalisate etc.) dupliziert werden muss, wurde entschieden das dieses Repository nachgenutzt werden soll. Voraussetzung (diese sind organisatorischer, nicht technischer Natur) dafür sind allerdings:
+ 
+  * Die Werke (nur Handschriften nicht die Sekundärliteratur) sollen nicht beim Browsing erreichbar sein, auch sollen sie nicht über die Suche findbar sein.
+ 
+  * Ein öffentlich sichtbarer Katalognachweiss muss optional sein, da die jeweiligen "Besitzer" das ggf. nicht zulassen werden.
+
+ Dazu kommt eine Vorraussetzung für die korrekte Darstellung in der Obefläche:
+ 
+  * Die digitalisierten Handschriften müssen eine maschinenlesbare Zuordnung zwischen den logischen und physischen Seiten haben (Stichwort: Buchrücken).
+
+ Daher wurde beschlossen die Werke in die Goobi Workflow Schicht [http://en.wikipedia.org/wiki/Goobi] zu importieren:
+
+  * Dort kann die Zuordnung (logisch vs. physisch, siehe oben) manuell erstellt werden
+
+  * Die Daten könne einfach ins Präsentationssystem importiert werden.
+
+ Daher beschäftigt sich diese Seite damit wie bestehende Daten (hauptsächlich Strukturmetadaten) in die Produktionsumgebung importiert werden können.
+
+Vorarbeiten
+
+* Anbindung des PoC an den DFG Viewer
+
+ Zur Nutzung der Skalierungsfunktionen des ContentServers wurden aus den TEI Dateien METS Dateien generiert, diese lassen sich auch mit dem DFG Viewer nutzen, es ist allerdings nur die grundlegende Funktionalität zu Interoperabilität mit beiden Komponenten implementiert:
+
+ * Da keine TEI Header vorhanden sind, fehlen viele Metadaten.
+
+ * Es gibt keine deskriptiven Metadaten für die Strukturelemente, da nur die Überschriften bekannt sind.
+
+ Die Ergebnisse sind unter dokumentiert.
+
+* METS Unterstützung von Goobi.Workflow
+
+ Die Workflowkomponente hat verfügt über zwei Formen der METS Unterstützung:
+
+ * Internes METS - Ein Format das seine Metadaten in einem <MODS:extension/> Element ablegt
+
+ * METS Export auf Basis eines sog. Regelsatzes - Genutzt um DFG Viewer kompatibles METS zu erzeugen
+
+ Leider gibt es keine Möglichkeit METS wieder zu importieren. Daher können die bestehenden METS Dateien nicht einfach nachgenutzt werden. Die Dokumentation der funktionalität ist im Subversion Repository zu finden [https://develop.sub.uni-goettingen.de/repos/ugh/trunk/ugh/doc/UGH-Bibliothek-Dokumentation.pdf]
+
+Konvertierung zwischen Goobi METS und DFG Viewer METS
+
+ Die Konvertierung von dem internen Format zu dem DFG Viewer Format wird vom Regelsatz gesteuert, leider ist die UGH Bibliothek nicht in  der Lage den ungekehrten Weg zu gehen.
+
+* Unterschiede
+
+ Goobi sichert intern die Metadaten (auch Strukturelmenttypen) in einem eigenen Format. Diese werden erst beim Export in das DMS mit Hilfe des Regelsatzes in eine externe Form umgewandelt. Daher ist es für eine Integration externer METS Dateien neben dem Anlegen eines Vorgang n Goobi notwendig die externe Form in die interne zu verwandeln.
+
+** Metadaten in Goobi METS
+
++-----+
+            <mets:xmlData>
+                <mods:mods xmlns:mods="http://www.loc.gov/mods/v3">
+                    <mods:extension><goobi:goobi xmlns:goobi="http://meta.goobi.org/v1.5.1/">
+                            <goobi:metadata name="CreatorsAllOrigin">Cuper, Gisbert</goobi:metadata>
+                            <goobi:metadata name="singleDigCollection"
+                                >Antiquitates_und_Archaeologia_ARCHAEO18</goobi:metadata>
+                            <goobi:metadata name="singleDigCollection"
+                                >Antiquitates_und_Archaeologia</goobi:metadata>
+                            <goobi:metadata name="PublicationYear">1683</goobi:metadata>
+                            <goobi:metadata name="PlaceOfPublication">Amstelodami</goobi:metadata>
+                            <goobi:metadata name="SizeSourcePrint">[8] Bl., 324 S., [2] Bl., [7] Bl.
+                                [2] gef. Bl</goobi:metadata>
+                            <goobi:metadata name="TitleDocMain">Apotheosis Vel Consecratio
+                                Homeri</goobi:metadata>
+                            <goobi:metadata name="TitleDocMainShort">Apotheosis Vel Consecratio
+                                Homeri</goobi:metadata>
+                            <goobi:metadata name="CatalogIDDigital">PPN636085163</goobi:metadata>
+                            <goobi:metadata name="CatalogIDSource">PPN133483827</goobi:metadata>
+                            <goobi:metadata name="DocLanguage">la</goobi:metadata>
+                            <goobi:metadata name="TSL_ATS">cupeapot</goobi:metadata>
+                            <goobi:metadata name="TitleDocSub1">Sive, Lapis antiquissimus, in quo
+                                Poëtarum Principis Homeri Consecratio sculpta est</goobi:metadata>
+                            <goobi:metadata name="PublisherName">Boom</goobi:metadata>
+                            <goobi:metadata name="Author" type="person"
+                                    ><goobi:lastName>Cuper</goobi:lastName>
+                                <goobi:firstName>Gisbert</goobi:firstName>
+                                <goobi:identifier>133375412</goobi:identifier>
+                                <goobi:displayName>Cuper, Gisbert</goobi:displayName>
+                            </goobi:metadata>
+                        </goobi:goobi>
+                    </mods:extension>
+                </mods:mods>
+            </mets:xmlData>
++-----+
+
+** Metadaten im (externen) DFG Viewer kompatiblen Format
+
++-----+
+            <mets:xmlData>
+                <mods:mods xmlns:mods="http://www.loc.gov/mods/v3">
+                    <mods:classification authority="GDZ">Antiquitates_und_Archaeologia_ARCHAEO18</mods:classification>
+                    <mods:classification authority="GDZ">Antiquitates_und_Archaeologia</mods:classification>
+                    <mods:recordInfo>
+                        <mods:recordIdentifier source="gbv-ppn">PPN636085163</mods:recordIdentifier>
+                    </mods:recordInfo>
+                    <mods:identifier type="PPNanalog">PPN133483827</mods:identifier>
+                    <mods:titleInfo>
+                        <mods:title>Apotheosis Vel Consecratio Homeri</mods:title>
+                        <mods:subTitle>Sive, Lapis antiquissimus, in quo Poëtarum Principis Homeri Consecratio sculpta est</mods:subTitle>
+                    </mods:titleInfo>
+                    <mods:language>
+                        <mods:languageTerm authority="iso639-2b" type="code">la</mods:languageTerm>
+                    </mods:language>
+                    <mods:originInfo>
+                        <mods:place>
+                            <mods:placeTerm type="text">Amstelodami</mods:placeTerm>
+                        </mods:place>
+                        <mods:dateIssued encoding="w3cdtf" keyDate="yes">1683</mods:dateIssued>
+                        <mods:publisher>Boom</mods:publisher>
+                    </mods:originInfo>
+                    <mods:subject authority="gdz">
+                        <mods:topic>cupeapot</mods:topic>
+                    </mods:subject>
+                    <mods:name type="personal">
+                        <mods:role>
+                            <mods:roleTerm authority="marcrelator" type="code">aut</mods:roleTerm>
+                        </mods:role>
+                        <mods:namePart type="family">Cuper</mods:namePart>
+                        <mods:namePart type="given">Gisbert</mods:namePart>
+                        <mods:displayForm>Cuper, Gisbert</mods:displayForm>
+                    </mods:name>
+                    <mods:physicalDescription>
+                        <mods:extent>[8] Bl., 324 S., [2] Bl., [7] Bl. [2] gef. Bl</mods:extent>
+                    </mods:physicalDescription>
+                </mods:mods>
+            </mets:xmlData>
++-----+
+
+Integration der Goobi Prozessmetadaten
+
+ Zusätzlich zu den bibliografischen Metadaten beinhalteten die Metadaten eines Goobi Vorgangs technische Prozessmetadaten, die einzig für die interne Benutzung (wie Speicherort der Digitalisate) gedacht sind, diese können nicht generiert werden, weil hier z.B. eine Datenbank ID genutzt wird, die ein externes Programm nicht erraten kann. Daher muss auch für ein extern digitalisiertes Werk zwingend ein Vorgang angelegt werden. Diese Metadaten müssen dann mit den generierten zusammengeführt werden.
+
+Lösungsansatz
+
+ Im Regelsatz ist in einer an XPath angelehnten Syntax beschrieben wie aus internen Strukturelementen und Metadaten eine externe Repräsentation erzeugt wird. Im ersten Schritt müssen die externen METS Dateien entsprechend konvertiert werden. Im zweiten Schritt müssen darauf hin die bestehende interne METS Datei (mit den technischen Metadaten) zusammengeführt werden. Am Ende muss eine "LOCAL" Filesection erstellt werden. 
+
+* Anpassung METS Generierung
+
+ Die bestehende TEI zu METS Konvertierung muss angepasst werden um zusätzliche deskriptive Metadaten pro Strukturelement zu erstellen. 
+
+* Auswertung Regelsatz
+
+ Siehe auch {{{https://develop.sub.uni-goettingen.de/repos/ugh/trunk/ugh/doc/UGH-Bibliothek-Dokumentation.pdf}Dokumentation}}.
+
+** Problemfälle
+
+ Da die Regelsätze explizit keien echten XPathes benutzen führt ihre unverarbeitete Verwendung zu Problemen mit XSLT Prozessoren:
+
+  * Unterschiedliche Verwendung von einfachen und Doppelten Hochkomata
+
+  * Slashes am Ende
+
+  * Eigene Syntax für Wiederholungen (#)
+
+  * Tief geschachtelte Selektoren
+
+** Bespiele
+
+*** Beispiel 1: Einfaches Metadatum
+
++-----+
+			<Metadata>
+				<InternalName>PublicationStart</InternalName>
+				<WriteXPath>./mods:mods/mods:originInfo/mods:dateIssued[@point='start'][@encoding='w3cdtf']</WriteXPath>
+			</Metadata>
++-----+
+
+*** Beispiel 2: Wiederkehrendes einfaches Metadatum
+
++-----+
+			<Metadata>
+				<InternalName>DocLanguage</InternalName>
+				<WriteXPath>./mods:mods/#mods:language/mods:languageTerm[@type='code'][@authority='iso639-2b']</WriteXPath>
+			</Metadata>
++-----+
+
+*** Beispiel 3: Komplexes (Personen-) Metadatum
+
++-----+
+			<Metadata>
+				<InternalName>Photographer</InternalName>
+				<WriteXPath>./mods:mods/#mods:name[@type='personal'][mods:role/mods:roleTerm="pht"[@authority='marcrelator'][@type='code']]</WriteXPath>
+				<FirstnameXPath>./mods:namePart[@type='given']</FirstnameXPath>
+				<LastnameXPath>./mods:namePart[@type='family']</LastnameXPath>
+				<DisplayNameXPath>./mods:displayForm</DisplayNameXPath>
+				<!-- Yet still hardcoded in UGH -->
+				<IdentifierXPath>../mods:name[@authority='gbv'][@ID='']</IdentifierXPath>
+			</Metadata>
++-----+
+
+*** Beispiel 4: Strukturelement
+
++-----+
+			<DocStruct>
+				<InternalName>BoundBook</InternalName>
+				<MetsType>physSequence</MetsType>
+			</DocStruct>
++-----+
+
+* Zusammenführung mit einem bestehenden Vorgang
+
+ Für die Zusammenführung mit einem bestehenden Vorgang müssen lediglich die Meta- und Strukturdaten (Elemente METS:structMap, METS:structLink) aus der externen METS Datei in die Zieldatei kopiert werden, dabei sollte darauf geachtet werden, das nicht Elemente aus dem Goobi Namensraum überschrieben werden.
+
+* Generierung einer LOCAL FileSect
+
+ Die Zusammenführung mit einem bestehenden Goobi vorgang liefert den Speicherort der Digitalisate, er kann mit dem XPath Ausdruck "goobi:metadata[@name='pathimagefiles']" ermittelt werden, damit lässt sich dann eine entsprechende FileSection erstellen.
