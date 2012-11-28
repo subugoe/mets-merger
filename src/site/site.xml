@@ -6,6 +6,7 @@
             <item name="Benutzung" href="usage.html"/>
             <item name="METS Konvertierung" href="mets-conversion.html"/>
             <item name="Todo" href="todo.html"/>
+            <item name="Entwicklung" href="development.html"/>
             <item name="GroovyDoc" href="./groovydoc/index.html"/>
         </menu>
         <menu ref="reports"/>

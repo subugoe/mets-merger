@@ -1,0 +1,19 @@
+ ------
+ SUB METS Merger Entwicklerdokumentation
+ ------
+ Christian Mahnke 
+ <mailto:mahnke@sub.uni-goettingen.de>
+ ------
+ 2012-11-28
+ ------
+Weiterentwicklung
+
+ Offene Entwicklungsmöglichkeiten werden zentral im Dokument {{{todo.html}TODO}} hinterlegt.
+
+Fehlerbehebung
+
+ Bei Fehlern in der Konvertierung sollten immer Testszenarien bereitgestellt werden. Dies Erlaubt es auch sicherzustellen das Funktionierende Fälle nicht nebenbei beschädigt werden. Wenn möglich sollten neue Test Dokumente auch i die bestehenden Tests integriert werden.
+
+* XMLUnit und METSDiff
+
+ Zur strukturellen Überprüfung der erzeugten METS Dateien wird METSDiff verwendet. Es basiert auf XMLUnit und beinhaltet die Fälle, bei denen eine Ungleichheit zwischen den generierten Dokumenten erwartet wird. Sollten Dokumente als nicht übereinstimmend gemeldet werden, sind Anpassungen hieran erforderlich.
