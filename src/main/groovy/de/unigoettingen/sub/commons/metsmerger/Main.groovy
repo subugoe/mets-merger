@@ -192,7 +192,6 @@ class Main {
         } else {
             converter = new MetsMerger(ruleset, input)
             converter.transform()
-            
         }
         
         if (inFormat == FORMAT.TEI) {
@@ -201,19 +200,9 @@ class Main {
                 converter = new MetsConverter(ruleset, input)
                 converter.transform()
             }
-        }
-        
-        switch (outFormat) {
-        case FORMAT.GOOBI:
-            
-            break
-        case FORMAT.DFG:
-            break
-
-        default:
-            log.warn('Format not supported as output!')
+        } else if ((inFormat != FORMAT.RULESET && outFormat != FORMAT.XSL)) {
+            log.warn('Format ' + outFormat.name + ' not supported as output!')
             System.exit(3)
-                
         }
         
         //Validate the result if requested
