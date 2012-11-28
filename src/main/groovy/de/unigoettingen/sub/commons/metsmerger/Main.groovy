@@ -42,6 +42,7 @@ class Main {
     static OutputStream output
     static FORMAT inFormat = FORMAT.DFG
     static FORMAT outFormat = FORMAT.GOOBI
+    static Map params = [:]
 
     /**
      * Sets options passed on commandline
@@ -51,6 +52,7 @@ class Main {
         log.setLevel(Level.ERROR)
         def cli = new CliBuilder(usage: 'java -jar mets-merger.jar')
         cli.c(longOpt: 'check', 'validate using XML Schema and UGH')
+        cli.D(args:2, valueSeparator:'=', argName:'property=value', 'use value for given property')
         cli.h(longOpt: 'help', 'usage information')
         cli.i(longOpt: 'input', 'input file', args: 1)
         cli.j(longOpt: 'input-format', 'input file format', args: 1)
@@ -141,6 +143,11 @@ class Main {
             }
             merge = new File(opt.m).toURL()
         }
+        //parse XSLT params
+        if(opt.D) {
+            log.trace('Params are ' + opt.Ds)
+        }
+        
         
         start()
     }	
@@ -188,7 +195,12 @@ class Main {
         
         //transform if no merge file
         if (merge == null) {
-            converter.transform()
+            try {
+                converter.transform()
+            } catch (IllegalStateException ise) {
+                println 'Transformation needs additional parameters'
+                System.exit(30)
+            }
         } else {
             converter = new MetsMerger(ruleset, input)
             converter.transform()
@@ -206,13 +218,16 @@ class Main {
         }
         
         //Validate the result if requested
+        //Use UGH for goobi METS
         if (check && outFormat == FORMAT.GOOBI) {
             if (!ughValidate(ruleset, converter.result)) {
                 log.info('Can\'t validate result, use verbose to see the logs')
                 println 'Validatition failed!'
                 System.exit(6)
             }
-        } else if (check) {
+        }
+        //Use XSD
+        if (check) {
             if (!converter.validate()) {
                 log.info('Can\'t validate result, use verbose to see the logs')
                 println 'Validatition failed!'
@@ -221,6 +236,7 @@ class Main {
         }
         //Write the result
         Util.writeDocument(converter.result, output);
+        println "Result written"
     }
     
 }
