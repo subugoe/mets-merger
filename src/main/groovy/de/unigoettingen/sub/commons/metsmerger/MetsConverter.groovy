@@ -35,7 +35,7 @@ import de.unigoettingen.sub.commons.metsmerger.util.NamespaceConstants
  */
 //@TypeChecked
 @Log4j
-class MetsConverter  extends AbstractTransformer {
+class MetsConverter extends AbstractTransformer {
     /** The RulesetConverter to generate the XSLT from the ruleset. */
     def RulesetConverter converter
     /** The XSLT to be used for the transformation, this is the result of the RulesetConverter */
