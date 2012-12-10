@@ -42,7 +42,6 @@ class MetsMergerTest {
     def static TEST_DATA = [new TestData(this.getClass().getResource("/rulesets/archaeo18.xml"), this.getClass().getResource("/processes/rom-38301.goobi.mets.xml"), this.getClass().getResource("/tei/rom-heyne1798.tei.xml")),
         new TestData(this.getClass().getResource("/rulesets/archaeo18.xml"), this.getClass().getResource("/processes/weimar-41874.goobi.mets.xml"), this.getClass().getResource("/tei/weimar-hs-2057.tei.xml"))]
 
-    
     @BeforeClass
     static void setup () {
         for (testSet in TEST_DATA) {
@@ -68,7 +67,6 @@ class MetsMergerTest {
             log.info('Result file will be ' + testSet.resultFile.getAbsolutePath())
         }
     }
-    
     
     @Test
     void testMerge () {
@@ -104,8 +102,6 @@ class MetsMergerTest {
             log.trace('Result is valid (UGH)')
         }
     }
-
-    
     
     @AfterClass
     static void cleanUp () {
