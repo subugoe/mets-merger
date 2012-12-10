@@ -52,7 +52,7 @@ class Main {
         log.setLevel(Level.ERROR)
         def cli = new CliBuilder(usage: 'java -jar mets-merger.jar')
         cli.c(longOpt: 'check', 'validate using XML Schema and UGH')
-        cli.D(args:2, valueSeparator:'=', argName:'property=value', 'use value for given property')
+        cli.D(args:2, valueSeparator:'=', argName:'property=value', 'use value for given property for XSLT')
         cli.h(longOpt: 'help', 'usage information')
         cli.i(longOpt: 'input', 'input file', args: 1)
         cli.j(longOpt: 'input-format', 'input file format', args: 1)
@@ -130,6 +130,16 @@ class Main {
             println 'Format must be one of ' + FORMAT.getFormats()
             System.exit(5)
         }
+        
+        //Guess input file type
+        if (!opt.j && opt.i) {
+            inFormat = guessFormat(input)
+            log.trace("No input format given assuming " + inFormat)
+            if (inFormat == FORMAT.RULESET) {
+                ruleset = input
+            }
+            //FORMAT.UNKNOWN fails late in start
+        }
 
         //Stuff to merge, check if the file format is right
         if(opt.m) {
@@ -144,10 +154,14 @@ class Main {
             merge = new File(opt.m).toURL()
         }
         //parse XSLT params
-        if(opt.D) {
-            log.trace('Params are ' + opt.Ds)
+        if (opt.D) {
+            for(i in (0..opt.Ds.size() - 1).step(2)) {
+                params[opt.Ds.get(i)] = opt.Ds.get(i + 1)
+            }
+            params.each() { key,  value ->
+                log.trace('XSLT Param ' + key + ' is set to ' + value)
+            }
         }
-        
         
         start()
     }	
@@ -169,29 +183,19 @@ class Main {
             converter = new RulesetConverter(ruleset)
             break
         default:
-            log.warn('Format ' + inFormat.name + ' not supported as input!')
-            System.exit(4)
-                
+            log.warn('Format ' + inFormat.name + ' not supported as input or not recognized!')
+            System.exit(4) 
         }
-        /*
-         * TODO: finish this, it's currently done by the options j and p 
-        //Check type of input
-        def inputNamespace = getRootNamespace(inputDoc)
-        if (inputNamespace == NamespaceConstants.METS_NAMESPACE) {
-        if (merge == null) {
-                
-        } else {
-        converter = new MetsConverter(input)
+        
+        //Set the XSLT params
+        params.each() { key, value ->
+            def method = 'set' + key[0].toUpperCase() + key[1..-1]
+            try {
+                converter."${method}"(value)
+            } catch (groovy.lang.MissingMethodException e) {
+                log.warn('Param ' + key + ' not supported (no method called ' + method + ')!')
+            }
         }
-            
-        } else if (inputNamespace == NamespaceConstants.TEI_NAMESPACE) {
-        converter = new Tei2Mets(input)
-        } else {
-        //fail
-        println 'Input namespace not supported!'
-        System.exit(10)
-        }
-         */
         
         //transform if no merge file
         if (merge == null) {
@@ -202,14 +206,24 @@ class Main {
                 System.exit(30)
             }
         } else {
+            //Test if the file types are right
+            if (guessFormat(merge) != FORMAT.GOOBI) {
+                println 'The to be merged to needs to be Goobi METS!'
+                System.exit(30)
+            }
+            
             converter = new MetsMerger(ruleset, input)
             converter.transform()
         }
         
         if (inFormat == FORMAT.TEI) {
+            def result = converter.result
             //Check which METS should be created
-            if (outFormat == FORMAT.GOOBI) {
-                converter = new MetsConverter(ruleset, input)
+            if (ruleset == null && outFormat == FORMAT.GOOBI) {
+                log.warn('No ruleset given, can\'t create Goobi METS !')
+                System.exit(3)
+            } else if (outFormat == FORMAT.GOOBI) {
+                converter = new MetsConverter(ruleset, result)
                 converter.transform()
             }
         } else if ((inFormat != FORMAT.RULESET && outFormat != FORMAT.XSL)) {
@@ -232,11 +246,39 @@ class Main {
                 log.info('Can\'t validate result, use verbose to see the logs')
                 println 'Validatition failed!'
                 System.exit(6)
+            } else {
+                println 'Result is valid'
             }
         }
         //Write the result
         Util.writeDocument(converter.result, output);
         println "Result written"
+    }
+    
+    /*
+     * TODO: finish this, it's currently done by the options j and p 
+     */
+    static FORMAT guessFormat (URL input) {
+        //Check type of input
+        def inputNamespace = getRootNamespace(input)
+        if (inputNamespace == NamespaceConstants.TEI_NAMESPACE) {
+            FORMAT.TEI
+        } else if (inputNamespace == NamespaceConstants.METS_NAMESPACE) {
+            def namespaces = getNamespaces(input)
+            if (namespaces.contains(NamespaceConstants.GOOBI_NAMESPACE)) {
+                FORMAT.GOOBI
+            } else if (namespaces.contains(NamespaceConstants.DV_NAMESPACE)) {
+                FORMAT.DFG
+            } else {
+                FORMAT.METS
+            }
+        } else {
+            if (getRootElementName(input) == 'Preferences') {
+                FORMAT.RULESET
+            } else {
+                FORMAT.UNKNOWN
+            }
+        }          
     }
     
 }
