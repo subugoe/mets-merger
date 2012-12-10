@@ -93,7 +93,7 @@ class Tei2Mets extends AbstractTransformer {
     protected Boolean validateParams(Map params) {
         log.debug('Params are set to ' + params)
         if (!params['identifier'] || params['identifier'] == '') {
-            log.debug('Param identifier not det or empty')
+            log.debug('Param "identifier" not det or empty')
             return false
         }
         return true
