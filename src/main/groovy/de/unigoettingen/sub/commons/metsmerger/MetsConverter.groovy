@@ -25,6 +25,7 @@ import javax.xml.transform.dom.DOMSource
 import javax.xml.transform.Source
 
 import de.unigoettingen.sub.commons.metsmerger.util.NamespaceConstants
+import org.w3c.dom.Document
 
 /**
  * This class an be used to convert external (like in 
@@ -79,14 +80,35 @@ class MetsConverter extends AbstractTransformer {
     }
     
     /**
+     * Construts a MetsConverter, sets the {@link java.net.URL URL} of the schema for validation
+     * and the parameters of the transformation and sets the given input. This version uses a W3C 
+     * DOM Document as input to be chainable. This might be added to the other converters as well.
+     * @param ruleset the {@link java.net.URL URL} of the ruleset used to generate the transformation
+     * @param doc the {@link org.w3c.dom.Document Document} of the METS file to be transformed
+     * @see #MetsConverter()
+     */
+    MetsConverter (URL ruleset, Document doc) {
+        this()
+        this.converter = new RulesetConverter(ruleset)
+        this.converter.transform()
+        this.xslt = new DOMSource(this.converter.result)
+        this.inputDoc = doc
+    }
+    
+    /**
      * {@inheritDoc}
      * 
      * @see de.unigoettingen.sub.commons.metsmerger.AbstractTransformer#transform()
      */
     @Override
     void transform () {
-        log.debug("Using ruleset to generate stylesheet " + this.converter.input.toString())
-        result = transform(input, xslt, params)
+        if (this.inputDoc == null) {
+            log.debug("Using ruleset to generate stylesheet " + this.converter.input.toString())
+            result = transform(input, xslt, params)
+        } else {
+            log.debug("Transforming using W3C Document")
+            result = transform(inputDoc, xslt, params)
+        }
     }
 	
 }
