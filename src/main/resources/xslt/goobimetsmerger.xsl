@@ -22,6 +22,10 @@
     xmlns:TEI="http://www.tei-c.org/ns/1.0" xmlns:xlink="http://www.w3.org/1999/xlink"
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:xs="http://www.w3.org/2001/XMLSchema"
     version="2.0" exclude-result-prefixes="TEI xd">
+    <!--
+        This style sheet should be used on the internal Goobi METS file.
+        It works the other qay around to, but the results are garbage
+    -->
     <xsl:output indent="no" encoding="UTF-8" method="xml"/>
     <xsl:preserve-space elements="*"/>
     <xsl:param name="structFileParam"/>
