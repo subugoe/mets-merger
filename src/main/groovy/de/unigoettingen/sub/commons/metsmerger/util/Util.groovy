@@ -204,14 +204,16 @@ class Util {
      * Returns al list of the used namespaces inside the provided document
      * @param url the {@link java.net.URL URL} for the document.
      * @see #getNamespaces(org.w3c.dom.Document)
+     * @returns the namespace URIs as List<String> 
      */
     static List<String> getNamespaces (URL xml) {
         getNamespaces(loadDocument(xml))
     }
     
     /**
-     * Returns al list of the used namespaces inside the provided document
+     * Returns a list of the used namespaces inside the provided document
      * @param doc the {@link org.w3c.dom.Document Document} 
+     * @returns the namespace URIs as List<String>
      */
     static List<String> getNamespaces (Document doc) {
         List<String> namespaces = []
@@ -237,16 +239,24 @@ class Util {
         } else {
             log.warn('No namespace nodes found') 
         }
-        
         namespaces
     }
-        
+    
+    /**
+     * Returns the name of the root element of the provided document
+     * @param url the {@link java.net.URL URL} for the document.
+     * @returns the root element name as String 
+     */
+    static String getRootElementName (URL xml) {
+        loadDocument(xml).documentElement.getTagName()
+    }
+    
     /**
      * This Enum is used to parse the supported input and output formats
      * @author cmahnke
      */
     enum FORMAT {
-        TEI('TEI'), DFG('DFG'), GOOBI('GOOBI'), XSL('XSL'), RULESET('RULESET')
+        TEI('TEI'), DFG('DFG'), GOOBI('GOOBI'), XSL('XSL'), RULESET('RULESET'), UNKNOWN('UNKNOWN')
         
         def name
         
