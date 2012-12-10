@@ -43,6 +43,8 @@ import javax.xml.xpath.XPathConstants
 import javax.xml.namespace.NamespaceContext
 
 import de.unigoettingen.sub.commons.metsmerger.util.NamespaceConstants
+import ugh.fileformats.mets.MetsMods
+import ugh.exceptions.ReadException
 
 /**
  * This class contains some static utility methods for DOM handling (like read and write) and for validation.
@@ -137,15 +139,20 @@ class Util {
      * 
      */
     static Boolean ughValidate (URL ruleset, File metadataFile) {
+        log.trace('Using ruleset ' + ruleset.toString())
         Prefs preferences = new Prefs();
         preferences.loadPrefs(new File(ruleset.toURI()).getAbsolutePath());
         try {
-            def mets = new MetsModsImportExport(preferences)
+            //def mets = new MetsModsImportExport(preferences)
+            def mets = new MetsMods(preferences)
             mets.read(metadataFile.getAbsolutePath());
             DigitalDocument myDocument = mets.getDigitalDocument();
                                         
         } catch (PreferencesException pe) {
-            log.error('Couldn\'t load DigitalDocument!', pe)
+            log.error('Couldn\'t load Ruleset!', pe)
+            return false
+        } catch (ReadException re) {
+            log.error('Couldn\'t read DigitalDocument!', re)
             return false
         }
         return true

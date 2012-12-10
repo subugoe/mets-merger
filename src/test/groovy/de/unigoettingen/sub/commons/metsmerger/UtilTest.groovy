@@ -37,7 +37,8 @@ import static de.unigoettingen.sub.commons.metsmerger.util.Util.*
 class UtilTest {
     def static TESTFILES = [this.getClass().getResource('/tei/rom-heyne1798.tei.xml'), 
                             this.getClass().getResource("/dfg-viewer-mets/PPN645063479.mets.xml"),
-                            this.getClass().getResource("/processes/24580.goobi.mets.xml")
+                            this.getClass().getResource("/processes/24580.goobi.mets.xml"),
+                            this.getClass().getResource("/rulesets/archaeo18.xml")
                            ]
     
     @BeforeClass
@@ -77,7 +78,7 @@ class UtilTest {
             def namespace = getRootNamespace(testFile)
             log.info('Got namespace URI ' + namespace)
             Boolean expected = false
-            if (namespace == NamespaceConstants.METS_NAMESPACE || namespace == NamespaceConstants.TEI_NAMESPACE) {
+            if (namespace == NamespaceConstants.METS_NAMESPACE || namespace == NamespaceConstants.TEI_NAMESPACE || namespace == null) {
                 expected = true
             }
             assertTrue('Namespace not expected ' + namespace, expected)
@@ -103,6 +104,15 @@ class UtilTest {
             assertNotNull('Schema URL couln\'t be created, maybe it\'s malformed?', schemaUrl)
             log.info('URL for ' + schema + ' seems valid')
         }
+    }
+    
+    @Test
+    void testUghValidate () {
+        log.info('Testing ughValidate with Goobi Mets')
+        assertTrue(ughValidate(TESTFILES.get(3), new File(TESTFILES.get(2).toURI())))
+        log.info('Testing ughValidate with DFG Viewer Mets')
+        assertFalse(ughValidate(TESTFILES.get(3), new File(TESTFILES.get(1).toURI())))
+        
     }
    
         
