@@ -234,8 +234,9 @@ class Main {
         //Validate the result if requested
         //Use UGH for goobi METS
         if (check && outFormat == FORMAT.GOOBI) {
+            log.trace('Validating using UGH')
             if (!ughValidate(ruleset, converter.result)) {
-                log.info('Can\'t validate result, use verbose to see the logs')
+                log.error('Can\'t validate result, use verbose (-v) to see the logs')
                 println 'Validatition failed!'
                 System.exit(6)
             }
