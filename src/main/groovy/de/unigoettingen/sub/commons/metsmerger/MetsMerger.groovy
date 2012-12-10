@@ -101,6 +101,7 @@ class MetsMerger extends AbstractTransformer {
     protected Boolean validateParams(Map params) {
         log.debug('Params are set to ' + params)
         if (!params['structFileParam'] || params['structFileParam'] == '') {
+            log.debug('Param "structFileParam" not det or empty')
             return false
         }
         return true
