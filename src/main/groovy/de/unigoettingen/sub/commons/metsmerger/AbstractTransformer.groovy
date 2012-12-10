@@ -178,6 +178,7 @@ abstract class AbstractTransformer {
      */
     public Boolean validate () {
         if (schemaUrl && result) {
+            log.trace('Validating result...')
             return XSDValidator.validate(schemaUrl, result)
         } else {
             log.warn('No Schema URL given and / or result empty')
