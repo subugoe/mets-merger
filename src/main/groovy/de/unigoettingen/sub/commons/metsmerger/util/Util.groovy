@@ -256,7 +256,7 @@ class Util {
      * @author cmahnke
      */
     enum FORMAT {
-        TEI('TEI'), DFG('DFG'), GOOBI('GOOBI'), XSL('XSL'), RULESET('RULESET'), UNKNOWN('UNKNOWN')
+        TEI('TEI'), DFG('DFG'), GOOBI('GOOBI'), XSL('XSL'), RULESET('RULESET'), METS('METS') ,UNKNOWN('UNKNOWN')
         
         def name
         
