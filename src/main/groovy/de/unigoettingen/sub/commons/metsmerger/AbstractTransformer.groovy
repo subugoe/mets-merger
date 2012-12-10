@@ -74,7 +74,7 @@ abstract class AbstractTransformer {
         transformer.setErrorListener(listener)
         def resultStylesheet = new DOMResult()
         //Pass params to the stylesheet
-        params.entrySet().each{
+        params.entrySet().each() {
             transformer.setParameter(it.key, it.value)
         }
 
