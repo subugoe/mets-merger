@@ -53,6 +53,8 @@ abstract class AbstractTransformer {
     protected Document result
     /** The {@link java.net.URL URL} of the input file */
     def URL input
+    /** The W3C documnt of the input */
+    def Document inputDoc
     /** The parameters to be used by the transformation */
     def Map params = [:]
     /** The {@link java.net.URL URL} of the schema used for validation */
@@ -66,8 +68,32 @@ abstract class AbstractTransformer {
      * @param xslt the {@link avax.xml.transform.Source Source} of the stylesheet
      * @param params parameters of the stylesheet
      * @return the result {@link org.w3c.dom.Document Document}
+     * @see #transform(javax.xml.transform.Source,javax.xml.transform.Source,java.util.Map)
      */
     def protected static Document transform (URL input, Source xslt, Map params) {
+        transform (new StreamSource(input.openStream()), xslt, params)
+    }
+    
+    /**
+     * Transforms the given document using the given stylesheet with parameters.
+     * @param doc the {@link org.w3c.dom.Document Document} of the input document
+     * @param xslt the {@link avax.xml.transform.Source Source} of the stylesheet
+     * @param params parameters of the stylesheet
+     * @return the result {@link org.w3c.dom.Document Document}
+     * @see #transform(javax.xml.transform.Source,javax.xml.transform.Source,java.util.Map)
+     */
+    def protected static Document transform (Document doc, Source xslt, Map params) {
+        transform (new DOMSource(doc), xslt, params)
+    }
+    
+    /**
+     * Transforms the given document using the given stylesheet with parameters.
+     * @param input the {@link avax.xml.transform.Source Source} of the input document
+     * @param xslt the {@link avax.xml.transform.Source Source} of the stylesheet
+     * @param params parameters of the stylesheet
+     * @return the result {@link org.w3c.dom.Document Document}
+     */
+    def protected static Document transform (Source input, Source xslt, Map params) {
         def factory = TransformerFactory.newInstance()
         def transformer = factory.newTransformer(xslt)
         def listener = new LogErrorListener()
@@ -79,7 +105,7 @@ abstract class AbstractTransformer {
         }
 
         try {
-            transformer.transform(new StreamSource(input.openStream()), resultStylesheet)
+            transformer.transform(input, resultStylesheet)
         } catch (TransformerException te) {
             log.error("Transformation failed ", te)
         }
@@ -90,6 +116,7 @@ abstract class AbstractTransformer {
         def domResult = (Document) resultStylesheet.getNode()
         return domResult
     }
+    
     /**
      * Transforms the given document using the given stylesheet with parameters.
      * This is just a wrapper for {@link #transform(URL,Source,Map) transform}
@@ -99,7 +126,7 @@ abstract class AbstractTransformer {
      * @param stylesheet the {@link java.net.URL URL} to the stylesheet
      * @param params parameters of the stylesheet
      * @return Document the result Document
-     * @see #transform(java.net.URL,javax.xml.transform.Source,java.util.Map)
+     * @see #transform(javax.xml.transform.Source,javax.xml.transform.Source,java.util.Map)
      */
     protected static Document transform (URL input, URL stylesheet, Map params) {
         log.trace("Transforming " + input.toString() + " using stylesheet " + stylesheet.toString())
