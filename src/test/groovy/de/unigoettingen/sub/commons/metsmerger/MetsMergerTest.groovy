@@ -72,7 +72,7 @@ class MetsMergerTest {
     void testMerge () {
         for (testSet in TEST_DATA) {
             testSet.converter.transform()
-            log.trace('Result:\n----------------START OF RESULT\n' + testSet.converter.getXML())
+            log.trace('Result for testMerge of ' + testSet.processMets + ':\n----------------START OF RESULT\n' + testSet.converter.getXML())
             log.trace('----------------END OF RESULT')
             assertNotNull('Check if Result is not null failed!', testSet.converter.result)
             log.info('METS merged')
