@@ -206,12 +206,15 @@ class Main {
                 System.exit(30)
             }
         } else {
-            //Test if the file types are right
+            //Test if the file type for merge is right
             if (guessFormat(merge) != FORMAT.GOOBI) {
                 println 'The to be merged to needs to be Goobi METS!'
                 System.exit(30)
             }
-            
+            //TODO : Check for previous results
+            if (inFormat != FORMAT.GOOBI) {
+                def result = converter.result
+            }
             converter = new MetsMerger(ruleset, input)
             converter.transform()
         }
