@@ -37,15 +37,15 @@
     -->
     <xsl:output encoding="UTF-8" method="xml" indent="yes"/>
     <xsl:namespace-alias stylesheet-prefix="xslo" result-prefix="xsl"/>
-    <xsl:param name="createDMSsectsParam" select="true()"/>
+    <xsl:param name="createDMDSectsParam" select="true()"/>
     <xsl:param name="addOrderLabelParam" select="true()"/>
-    <!-- Currently the result stylesheet will be configurable if createDMSsects is set
+    <!-- Currently the result stylesheet will be configurable if createDMDSects is set
     <xsl:param name="configurableResultParam" select="true()"/>
     -->
     <!-- This is a stupid method to use params via JAXP, which are typed as String.
     Pass an empty tring to set the variables to  -->
-    <xsl:variable name="createDMSsects"
-        select="if ($createDMSsectsParam castable as xs:boolean) then xs:boolean($createDMSsectsParam) else false()"
+    <xsl:variable name="createDMDSects"
+        select="if ($createDMDSectsParam castable as xs:boolean) then xs:boolean($createDMDSectsParam) else true()"
         as="xs:boolean"/>
     <xsl:variable name="addOrderLabel"
         select="if ($addOrderLabelParam castable as xs:boolean) then xs:boolean($addOrderLabelParam) else false()"
@@ -80,7 +80,7 @@
             <xslo:variable name="copyADM"
                 select="if ($copyADMParam castable as xs:boolean) then xs:boolean($copyADMParam) else false()"
                 as="xs:boolean"/>
-            <xsl:if test="$createDMSsects">
+            <xsl:if test="$createDMDSects">
                 <xslo:param name="createGoobiMETSParam" select="true()"/>
                 <xslo:variable name="createGoobiMETS"
                     select="if ($createGoobiMETSParam castable as xs:boolean) then xs:boolean($createGoobiMETSParam) else false()"
@@ -99,7 +99,7 @@
             <xslo:template match="processing-instruction()">
                 <xslo:copy-of select="."/>
             </xslo:template>
-            <xsl:if test="$createDMSsects">
+            <xsl:if test="$createDMDSects">
                 <xsl:variable name="InternalName">
                     <xsl:value-of
                         select="//WriteXPath[text() ='./mods:mods/mods:titleInfo/#mods:title']/../InternalName/text()"
@@ -192,7 +192,7 @@
                     </xslo:choose>
                 </xslo:template>
             </xsl:if>
-            <xsl:if test="$addOrderLabel and not($createDMSsects)">
+            <xsl:if test="$addOrderLabel and not($createDMDSects)">
                 <xslo:template match="mets:div">
                     <xslo:choose>
                         <xslo:when
