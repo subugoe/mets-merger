@@ -27,6 +27,7 @@ import static org.junit.Assert.*
 
 import de.unigoettingen.sub.commons.metsmerger.util.NamespaceConstants
 import static de.unigoettingen.sub.commons.metsmerger.util.Util.*
+import org.w3c.dom.Document
 
 /**
  *
@@ -116,6 +117,12 @@ class UtilTest {
         
     }
    
+    @Test
+    void testGetGoobiIdentifier () {
+        log.info('Loading document ' + TESTFILES.get(2).toString())
+        Document doc = loadDocument(TESTFILES.get(2))
+        assertTrue('Not the expected Identifier', getGoobiIdentifier(doc) == 'PPN645063479')
+    }
         
 }
 

@@ -263,7 +263,6 @@ class Util {
      * @param doc the {@link org.w3c.dom.Document Document} to look into.
      * @returns the identifier as String or null
      */
-    //TODO: Add a unit test for this
     static String getGoobiIdentifier (Document doc) {
         def path = '//mets:dmdSec[@ID = //mets:structMap[@TYPE=\'LOGICAL\']/mets:div/@DMDID]//goobi:metadata[@name=\'CatalogIDDigital\']'
             
