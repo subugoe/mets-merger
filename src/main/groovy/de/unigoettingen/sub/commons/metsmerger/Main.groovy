@@ -187,6 +187,12 @@ class Main {
             System.exit(4) 
         }
         
+        //TODO: check if this works
+        if (inFormat == FORMAT.TEI && merge != null && (params['identifier'] == null || params['identifier'] == '')) {
+            def identifier = getGoobiIdentifier(goobiDoc)
+            params['identifier'] = identifier
+        }
+
         //Set the XSLT params
         params.each() { key, value ->
             def method = 'set' + key[0].toUpperCase() + key[1..-1]
@@ -218,7 +224,7 @@ class Main {
             converter = new MetsMerger(ruleset, input)
             converter.transform()
         }
-        
+        //Handling for TEI input, needs to happen before merge
         if (inFormat == FORMAT.TEI) {
             def result = converter.result
             //Check which METS should be created
