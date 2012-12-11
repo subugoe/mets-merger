@@ -88,9 +88,9 @@ class MetsMerger extends AbstractTransformer {
         }
 
         log.debug("Using stylesheet " + stylesheet.toString())
-        log.trace('Rewiting location of merge file from ' + this.params['structFileParam'])
+        log.trace('Rewriting location of merge file from ' + this.params['structFileParam'])
         this.params['structFileParam'] = getRelativePath(this.params['structFileParam'])
-        log.trace('Rewiting location of merge file to ' + this.params['structFileParam'])
+        log.trace('Rewriting location of merge file to ' + this.params['structFileParam'])
         result = transform(this.input, this.stylesheet, this.params)
     }
     
