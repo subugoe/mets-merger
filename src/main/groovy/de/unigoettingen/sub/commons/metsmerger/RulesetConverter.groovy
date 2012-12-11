@@ -33,6 +33,19 @@ import de.unigoettingen.sub.commons.metsmerger.util.NamespaceConstants
 class RulesetConverter extends AbstractTransformer {
     /** The URL of the stylesheet to used */
     def static URL stylesheet = this.getClass().getResource("/xslt/ruleset2xslt.xsl")
+    /** Parameters of the stylesheet */
+    def static paramPrototypes = ['createDMDSectsParam': 'true', 'addOrderLabelParam': 'true']
+    
+        /*
+     * This generates accessor methods for the parameters which live inside of the params Map 
+     */
+    static {
+        paramPrototypes.keySet().each { name ->
+            def methodName = name[0].toUpperCase() + name[1..-1]
+            RulesetConverter.metaClass."set${methodName}" = {String value -> params."${name}" = value }
+            RulesetConverter.metaClass."get${methodName}" = {-> params."${name}" }
+        }
+    }
     
     /**
      * Construts a empty RulesetConverter and sets the {@link java.net.URL URL} of the schema for validation
@@ -40,7 +53,7 @@ class RulesetConverter extends AbstractTransformer {
      */
     RulesetConverter () {
         //Configuration of Stylesheet
-        this.params = ['createDMSsectsParam': 'true', 'addOrderLabelParam': 'true']
+        paramPrototypes.each() { name, value -> params[name] = value }
         this.resultNamespace = NamespaceConstants.XSLT_NAMESPACE
         this.schemaUrl = new URL(NamespaceConstants.getSchemaLoactionForNamespace(this.resultNamespace))
     }
