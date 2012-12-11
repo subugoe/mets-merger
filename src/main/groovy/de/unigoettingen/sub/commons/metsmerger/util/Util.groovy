@@ -22,29 +22,30 @@ package de.unigoettingen.sub.commons.metsmerger.util
 import groovy.util.logging.Log4j
 import groovy.transform.TypeChecked
 
+import javax.xml.parsers.DocumentBuilder
 import javax.xml.parsers.DocumentBuilderFactory
 import javax.xml.transform.dom.DOMSource
 import javax.xml.transform.Transformer
 import javax.xml.transform.stream.StreamResult
 import javax.xml.transform.OutputKeys
 import javax.xml.transform.TransformerFactory
-import org.w3c.dom.Document
-import org.w3c.dom.Node
-import org.w3c.dom.NodeList
-import ugh.dl.Prefs
-import ugh.fileformats.mets.MetsModsImportExport
-import ugh.dl.DigitalDocument
-import ugh.exceptions.PreferencesException
-import javax.xml.parsers.DocumentBuilder
 import javax.xml.xpath.XPathExpression
 import javax.xml.xpath.XPath
-import javax.xml.xpath.XPathFactory
 import javax.xml.xpath.XPathConstants
+import javax.xml.xpath.XPathFactory
 import javax.xml.namespace.NamespaceContext
+import org.w3c.dom.Document
+import org.w3c.dom.Element
+import org.w3c.dom.Node
+import org.w3c.dom.NodeList
+import ugh.dl.DigitalDocument
+import ugh.dl.Prefs
+import ugh.exceptions.ReadException
+import ugh.exceptions.PreferencesException
+import ugh.fileformats.mets.MetsMods
+import ugh.fileformats.mets.MetsModsImportExport
 
 import de.unigoettingen.sub.commons.metsmerger.util.NamespaceConstants
-import ugh.fileformats.mets.MetsMods
-import ugh.exceptions.ReadException
 
 /**
  * This class contains some static utility methods for DOM handling (like read and write) and for validation.
@@ -231,7 +232,6 @@ class Util {
         xpath.setNamespaceContext(new NamespaceConstants())
         XPathExpression expr = xpath.compile(path);
         
-        //NodeList nodes = expr.evaluate(doc, XPathConstants.NODESET);
         def nodes = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
         
         if (nodes.getLength() > 0) {
@@ -256,6 +256,30 @@ class Util {
      */
     static String getRootElementName (URL xml) {
         loadDocument(xml).documentElement.getTagName()
+    }
+    
+    /**
+     * Returns the Goobi Identifier from a given Document
+     * @param doc the {@link org.w3c.dom.Document Document} to look into.
+     * @returns the identifier as String or null
+     */
+    //TODO: Add a unit test for this
+    static String getGoobiIdentifier (Document doc) {
+        def path = '//mets:dmdSec[@ID = //mets:structMap[@TYPE=\'LOGICAL\']/mets:div/@DMDID]//goobi:metadata[@name=\'CatalogIDDigital\']'
+            
+        XPathFactory factory = XPathFactory.newInstance();
+        XPath xpath = factory.newXPath();
+        xpath.setNamespaceContext(new NamespaceConstants())
+        XPathExpression expr = xpath.compile(path);
+        
+        def nodes = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
+        
+        if (nodes.getLength() != 1) {
+            log.info('Search for Goobi Identifier returned no or to many identifiers')
+            return null
+        }
+        Element e = (Element) nodes.item(0)
+        return e.getTextContent()
     }
     
     /**
