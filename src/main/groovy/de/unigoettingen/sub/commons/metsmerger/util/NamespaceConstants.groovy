@@ -93,16 +93,7 @@ class NamespaceConstants implements NamespaceContext {
     static String getSchemaForPrefix (prefix) {
         return SCHEMA_LOCATIONS.get(NAMESPACES_WITH_PREFIX.get(prefix))
     }
-        
-    /**
-     * Gets the namespace URI for a prefix
-     * @param prefix the namemace prefix
-     * @return the namespace URI
-     */
-    static String getNamespaceForPrefix (prefix) {
-        return NAMESPACES_WITH_PREFIX[prefix]
-    } 
-        
+            
     /**
      * Gets the Schema location for a given namespace URI
      * @param uri the namemace URI
@@ -111,23 +102,15 @@ class NamespaceConstants implements NamespaceContext {
     static String getSchemaLoactionForNamespace (uri) {
         return SCHEMA_LOCATIONS.get(uri)
     } 
-        
-    /**
-     * Gets the prefix for an namespace URI
-     * @param namespace - the namespace of an URI
-     * @returns a prefix
-     */
-    static String getPrefixForURI (namespace) {
-        PREFIX_WITH_NAMESPACES.get(namespace)
-    }
-        
+         
     /**
      * {@inheritDoc}
      * 
      * @see javax.xml.namespace.NamespaceContext#getNamespaceURI(java.lang.String)
      */
+    @Override
     String getNamespaceURI(String prefix) {
-        return getPrefixForURI(prefix)
+        return NAMESPACES_WITH_PREFIX[prefix]
     }
         
     /**
@@ -135,8 +118,9 @@ class NamespaceConstants implements NamespaceContext {
      * 
      * @see javax.xml.namespace.NamespaceContext#getPrefix(java.lang.String)
      */
+    @Override
     String getPrefix(String namespaceURI) {
-        return getPrefixForURI(namespaceURI)
+        return NAMESPACES_WITH_PREFIX[namespaceURI]
     }
         
     /**
@@ -144,9 +128,9 @@ class NamespaceConstants implements NamespaceContext {
      * 
      * @see javax.xml.namespace.NamespaceContext#getPrefixes(java.lang.String)
      */
+    @Override
     Iterator getPrefixes(String namespaceURI) {
-        [getPrefixForURI(namespaceURI)]
-
+        [getPrefix(namespaceURI)]
     }
 
 }
