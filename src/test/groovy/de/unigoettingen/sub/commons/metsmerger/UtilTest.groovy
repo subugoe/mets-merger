@@ -111,6 +111,7 @@ class UtilTest {
         log.info('Testing ughValidate with Goobi Mets')
         assertTrue(ughValidate(TESTFILES.get(3), new File(TESTFILES.get(2).toURI())))
         log.info('Testing ughValidate with DFG Viewer Mets')
+        log.warn('!!!THIS IS EXPECTED TO FAIL!!!')
         assertFalse(ughValidate(TESTFILES.get(3), new File(TESTFILES.get(1).toURI())))
         
     }
