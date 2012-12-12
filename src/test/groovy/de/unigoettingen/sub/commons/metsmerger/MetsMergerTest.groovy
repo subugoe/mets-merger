@@ -84,7 +84,7 @@ class MetsMergerTest {
         for (testSet in TEST_DATA) {
             testSet.converter.transform()
             log.trace('Check if result is valid using XML Schema ' + testSet.converter.schemaUrl + ':')
-            log.trace('Not that this test depends on an external hosted schema, it will fail if you are offline or the schema isn\'t available')
+            log.trace('Note  that this test depends on an external hosted schema, it will fail if you are offline or the schema isn\'t available')
             assertTrue('Validatione failed', testSet.converter.validate())
             log.trace('Result is valid (XML Schema)')
         }
