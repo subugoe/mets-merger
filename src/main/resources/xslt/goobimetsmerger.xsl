@@ -26,11 +26,30 @@
         This style sheet should be used on the internal Goobi METS file.
         It works the other qay around to, but the results are garbage
     -->
-    <xsl:output indent="no" encoding="UTF-8" method="xml"/>
+
+    <!-- 
+    Development and bug fixes
+    Terminology used in Comments and messages
+    
+    Merge file: A Goobi METS file of a ne created "Vorgang" - Process, that will
+                be enriched with structure metadata from external source.
+    Structure file: Also called external Document, pseudo Goobi METS file 
+                    containing structural metadata to be included in a real Goobi process.
+    -->
+    <xsl:output indent="yes" encoding="UTF-8" method="xml"/>
     <xsl:preserve-space elements="*"/>
+    <!-- 
+    The file to take the structure from
+    -->
     <xsl:param name="structFileParam"/>
     <xsl:param name="copyPhysicalStructMapParam" select="false()"/>
     <xsl:param name="fileSectionParam" select="'PRESENTATION'"/>
+    <!--
+    This is needed to make sure that structLink Elements match the generated
+    structure, otherwise the merge will fail if there is a structLink section
+    in the document the structure will be merged to
+    -->
+    <xsl:param name="overwriteStructLinkParam" select="false()"/>
 
     <!-- This is used to get the types right -->
     <!--
@@ -45,6 +64,9 @@
     <xsl:variable name="fileSection"
         select="if ($fileSectionParam castable as xs:string) then xs:string($fileSectionParam) else 'PRESENTATION'"
         as="xs:string"/>
+    <xsl:variable name="overwriteStructLink"
+        select="if ($overwriteStructLinkParam castable as xs:boolean) then xs:boolean($overwriteStructLinkParam) else false()"
+        as="xs:boolean"/>
     <!--
     TODO:
     * Rewrite and / or check ID links. works for the top element of each struct map 
@@ -56,10 +78,9 @@
     <xsl:variable name="version">201112-2104</xsl:variable>
 
     <xsl:template match="/">
-        <!--
-        <xsl:message>Struct file is '<xsl:value-of select="$structFile"/>' </xsl:message>
-        <xsl:message>Struct file param is '<xsl:value-of select="$structFileParam"/>' </xsl:message>
-        -->
+        <!-- For debuging of the given path -->
+        <xsl:message>Struct file is '<xsl:value-of select="$structFile"/>', Struct file param is
+                '<xsl:value-of select="$structFileParam"/>' </xsl:message>
         <xsl:comment>
             <xsl:text>This file was merged by GoobiMETSMerger Version </xsl:text>
             <xsl:value-of select="$version"/>
@@ -117,21 +138,97 @@
         </xsl:choose>
     </xsl:template>
     <xsl:template match="METS:structLink">
-        <!-- Fail if structLink is not empty -->
         <xsl:if test=".//METS:smLink[@xlink:from != '' and @xlink:to != '']">
-            <xsl:message terminate="yes">StructLinks of document are not empty!
-                Exiting!</xsl:message>
+            <xsl:choose>
+                <xsl:when test="not($overwriteStructLink)">
+                    <!-- Fail if structLink is not empty -->
+                    <xsl:message terminate="yes">StructLinks of merge document are not empty!
+                        Exiting!</xsl:message>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:message>StructLinks of document are not empty! Ignoring!</xsl:message>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:if>
-        <xsl:variable name="structLink">
-            <xsl:copy-of select="document($structFile)//METS:structLink"/>
-        </xsl:variable>
-        <!-- TODO: This may needs to be rewritten. Check if IDs will be in target document -->
-        <xsl:copy-of select="$structLink"/>
         <!--
+        This builds some variables to do a basic maping for indentifiers to rewrite the 
+        structLink part of the METS Document, just get the root of the physical and logical
+        structure.
+        -->
+        <xsl:variable name="myPhysicalRootId">
+            <xsl:if test="not(//METS:structMap[@TYPE = 'PHYSICAL']/METS:div[1]/@ID)">
+                <xsl:message terminate="yes">Couldn't find DMDID for first physical structure
+                    element in merge file!</xsl:message>
+            </xsl:if>
+            <xsl:value-of select="//METS:structMap[@TYPE = 'PHYSICAL']/METS:div[1]/@ID"/>
+        </xsl:variable>
+        <xsl:variable name="externalPhysicalRootId">
+            <xsl:if
+                test="not(document($structFile)//METS:structMap[@TYPE = 'PHYSICAL']/METS:div[1]/@ID)">
+                <xsl:message terminate="yes">Couldn't find DMDID for first physical structure
+                    element in structure file!</xsl:message>
+            </xsl:if>
+            <xsl:value-of
+                select="document($structFile)//METS:structMap[@TYPE = 'PHYSICAL']/METS:div[1]/@ID"/>
+        </xsl:variable>
+        <xsl:variable name="myLogicalRootId">
+            <xsl:if test="not(//METS:structMap[@TYPE = 'LOGICAL']/METS:div[1]/@ID)">
+                <xsl:message terminate="yes">Couldn't find DMDID for first logical structure element
+                    in merge file!</xsl:message>
+            </xsl:if>
+            <xsl:value-of select="//METS:structMap[@TYPE = 'LOGICAL']/METS:div[1]/@ID"/>
+        </xsl:variable>
+        <xsl:variable name="externalLogicalRootId">
+            <xsl:if
+                test="not(document($structFile)//METS:structMap[@TYPE = 'LOGICAL']/METS:div[1]/@DMDID)">
+                <xsl:message terminate="yes">Couldn't find DMDID for first logical structure element
+                    in structure file!</xsl:message>
+            </xsl:if>
+            <xsl:value-of
+                select="document($structFile)//METS:structMap[@TYPE = 'LOGICAL']/METS:div[1]/@DMDID"
+            />
+        </xsl:variable>
+        <!-- Get the structLink section from external document -->
+        <xsl:variable name="structLink">
+            <xsl:copy-of select="document($structFile)//METS:structLink/*"/>
+        </xsl:variable>
+        <!-- 
+        Copy unknown elements and replace known IDs
+        -->
         <xsl:copy>
-        <xsl:copy-of select="@*"/>
-            <xsl:for-each select="$structLink/METS:smLink"></xsl:for-each>
-        </xsl:copy> -->
+            <xsl:copy-of select="@*"/>
+            <xsl:for-each select="$structLink/*">
+                <xsl:choose>
+                    <xsl:when test="local-name(.) = 'smLink'">
+                        <xsl:copy>
+                            <!-- copy unknown attributes -->
+                            <xsl:copy-of select="@* except @xlink:from except @xlink:to"/>
+                            <xsl:choose>
+                                <xsl:when
+                                    test="@xlink:from and @xlink:from = $externalLogicalRootId">
+                                    <xsl:attribute name="xlink:from" select="$myLogicalRootId"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:copy-of select="@xlink:from"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            <xsl:choose>
+                                <xsl:when test="@xlink:to and @xlink:to = $externalPhysicalRootId">
+                                    <xsl:attribute name="xlink:to" select="$myPhysicalRootId"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:copy-of select="@xlink:to"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:copy>
+                    </xsl:when>
+                    <!-- copy unknown elements -->
+                    <xsl:otherwise>
+                        <xsl:copy-of select="."/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:for-each>
+        </xsl:copy>
     </xsl:template>
     <xsl:template match="METS:fileSec">
         <xsl:call-template name="copyDmdSec"/>
