@@ -103,6 +103,22 @@ class MetsMergerTest {
         }
     }
     
+    @Test
+    void checkStructLink () {
+        for (testSet in TEST_DATA) {
+            log.info('Checking if Ids in structLink section are resolvable')
+            testSet.converter.transform()
+            //test if there are no IDREFs in the structLink section that aren't resolvable 
+
+            def fromIDsNotResoveablePath = '//mets:smLink[@xlink:from[not(//mets:div/@ID = .)]]'
+            assertTrue(assertEmptyXPathResult(fromIDsNotResoveablePath, testSet.converter.result))
+            
+            def toIDsNotResoveablePath = '//mets:smLink[@xlink:to[not(//mets:div/@ID = .)]]'
+            assertTrue(assertEmptyXPathResult(toIDsNotResoveablePath, testSet.converter.result))
+            log.info('All Ids in structLink section are resolvable')
+        }
+    }
+    
     @AfterClass
     static void cleanUp () {
         for (testSet in TEST_DATA) {
