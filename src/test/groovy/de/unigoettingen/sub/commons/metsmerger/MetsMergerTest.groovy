@@ -97,8 +97,8 @@ class MetsMergerTest {
             //Use UGH for validation
             writeDocument(testSet.converter.result, testSet.resultFile)
             log.info('Document written to ' + testSet.resultFile.getAbsolutePath())
-            log.info('Validate using UGH')
-            assertTrue('UGH couln\'t load result!', ughValidate(testSet.ruleset, testSet.resultFile))
+            log.info('Validate using UGH (' + testSet.dfgViewerMets + ')')
+            assertTrue('UGH couln\'t load result for file ' + testSet.dfgViewerMets + '!', ughValidate(testSet.ruleset, testSet.resultFile))
             log.trace('Result is valid (UGH)')
         }
     }
