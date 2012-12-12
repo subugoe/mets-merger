@@ -21,9 +21,18 @@ package de.unigoettingen.sub.commons.metsmerger
 import groovy.util.logging.Log4j
 import groovy.transform.TypeChecked
 import static org.junit.Assert.*
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.Ignore
+import org.junit.Test
+import org.w3c.dom.Document
+import org.w3c.dom.NodeList
 import javax.xml.transform.stream.StreamSource
+import javax.xml.transform.dom.DOMSource
+import javax.xml.transform.TransformerException
+import javax.xml.transform.TransformerFactory
+import javax.xml.transform.dom.DOMResult
+
+import de.unigoettingen.sub.commons.metsmerger.util.LogErrorListener
+import de.unigoettingen.sub.commons.metsmerger.util.NamespaceConstants
 
 /**
  *
@@ -35,7 +44,9 @@ class RulesetConverterTest extends AbstractTransformerTest {
     
     def static RULESETS = [this.getClass().getResource('/rulesets/archaeo18.xml'), 
                           this.getClass().getResource('/rulesets/gdz.xml')]
-                      
+    
+    def static TESTFILE = this.getClass().getResource('/dfg-viewer-mets/PPN645063479.mets.xml')
+    
     def static TEMPLATE_PATH = '//xsl:template[@match = following-sibling::xsl:template/@match]'
                       
     @Test
@@ -68,6 +79,39 @@ class RulesetConverterTest extends AbstractTransformerTest {
             log.trace('Result seems valid')
         }
     }
+    
+    @Test
+    void testDMDSects () {
+        //This should test if for every label a DMD Sect is created
+       //First get the stylesheet from the ruleset
+        def RulesetConverter converter
+        converter = new RulesetConverter(RULESETS.get(0))
+        //set option for DMD sections
+        converter.setCreateDMDSectsParam('true')
+        converter.transform()
+        //Use the result to transform
+        //def protected static Document transform (Source input, Source xslt, Map params) {
+        def factory = TransformerFactory.newInstance()
+        def transformer = factory.newTransformer(new DOMSource(converter.result))
+        def listener = new LogErrorListener()
+        transformer.setErrorListener(listener)
+        def result = new DOMResult()
+        //Pass params to the stylesheet
+        //Preserve the labels
+        transformer.setParameter('copyLabelParam', 'true')
+
+        try {
+            transformer.transform(new StreamSource(TESTFILE.openStream()), result)
+        } catch (TransformerException te) {
+            log.error("Transformation failed ", te)
+        }
+        if (listener.fatal) {
+            log.error('Transformation failed, check the log!')
+        }
+        def doc = (Document) result.getNode()
+        assertTrue('XPathes for DMD check failed!', dmdcheck(doc))
         
+    }
+            
 }
 

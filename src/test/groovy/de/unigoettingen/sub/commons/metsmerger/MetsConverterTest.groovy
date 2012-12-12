@@ -146,16 +146,14 @@ class MetsConverterTest extends AbstractTransformerTest {
         }
     }
      
-    def static getDocumentFromXPath (String path, Document doc, Map namespaces) {
-        def xpath = new DOMXPath(path)
-        log.info('Checking XPath \'' + path + '\'')
-        def nsContext = new SimpleNamespaceContext(namespaces)
-        log.info('Set up namespace context')
-        xpath.setNamespaceContext(nsContext)
-        def node = xpath.selectSingleNode(doc)
-        return getDocumentFromNode(node)
+    @Test
+    void testDMDSects () {
+        for (testSet in TEST_DATA) {
+            log.info('Checking DMD sects')
+            assertTrue('XPathes for DMD check failed!', dmdcheck(testSet.converter.result))
+        }
     }
-        
+     
     @AfterClass
     static void cleanUp () {
         for (testSet in TEST_DATA) {
