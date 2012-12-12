@@ -28,7 +28,23 @@
             <xd:p/>
         </xd:desc>
     </xd:doc>
-
+    <!-- 
+    TODO:
+    * Use more Header metadata
+    * Add a physical DMD Section
+    ** example:
+    <mets:dmdSec ID="DMDPHYS_0000">
+        <mets:mdWrap MDTYPE="MODS">
+            <mets:xmlData>
+                <mods:mods xmlns:mods="http://www.loc.gov/mods/v3">
+                    <mods:location>
+                        <mods:physicalLocation type="shelfmark">8 ARCH II, 3542</mods:physicalLocation>
+                    </mods:location>
+                </mods:mods>
+            </mets:xmlData>
+        </mets:mdWrap>
+    </mets:dmdSec>
+    -->
     <xsl:output encoding="UTF-8" exclude-result-prefixes="#all" indent="yes"/>
     <xsl:param name="identifier" select="string('REPLACEME-IDENTIFIER')"/>
     <xsl:param name="locationPrefix">string('REPLACEME-LOCATION_PREFIX')</xsl:param>
