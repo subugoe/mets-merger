@@ -195,12 +195,12 @@
         <!-- 
         Copy unknown elements and replace known IDs
         -->
-        <xsl:copy>
+        <xsl:copy copy-namespaces="no">
             <xsl:copy-of select="@*"/>
             <xsl:for-each select="$structLink/*">
                 <xsl:choose>
                     <xsl:when test="local-name(.) = 'smLink'">
-                        <xsl:copy>
+                        <xsl:copy copy-namespaces="no" exclude-result-prefixes="METS xlink">
                             <!-- copy unknown attributes -->
                             <xsl:copy-of select="@* except @xlink:from except @xlink:to"/>
                             <xsl:choose>
