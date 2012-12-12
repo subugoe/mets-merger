@@ -41,7 +41,7 @@ class MetsMerger extends AbstractTransformer {
     
     //Configuration of Stylesheet
     /** Parameters of the stylesheet */
-    def static paramPrototypes = ['structFileParam': '', 'copyPhysicalStructMapParam': 'false', 'fileSectionParam': '']
+    def static paramPrototypes = ['structFileParam': '', 'copyPhysicalStructMapParam': 'false', 'fileSectionParam': '', 'overwriteStructLinkParam': 'true']
     
     static {
         paramPrototypes.keySet().each { name ->
@@ -60,6 +60,12 @@ class MetsMerger extends AbstractTransformer {
         this.schemaUrl = new URL(NamespaceConstants.getSchemaLoactionForNamespace(this.resultNamespace))
         //Configuration of Stylesheet
         paramPrototypes.each() { name, value -> params[name] = value }
+        /*
+         * This is needed to make sure that structLink Elements match the generated
+         * structure, otherwise the merge will fail if there is a structLink section
+         * in the document the structure will be merged to
+         */
+        this.setOverwriteStructLinkParam('true')
     }
     
     /**
