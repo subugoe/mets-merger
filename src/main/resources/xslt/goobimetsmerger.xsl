@@ -117,7 +117,21 @@
         </xsl:choose>
     </xsl:template>
     <xsl:template match="METS:structLink">
-        <xsl:copy-of select="document($structFile)//METS:structLink"/>
+        <!-- Fail if structLink is not empty -->
+        <xsl:if test=".//METS:smLink[@xlink:from != '' and @xlink:to != '']">
+            <xsl:message terminate="yes">StructLinks of document are not empty!
+                Exiting!</xsl:message>
+        </xsl:if>
+        <xsl:variable name="structLink">
+            <xsl:copy-of select="document($structFile)//METS:structLink"/>
+        </xsl:variable>
+        <!-- TODO: This may needs to be rewritten. Check if IDs will be in target document -->
+        <xsl:copy-of select="$structLink"/>
+        <!--
+        <xsl:copy>
+        <xsl:copy-of select="@*"/>
+            <xsl:for-each select="$structLink/METS:smLink"></xsl:for-each>
+        </xsl:copy> -->
     </xsl:template>
     <xsl:template match="METS:fileSec">
         <xsl:call-template name="copyDmdSec"/>
@@ -168,7 +182,7 @@
     </xsl:template>
     <xsl:template name="createPhysicalStructMap">
         <METS:structMap TYPE="PHYSICAL">
-            <METS:div ID="phys_0">
+            <METS:div>
                 <xsl:choose>
                     <xsl:when test="//METS:structMap[@TYPE = 'PHYSICAL']/METS:div[1]/@TYPE">
                         <xsl:attribute name="TYPE">
@@ -188,9 +202,13 @@
                             select="//METS:structMap[@TYPE = 'PHYSICAL']/METS:div[1]/@DMDID"/>
                     </xsl:attribute>
                 </xsl:if>
+                <!-- TODO: This ID needs to be from the original -->
                 <xsl:attribute name="ID">
+                    <!--
                     <xsl:value-of
                         select="document($structFile)//METS:div[@TYPE = 'physSequence']/@ID"/>
+                        -->
+                    <xsl:value-of select="//METS:structMap[@TYPE = 'PHYSICAL']/METS:div[1]/@ID"/>
                 </xsl:attribute>
                 <xsl:for-each
                     select="document($structFile)//METS:fileSec/METS:fileGrp[@USE=$fileSection]/METS:file">
