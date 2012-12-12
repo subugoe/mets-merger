@@ -104,7 +104,8 @@ abstract class AbstractTransformerTest {
     
     protected static Boolean dmdcheck (Document doc) {
         //get all labels and see if the content is also part of the linked dmd sects
-        //fail first if there are no linked IDs
+        //fail first if there is a label but no linked ID, this should be assured 
+        //and done by the result of the ruleset converter. 
         log.info('some complex XPath test, check the source code to see whats going on')
         def labelWithoutDMDIDPath = '//mets:div[@LABEL][not(@DMDID)]'   
         assertTrue(assertEmptyXPathResult(labelWithoutDMDIDPath, doc))
@@ -114,9 +115,12 @@ abstract class AbstractTransformerTest {
         def logicalDivsWithoutDMDIdPath = '//mets:structMap[@TYPE=\'LOGICAL\']//mets:div[not(@DMDID)]'
         assertTrue(assertEmptyXPathResult(logicalDivsWithoutDMDIdPath, domResult))
          */
+        
+        //This looks if there are any div's with DMD IDs that aren't resoveable
         def labelAndDMDSectDoesntMatchPath = '//mets:div[@DMDID[not(//mets:dmdSec/@ID = .)]]'
         assertTrue(assertEmptyXPathResult(labelAndDMDSectDoesntMatchPath, doc))
         
+        //This checks if there are any empty DMDID Attributes
         def emptyDMDIdsPath = '//mets:div[@DMDID = \'\']'
         assertTrue(assertEmptyXPathResult(emptyDMDIdsPath, doc))
         
