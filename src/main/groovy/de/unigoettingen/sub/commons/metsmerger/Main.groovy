@@ -189,7 +189,7 @@ class Main {
         
         //TODO: check if this works
         if (inFormat == FORMAT.TEI && merge != null && (params['identifier'] == null || params['identifier'] == '')) {
-            def identifier = getGoobiIdentifier(goobiDoc)
+            def identifier = Util.getGoobiIdentifier(input)
             params['identifier'] = identifier
         }
 
