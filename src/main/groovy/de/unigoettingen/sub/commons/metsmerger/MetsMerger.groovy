@@ -23,9 +23,10 @@ import groovy.util.logging.Log4j
 
 import javax.xml.transform.dom.DOMSource
 import javax.xml.transform.Source
+import org.w3c.dom.Document
 
 import de.unigoettingen.sub.commons.metsmerger.util.NamespaceConstants
-import org.w3c.dom.Document
+import static de.unigoettingen.sub.commons.metsmerger.util.Util.*
 
 /**
  * This class can be used to merge a existing Goobi process METS Metadata file with
@@ -92,6 +93,8 @@ class MetsMerger extends AbstractTransformer {
      */
     MetsMerger(Document externalDoc, URL goobiMets) {
         this()
+        this.input = goobiMets
+        //This isn't really needed, it just works as marker
         this.inputDoc = externalDoc
         //Safe document
         out = File.createTempFile('metsMerge-struct-file', '.xml')
