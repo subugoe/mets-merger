@@ -261,7 +261,7 @@ class Util {
     }
     
     /**
-     * Tries to gues the FORMAt of a given {@link java.net.URL URL}
+     * Tries to gues the FORMAT of a given {@link java.net.URL URL}
      * This is done by detecting namespaces or root elements
      * @returns the guessed FORMAT of a URL
      */
@@ -289,7 +289,16 @@ class Util {
     }
     
     /**
-     * Returns the Goobi Identifier from a given Document
+     * Returns the Goobi Identifier from a given {@link java.net.URL URL}
+     * @param url the {@link java.net.URL URL} to look into.
+     * @returns the identifier as String or null
+     */
+    static String getGoobiIdentifier (URL url) {
+        getGoobiIdentifier(loadDocument(url))
+    }
+    
+    /**
+     * Returns the Goobi Identifier from a given {@link org.w3c.dom.Document Document}
      * @param doc the {@link org.w3c.dom.Document Document} to look into.
      * @returns the identifier as String or null
      */
