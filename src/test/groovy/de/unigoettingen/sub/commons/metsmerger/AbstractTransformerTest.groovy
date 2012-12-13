@@ -61,7 +61,7 @@ abstract class AbstractTransformerTest {
         def nodes = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
         
         if (nodes.getLength() != 0) {
-            log.info('Result not empty for XPath ' + path)
+            log.info('Result not empty for XPath ' + path + 'matches: ' + nodes.getLength())
             for (int i = 0; i < nodes.getLength(); i++) {
                 log.error('Unexpected Match: ' + XmlUtil.serialize(nodes.item(i)))
             }
@@ -102,7 +102,7 @@ abstract class AbstractTransformerTest {
         logger.trace('----------------END OF RESULT\n')
     }
     
-    protected static Boolean dmdcheck (Document doc) {
+    static Boolean dmdcheck (Document doc) {
         //get all labels and see if the content is also part of the linked dmd sects
         //fail first if there is a label but no linked ID, this should be assured 
         //and done by the result of the ruleset converter. 
