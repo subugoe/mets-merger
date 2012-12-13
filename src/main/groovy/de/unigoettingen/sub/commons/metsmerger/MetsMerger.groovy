@@ -39,7 +39,8 @@ class MetsMerger extends AbstractTransformer {
     def MetsConverter converter
     /** The URL of the stylesheet to used */
     def static URL stylesheet = this.getClass().getResource("/xslt/goobimetsmerger.xsl")
-    
+    //** Temp file for merge of W3C Document */
+    protected File out
     //Configuration of Stylesheet
     /** Parameters of the stylesheet */
     def static paramPrototypes = ['structFileParam': '', 'copyPhysicalStructMapParam': 'false', 'fileSectionParam': '', 'overwriteStructLinkParam': 'true']
@@ -92,7 +93,13 @@ class MetsMerger extends AbstractTransformer {
     MetsMerger(Document externalDoc, URL goobiMets) {
         this()
         this.inputDoc = externalDoc
-        params['structFileParam'] = externalMets.toString()
+        //Safe document
+        out = File.createTempFile('metsMerge-struct-file', '.xml')
+        log.trace('Got W3C DOM Document, write File to ' + out.getAbsolutePath())
+        writeDocument(externalDoc, out)
+        
+        //Make sure the string is in the right format
+        params['structFileParam'] = out.toURI().toURL().toString()
     }
     
     /**
@@ -116,7 +123,9 @@ class MetsMerger extends AbstractTransformer {
             result = transform(this.input, this.stylesheet, this.params)
         } else {
             log.debug("Transforming using W3C Document")
-            result = transform(this.inputDoc, this.stylesheet, this.params)
+            result = transform(this.input, this.stylesheet, this.params)
+            //Get rid of temp file
+            out.delete()
         }
     }
     
