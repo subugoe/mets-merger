@@ -126,7 +126,7 @@ class Util {
     static Boolean ughValidate (URL ruleset, Document metadataDoc) {
         //create a temp file
         File out = File.createTempFile('ugh-result-check', '.xml')
-        log.trace('Got w3C DOM Document, write File to ' + out.getAbsolutePath())
+        log.trace('Got W3C DOM Document, write File to ' + out.getAbsolutePath())
         writeDocument(metadataDoc, out)
         def valid = ughValidate(ruleset, out)
         //delete the temp file
