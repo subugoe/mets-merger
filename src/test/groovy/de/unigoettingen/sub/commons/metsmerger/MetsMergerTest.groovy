@@ -45,15 +45,18 @@ class MetsMergerTest {
     @BeforeClass
     static void setup () {
         for (testSet in TEST_DATA) {
+            log.info('Setting up test data for ' + testSet.dfgViewerMets)
             //load process to be merged to
             def goobiDoc = loadDocument(testSet.processMets)
             //Get Identifier from METS to be merged
             def identifier = getGoobiIdentifier(goobiDoc)
             log.info('Got identifier ' + identifier + ' from file ' + testSet.processMets.toString())
             //Convert TEI to METS
+            log.info('Converting TEI File ' + testSet.dfgViewerMets)
             def converter = new Tei2Mets(testSet.dfgViewerMets)
             converter.setIdentifier(identifier)
             converter.transform()
+            log.info('TEI transformed (ID: ' + identifier + ')')
             //Save the result METS as input for the merger
             File mets = File.createTempFile('tei2mets-result', '.xml')
             writeDocument(converter.result, mets)
@@ -63,7 +66,7 @@ class MetsMergerTest {
             
             log.info('Setting up MetsMerger with ruleset ' + testSet.ruleset.toString() + ' for file ' + testSet.dfgViewerMets.toString())
             testSet.converter = new MetsMerger(testSet.dfgViewerMets, testSet.processMets)
-            testSet.resultFile = File.createTempFile('result', '.xml')
+            testSet.resultFile = File.createTempFile('metsMerger-result', '.xml')
             log.info('Result file will be ' + testSet.resultFile.getAbsolutePath())
         }
     }
@@ -92,29 +95,35 @@ class MetsMergerTest {
     
     @Test
     void testDfg2GoobiMetsUGHValidate () {
+        log.info('Entering testDfg2GoobiMetsUGHValidate:')
         for (testSet in TEST_DATA) {
             testSet.converter.transform()
+            def file = testSet.resultFile
             //Use UGH for validation
             writeDocument(testSet.converter.result, testSet.resultFile)
             log.info('Document written to ' + testSet.resultFile.getAbsolutePath())
-            log.info('Validate using UGH (' + testSet.dfgViewerMets + ')')
-            assertTrue('UGH couln\'t load result for file ' + testSet.dfgViewerMets + '!', ughValidate(testSet.ruleset, testSet.resultFile))
-            log.trace('Result is valid (UGH)')
+            log.info('Validate using UGH (' + testSet.processMets + ') - temp File ' + testSet.resultFile.getAbsolutePath())
+            assertTrue('UGH couln\'t load result for file ' + testSet.processMets + '!', ughValidate(testSet.ruleset, testSet.resultFile))
+            log.trace('Result for '+ testSet.processMets + ' is valid (UGH)')
+            assertTrue(file == testSet.resultFile)
         }
     }
     
     @Test
     void checkStructLink () {
+        log.info('Entering checkStructLink:')
         for (testSet in TEST_DATA) {
-            log.info('Checking if Ids in structLink section are resolvable')
+            log.info('Checking if Ids in structLink section are resolvable for merge of ' + testSet.processMets + ' and ' + testSet.dfgViewerMets)
             testSet.converter.transform()
             //test if there are no IDREFs in the structLink section that aren't resolvable 
 
+            //This tests the logical structural elements
             def fromIDsNotResoveablePath = '//mets:smLink[@xlink:from[not(//mets:div/@ID = .)]]'
-            assertTrue(assertEmptyXPathResult(fromIDsNotResoveablePath, testSet.converter.result))
+            assertTrue('XPath ' + fromIDsNotResoveablePath + ' for document ' + testSet.processMets + ' failed', assertEmptyXPathResult(fromIDsNotResoveablePath, testSet.converter.result))
             
+            //This tests the physical structural elements
             def toIDsNotResoveablePath = '//mets:smLink[@xlink:to[not(//mets:div/@ID = .)]]'
-            assertTrue(assertEmptyXPathResult(toIDsNotResoveablePath, testSet.converter.result))
+            assertTrue('XPath ' + toIDsNotResoveablePath + ' for document ' + testSet.processMets + ' failed', assertEmptyXPathResult(toIDsNotResoveablePath, testSet.converter.result))
             log.info('All Ids in structLink section are resolvable')
         }
     }
