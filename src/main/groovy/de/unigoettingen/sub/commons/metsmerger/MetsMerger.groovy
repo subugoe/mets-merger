@@ -25,6 +25,7 @@ import javax.xml.transform.dom.DOMSource
 import javax.xml.transform.Source
 
 import de.unigoettingen.sub.commons.metsmerger.util.NamespaceConstants
+import org.w3c.dom.Document
 
 /**
  * This class can be used to merge a existing Goobi process METS Metadata file with
@@ -71,7 +72,6 @@ class MetsMerger extends AbstractTransformer {
     /**
      * Construts a MetsMerger, sets the URL of the schema for validation
      * and the parameters of the transformation.
-     * @param ruleset the {@link java.net.URL URL} of the ruleset used to generate the transformation
      * @param externalMets the {@link java.net.URL URL} of the external METS file to be merged
      * @param goobiMets the {@link java.net.URL URL} of the goobi METS file to be merged
      * @see #MetsMerger()
@@ -79,6 +79,19 @@ class MetsMerger extends AbstractTransformer {
     MetsMerger(URL externalMets, URL goobiMets) {
         this()
         this.input = goobiMets
+        params['structFileParam'] = externalMets.toString()
+    }
+    
+    /**
+     * Construts a MetsMerger, sets the URL of the schema for validation
+     * and the parameters of the transformation.
+     * @param externalDoc the {@link org.w3c.dom.Document Document} of the external METS file to be merged
+     * @param goobiMets the {@link java.net.URL URL} of the goobi METS file to be merged
+     * @see #MetsMerger()
+     */
+    MetsMerger(Document externalDoc, URL goobiMets) {
+        this()
+        this.inputDoc = doc
         params['structFileParam'] = externalMets.toString()
     }
     
