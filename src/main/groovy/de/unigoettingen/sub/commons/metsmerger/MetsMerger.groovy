@@ -91,7 +91,7 @@ class MetsMerger extends AbstractTransformer {
      */
     MetsMerger(Document externalDoc, URL goobiMets) {
         this()
-        this.inputDoc = doc
+        this.inputDoc = externalDoc
         params['structFileParam'] = externalMets.toString()
     }
     
@@ -110,7 +110,13 @@ class MetsMerger extends AbstractTransformer {
         log.trace('Rewriting location of merge file from ' + this.params['structFileParam'])
         this.params['structFileParam'] = getRelativePath(this.params['structFileParam'])
         log.trace('Rewriting location of merge file to ' + this.params['structFileParam'])
-        result = transform(this.input, this.stylesheet, this.params)
+        if (this.inputDoc == null) {
+            log.debug("Using ruleset to generate stylesheet " + this.converter.input.toString())
+            result = transform(this.input, this.stylesheet, this.params)
+        } else {
+            log.debug("Transforming using W3C Document")
+            result = transform(this.inputDoc, this.stylesheet, this.params)
+        }   
     }
     
     /**
