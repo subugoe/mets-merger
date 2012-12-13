@@ -125,10 +125,12 @@ class Util {
     static Boolean ughValidate (URL ruleset, Document metadataDoc) {
         //create a temp file
         File out = File.createTempFile('ugh-result-check', '.xml')
+        log.trace('Got w3C DOM Document, write File to ' + out.getAbsolutePath())
         writeDocument(metadataDoc, out)
         def valid = ughValidate(ruleset, out)
         //delete the temp file
         out.delete()
+        log.trace('Deleted temp file')
         return valid
     }
     
@@ -140,7 +142,7 @@ class Util {
      * 
      */
     static Boolean ughValidate (URL ruleset, File metadataFile) {
-        log.trace('Using ruleset ' + ruleset.toString())
+        log.trace('Checking file ' + metadataFile.getAbsolutePath() + ' using ruleset ' + ruleset.toString())
         Prefs preferences = new Prefs();
         preferences.loadPrefs(new File(ruleset.toURI()).getAbsolutePath());
         try {
