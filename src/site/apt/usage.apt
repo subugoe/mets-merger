@@ -45,3 +45,18 @@ java -jar mets-merger.jar -r ruleset.xml -i dfg.mets.xml -o goobi.mets.xml
 +-----+
 java -jar mets-merger.jar -i dfg.mets.xml -m goobi.mets.xml -o goobi.mets.xml
 +-----+
+
+~~ Beispiele aus der Wurzel des Repositories
+~~ mvn package
+~~ # Regelsatz zu XSLT
+~~ java -jar target/mets-merger-1.0-SNAPSHOT.jar -i src/test/resources/rulesets/archaeo18.xml
+~~ # TEI zu DFG Viewer METS mit id
+~~ java -jar target/mets-merger-1.0-SNAPSHOT.jar -v -i src/test/resources/tei/weimar-hs-2057.tei.xml -p DFG -Didentifier=bla
+~~ # DFG Viewer METS zu internem Goobi METS (mit Validierung)
+~~ java -jar target/mets-merger-1.0-SNAPSHOT.jar -v -i src/test/resources/dfg-viewer-mets/PPN645063479.mets.xml -r src/test/resources/rulesets/archaeo18.xml -c
+~~ # TEI mit Goobi METS zusammenführen
+~~ java -jar target/mets-merger-1.0-SNAPSHOT.jar -v -i src/test/resources/tei/weimar-hs-2057.tei.xml -m src/test/resources/processes/weimar-41874.goobi.mets.xml -r src/test/resources/rulesets/archaeo18.xml -c
+~~
+~~
+
+
