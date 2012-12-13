@@ -40,7 +40,9 @@ class MetsMergerTest {
     static Boolean DELETE_TMP_FILES = false
     
     def static TEST_DATA = [new TestData(this.getClass().getResource("/rulesets/archaeo18.xml"), this.getClass().getResource("/processes/rom-38301.goobi.mets.xml"), this.getClass().getResource("/tei/rom-heyne1798.tei.xml")),
-        new TestData(this.getClass().getResource("/rulesets/archaeo18.xml"), this.getClass().getResource("/processes/weimar-41874.goobi.mets.xml"), this.getClass().getResource("/tei/weimar-hs-2057.tei.xml"))]
+        new TestData(this.getClass().getResource("/rulesets/archaeo18.xml"), this.getClass().getResource("/processes/weimar-41874.goobi.mets.xml"), this.getClass().getResource("/tei/weimar-hs-2057.tei.xml")),
+        new TestData(this.getClass().getResource("/rulesets/archaeo18.xml"), this.getClass().getResource("/processes/bern-41873.goobi.mets.xml"), this.getClass().getResource("/tei/bern-mss-muel-507.tei.xml"))
+    ]
 
     @BeforeClass
     static void setup () {
