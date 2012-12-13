@@ -21,6 +21,7 @@ package de.unigoettingen.sub.commons.metsmerger.util
 
 import groovy.util.logging.Log4j
 import groovy.transform.TypeChecked
+import groovy.xml.XmlUtil
 
 import javax.xml.parsers.DocumentBuilder
 import javax.xml.parsers.DocumentBuilderFactory
@@ -315,6 +316,10 @@ class Util {
         if (nodes.getLength() != 1) {
             log.info('Search for Goobi Identifier returned no or to many identifiers')
             return null
+        } else if (nodes.getLength() > 1) {
+            for (int i = 0; i < nodes.getLength(); i++) {
+                log.error('Identifier: ' + XmlUtil.serialize(nodes.item(i)))
+            }
         }
         Element e = (Element) nodes.item(0)
         return e.getTextContent()
