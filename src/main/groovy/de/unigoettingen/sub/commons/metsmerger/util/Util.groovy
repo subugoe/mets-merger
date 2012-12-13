@@ -261,6 +261,34 @@ class Util {
     }
     
     /**
+     * Tries to gues the FORMAt of a given {@link java.net.URL URL}
+     * This is done by detecting namespaces or root elements
+     * @returns the guessed FORMAT of a URL
+     */
+    static FORMAT guessFormat (URL input) {
+        //Check type of input
+        def inputNamespace = getRootNamespace(input)
+        if (inputNamespace == NamespaceConstants.TEI_NAMESPACE) {
+            FORMAT.TEI
+        } else if (inputNamespace == NamespaceConstants.METS_NAMESPACE) {
+            def namespaces = getNamespaces(input)
+            if (namespaces.contains(NamespaceConstants.GOOBI_NAMESPACE)) {
+                FORMAT.GOOBI
+            } else if (namespaces.contains(NamespaceConstants.DV_NAMESPACE)) {
+                FORMAT.DFG
+            } else {
+                FORMAT.METS
+            }
+        } else {
+            if (getRootElementName(input) == 'Preferences') {
+                FORMAT.RULESET
+            } else {
+                FORMAT.UNKNOWN
+            }
+        }          
+    }
+    
+    /**
      * Returns the Goobi Identifier from a given Document
      * @param doc the {@link org.w3c.dom.Document Document} to look into.
      * @returns the identifier as String or null
