@@ -37,10 +37,14 @@ import org.w3c.dom.Document
 @Log4j
 class UtilTest {
     def static TESTFILES = [this.getClass().getResource('/tei/rom-heyne1798.tei.xml'), 
-                            this.getClass().getResource("/dfg-viewer-mets/PPN645063479.mets.xml"),
-                            this.getClass().getResource("/processes/24580.goobi.mets.xml"),
-                            this.getClass().getResource("/rulesets/archaeo18.xml")
-                           ]
+        this.getClass().getResource('/dfg-viewer-mets/PPN645063479.mets.xml'),
+        this.getClass().getResource('/processes/24580.goobi.mets.xml'),
+        this.getClass().getResource('/rulesets/archaeo18.xml')
+    ]
+    def static IDENTIFIER_TESTFILES = [this.getClass().getResource('/processes/24580.goobi.mets.xml'),
+        this.getClass().getResource('/processes/rom-38301.goobi.mets.xml'),
+        this.getClass().getResource('/processes/weimar-41874.goobi.mets.xml'),
+    ]
     
     @BeforeClass
     static void testFilesNotNull () {
@@ -119,9 +123,12 @@ class UtilTest {
    
     @Test
     void testGetGoobiIdentifier () {
-        log.info('Loading document ' + TESTFILES.get(2).toString())
-        Document doc = loadDocument(TESTFILES.get(2))
-        assertTrue('Not the expected Identifier', getGoobiIdentifier(doc) == 'PPN645063479')
+        for (gMets in IDENTIFIER_TESTFILES) {
+            log.info('Loading document ' + gMets.toString())
+            def identifier = getGoobiIdentifier(gMets)
+            log.info('Got identifier ' + identifier)
+            assertNotNull('Not the expected Identifier', identifier)
+        }
     }
         
 }
