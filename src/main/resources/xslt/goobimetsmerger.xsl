@@ -62,7 +62,7 @@
         select="if ($copyPhysicalStructMapParam castable as xs:boolean) then xs:boolean($copyPhysicalStructMapParam) else false()"
         as="xs:boolean"/>
     <xsl:variable name="fileSection"
-        select="if ($fileSectionParam castable as xs:string) then xs:string($fileSectionParam) else 'PRESENTATION'"
+        select="if ($fileSectionParam castable as xs:string and xs:string($fileSectionParam) != '') then xs:string($fileSectionParam) else 'PRESENTATION'"
         as="xs:string"/>
     <xsl:variable name="overwriteStructLink"
         select="if ($overwriteStructLinkParam castable as xs:boolean) then xs:boolean($overwriteStructLinkParam) else false()"
@@ -79,11 +79,15 @@
 
     <xsl:template match="/">
         <!-- For debuging of the given path -->
-        <xsl:message>Struct file is '<xsl:value-of select="$structFile"/>', Struct file param is
-                '<xsl:value-of select="$structFileParam"/>' </xsl:message>
         <xsl:comment>
             <xsl:text>This file was merged by GoobiMETSMerger Version </xsl:text>
             <xsl:value-of select="$version"/>
+            <xsl:text>Struct file is '</xsl:text><xsl:value-of select="$structFile"/><xsl:text>',
+                Struct file param is'</xsl:text><xsl:value-of select="$structFileParam"/><xsl:text>' </xsl:text>
+            <xsl:text>Params:</xsl:text>
+            <xsl:text>copyPhysicalStructMap: </xsl:text><xsl:value-of select="$copyPhysicalStructMap"/>
+            <xsl:text>fileSection: </xsl:text><xsl:value-of select="$fileSection"/>
+            <xsl:text>overwriteStructLink: </xsl:text><xsl:value-of select="$overwriteStructLink"/>
         </xsl:comment>
         <xsl:apply-templates/>
     </xsl:template>
@@ -245,6 +249,12 @@
     </xsl:template>
     -->
     <xsl:template name="createFileSec">
+        <!-- Fail if there is no source for the fileSect -->
+        <xsl:if test="not(document($structFile)//METS:fileSec/METS:fileGrp[@USE=$fileSection])">
+            <xsl:message terminate="yes">
+                Given fileGrp '<xsl:value-of select="$fileSection"/>' not found!
+            </xsl:message>
+        </xsl:if>
         <xsl:variable name="locationPrefix" select="//goobi:metadata[@name='pathimagefiles']"/>
         <METS:fileSec>
             <METS:fileGrp USE="LOCAL">
@@ -272,10 +282,6 @@
                 </xsl:for-each>
             </METS:fileGrp>
         </METS:fileSec>
-    </xsl:template>
-    <xsl:template name="getFileID">
-        <xsl:text>FILE_</xsl:text>
-        <xsl:number format="0001" value="position()"/>
     </xsl:template>
     <xsl:template name="createPhysicalStructMap">
         <METS:structMap TYPE="PHYSICAL">
@@ -335,6 +341,10 @@
                 </xsl:for-each>
             </METS:div>
         </METS:structMap>
+    </xsl:template>
+    <xsl:template name="getFileID">
+        <xsl:text>FILE_</xsl:text>
+        <xsl:number format="0001" value="position()"/>
     </xsl:template>
     <xsl:template name="copyDmdSec">
         <xsl:variable name="vetoIDs">
