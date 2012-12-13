@@ -63,12 +63,12 @@ class Main {
         cli.v(longOpt: 'verbose', 'verbose output')
         
         def opt = cli.parse(args)
-        if(opt.v) {
+        if (opt.v) {
             verbose = true
             log.setLevel(Level.TRACE)
         }
         
-        if(!opt) {
+        if (!opt) {
             cli.usage()
             return
         }
@@ -79,11 +79,11 @@ class Main {
             return
         }
         
-        if(opt.r) {
+        if (opt.r) {
             ruleset = new File(opt.r).toURL()
             log.trace('Ruleset: ' + ruleset.toString())
         }
-        if(opt.i) {
+        if (opt.i) {
             input = new File(opt.i).toURL()
             log.trace('Input: ' + input.toString())
             //No input, just ruleset
@@ -116,14 +116,14 @@ class Main {
         }
         
         //Check formats
-        if(opt.j && FORMAT.fromString(opt.j) != null) {
+        if (opt.j && FORMAT.fromString(opt.j) != null) {
             inFormat = FORMAT.fromString(opt.j)
         } else if (opt.j) {
             log.trace('Can\'t parse input format' + opt.j)
             println 'Format must be one of ' + FORMAT.getFormats()
             System.exit(5)
         }
-        if(opt.p && FORMAT.fromString(opt.p) != null) {
+        if (opt.p && FORMAT.fromString(opt.p) != null) {
             outFormat = FORMAT.fromString(opt.p)
         } else if (opt.p) {
             log.info('Can\'t parse output format' + opt.p)
@@ -140,9 +140,15 @@ class Main {
             }
             //FORMAT.UNKNOWN fails late in start
         }
+        
+        if (outFormat != FORMAT.GOOBI && outFormat != FORMAT.DFG && outFormat != FORMAT.XSLT) {
+            log.info('Can\'t create output format' + outFormat.name)
+            println 'Format ' + outFormat.name + ' not supported as output format!'
+            System.exit(5)
+        }
 
         //Stuff to merge, check if the file format is right
-        if(opt.m) {
+        if (opt.m) {
             if (inFormat == FORMAT.RULESET || outFormat != FORMAT.GOOBI) {
                 println 'Merge mode only woks with Goobi output, and can\'t operate on ruleset input'
                 System.exit(10)
@@ -152,6 +158,7 @@ class Main {
                 System.exit(11)
             }
             merge = new File(opt.m).toURL()
+            log.trace('Merge: ' + merge.toString())
         }
         //parse XSLT params
         if (opt.D) {
@@ -170,11 +177,38 @@ class Main {
      * Processes the given files
      */
     static void start () {
-        //Open input
+        log.info('Input format: ' + inFormat.name + ' output format ' + outFormat.name)
+        //If input is TEI and merge is requested get identifier from merge file
+        if (inFormat == FORMAT.TEI && merge != null && (params['identifier'] == null || params['identifier'] == '')) {
+            def identifier = Util.getGoobiIdentifier(merge)
+            params['identifier'] = identifier
+        }
+        
+        //Decide which converter to use
         AbstractTransformer converter
         switch (inFormat) {
         case FORMAT.TEI:
-            converter = new Tei2Mets(input)
+            //Check if TEI is jus one step for merge
+            if (ruleset == null && outFormat == FORMAT.GOOBI) {
+                println 'No ruleset given, can\'t create Goobi METS!'
+                System.exit(3)
+            } else if (outFormat == FORMAT.GOOBI) {
+                def result
+                //Create DFG Viewer METS from TEI
+                converter = new Tei2Mets(input)
+                converter = setUpConverter(converter, params)
+                try {
+                    converter.transform()
+                    result = converter.result
+                } catch (IllegalStateException ise) {
+                    println 'Transformation needs additional parameters'
+                    System.exit(30)
+                }
+                converter = new MetsConverter(ruleset, result)
+
+            } else {
+                converter = new Tei2Mets(input)
+            }
             break
         case FORMAT.DFG:
             converter = new MetsConverter(ruleset, input)
@@ -182,62 +216,46 @@ class Main {
         case FORMAT.RULESET:
             converter = new RulesetConverter(ruleset)
             break
+        case FORMAT.GOOBI:
+            //Input is alreadx Goobi METS no cenversion needed, just merge
+            break
         default:
             log.warn('Format ' + inFormat.name + ' not supported as input or not recognized!')
             System.exit(4) 
         }
         
-        //TODO: check if this works
-        if (inFormat == FORMAT.TEI && merge != null && (params['identifier'] == null || params['identifier'] == '')) {
-            def identifier = Util.getGoobiIdentifier(input)
-            params['identifier'] = identifier
+        converter = setUpConverter(converter, params)
+        
+        //Transform
+        try {
+            converter.transform()
+        } catch (IllegalStateException ise) {
+            println 'Transformation needs additional parameters'
+            System.exit(30)
         }
 
-        //Set the XSLT params
-        params.each() { key, value ->
-            def method = 'set' + key[0].toUpperCase() + key[1..-1]
-            try {
-                converter."${method}"(value)
-            } catch (groovy.lang.MissingMethodException e) {
-                log.warn('Param ' + key + ' not supported (no method called ' + method + ')!')
+        //Merge if requested
+        if (merge != null) {
+            //Test if the file type for merge is right
+            if (guessFormat(merge) != FORMAT.GOOBI) {
+                println 'The to be merged to needs to be Goobi METS!'
+                System.exit(30)
             }
-        }
-        
-        //transform if no merge file
-        if (merge == null) {
+            //Set up merger
+            //Check if we operate on input or on result of previous transformation
+            if (inFormat == FORMAT.GOOBI) {
+                converter = new MetsMerger(input, merge)
+            } else {
+                converter = new MetsMerger(converter.result, merge)
+            }
+            //Merge
+            converter = setUpConverter(converter, params)
             try {
                 converter.transform()
             } catch (IllegalStateException ise) {
                 println 'Transformation needs additional parameters'
                 System.exit(30)
             }
-        } else {
-            //Test if the file type for merge is right
-            if (guessFormat(merge) != FORMAT.GOOBI) {
-                println 'The to be merged to needs to be Goobi METS!'
-                System.exit(30)
-            }
-            //TODO : Check for previous results
-            if (inFormat != FORMAT.GOOBI) {
-                def result = converter.result
-            }
-            converter = new MetsMerger(ruleset, input)
-            converter.transform()
-        }
-        //Handling for TEI input, needs to happen before merge
-        if (inFormat == FORMAT.TEI) {
-            def result = converter.result
-            //Check which METS should be created
-            if (ruleset == null && outFormat == FORMAT.GOOBI) {
-                log.warn('No ruleset given, can\'t create Goobi METS !')
-                System.exit(3)
-            } else if (outFormat == FORMAT.GOOBI) {
-                converter = new MetsConverter(ruleset, result)
-                converter.transform()
-            }
-        } else if ((inFormat != FORMAT.RULESET && outFormat != FORMAT.XSL)) {
-            log.warn('Format ' + outFormat.name + ' not supported as output!')
-            System.exit(3)
         }
         
         //Validate the result if requested
@@ -265,31 +283,20 @@ class Main {
         println "Result written"
     }
     
-    /*
-     * TODO: finish this, it's currently done by the options j and p 
-     */
-    static FORMAT guessFormat (URL input) {
-        //Check type of input
-        def inputNamespace = getRootNamespace(input)
-        if (inputNamespace == NamespaceConstants.TEI_NAMESPACE) {
-            FORMAT.TEI
-        } else if (inputNamespace == NamespaceConstants.METS_NAMESPACE) {
-            def namespaces = getNamespaces(input)
-            if (namespaces.contains(NamespaceConstants.GOOBI_NAMESPACE)) {
-                FORMAT.GOOBI
-            } else if (namespaces.contains(NamespaceConstants.DV_NAMESPACE)) {
-                FORMAT.DFG
-            } else {
-                FORMAT.METS
+    protected static AbstractTransformer setUpConverter (AbstractTransformer converter, Map params) {
+        //Set the XSLT params
+        //If there is more then one conversion step all parameters are passed to all converters
+        params.each() { key, value ->
+            def method = 'set' + key[0].toUpperCase() + key[1..-1]
+            try {
+                converter."${method}"(value)
+            } catch (groovy.lang.MissingMethodException e) {
+                log.warn('Param ' + key + ' not supported (no method called ' + method + ')!')
             }
-        } else {
-            if (getRootElementName(input) == 'Preferences') {
-                FORMAT.RULESET
-            } else {
-                FORMAT.UNKNOWN
-            }
-        }          
+        }
+        converter
     }
+    
     
 }
 
