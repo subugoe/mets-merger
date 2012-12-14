@@ -109,7 +109,7 @@ class RulesetConverterTest extends AbstractTransformerTest {
             log.error('Transformation failed, check the log!')
         }
         def doc = (Document) result.getNode()
-        assertTrue('XPathes for DMD check failed!', dmdcheck(doc))
+        assertTrue('XPathes for DMD check failed!', dmdCheck(doc))
         
     }
             

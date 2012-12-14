@@ -102,7 +102,7 @@ abstract class AbstractTransformerTest {
         logger.trace('----------------END OF RESULT\n')
     }
     
-    static Boolean dmdcheck (Document doc) {
+    static Boolean dmdCheck (Document doc) {
         //get all labels and see if the content is also part of the linked dmd sects
         //fail first if there is a label but no linked ID, this should be assured 
         //and done by the result of the ruleset converter. 
@@ -125,6 +125,18 @@ abstract class AbstractTransformerTest {
         assertTrue(assertEmptyXPathResult(emptyDMDIdsPath, doc))
         
         return true
+    }
+    
+    static Boolean checkStructLink (Document doc) {
+        //test if there are no IDREFs in the structLink section that aren't resolvable 
+        //This tests the logical structural elements
+        def fromIDsNotResoveablePath = '//mets:smLink[@xlink:from[not(//mets:div/@ID = .)]]'
+        assertTrue('XPath ' + fromIDsNotResoveablePath + ' failed', assertEmptyXPathResult(fromIDsNotResoveablePath, doc))
+            
+        //This tests the physical structural elements
+        def toIDsNotResoveablePath = '//mets:smLink[@xlink:to[not(//mets:div/@ID = .)]]'
+        assertTrue('XPath ' + toIDsNotResoveablePath + ' failed', assertEmptyXPathResult(toIDsNotResoveablePath, doc))
+        log.info('All Ids in structLink section are resolvable')
     }
     
     //TODO: get rid of Jaxen

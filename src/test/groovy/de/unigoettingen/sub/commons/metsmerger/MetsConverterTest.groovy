@@ -149,8 +149,8 @@ class MetsConverterTest extends AbstractTransformerTest {
     @Test
     void testDMDSects () {
         for (testSet in TEST_DATA) {
-            log.info('Checking DMD sects')
-            assertTrue('XPathes for DMD check failed!', dmdcheck(testSet.converter.result))
+            log.info('Checking DMD sects for input document ' + testSet.processMets.toString())
+            assertTrue('XPathes for DMD check failed!', dmdCheck(testSet.converter.result))
         }
     }
      
