@@ -137,6 +137,8 @@ abstract class AbstractTransformerTest {
         def toIDsNotResoveablePath = '//mets:smLink[@xlink:to[not(//mets:div/@ID = .)]]'
         assertTrue('XPath ' + toIDsNotResoveablePath + ' failed', assertEmptyXPathResult(toIDsNotResoveablePath, doc))
         log.info('All Ids in structLink section are resolvable')
+        
+        return true
     }
     
     //TODO: get rid of Jaxen
