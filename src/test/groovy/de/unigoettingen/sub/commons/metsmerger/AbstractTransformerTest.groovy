@@ -61,7 +61,7 @@ abstract class AbstractTransformerTest {
         def nodes = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
         
         if (nodes.getLength() != 0) {
-            log.info('Result not empty for XPath ' + path + 'matches: ' + nodes.getLength())
+            log.info('Result not empty for XPath ' + path + ' matches: ' + nodes.getLength())
             for (int i = 0; i < nodes.getLength(); i++) {
                 log.error('Unexpected Match: ' + XmlUtil.serialize(nodes.item(i)))
             }
