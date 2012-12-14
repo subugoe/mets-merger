@@ -214,9 +214,11 @@
                         <xsl:copy copy-namespaces="no" exclude-result-prefixes="METS xlink">
                             <!-- copy unknown attributes -->
                             <xsl:copy-of select="@* except @xlink:from except @xlink:to"/>
+                            <!--
                             <xsl:if test="not($force) and @xlink:from and not(document($structFile)//@ID[. = @xlink:from])">
-                                <xsl:message terminate="yes">No ID found: <xsl:value-of select="@xlink:from"/></xsl:message>
+                                <xsl:message terminate="yes">Fatal: No ID found: <xsl:value-of select="@xlink:from"/></xsl:message>
                             </xsl:if>
+                            -->
                             <xsl:choose>
                                 <xsl:when
                                     test="@xlink:from and @xlink:from = $externalLogicalRootId">
@@ -226,9 +228,11 @@
                                     <xsl:copy-of select="@xlink:from"/>
                                 </xsl:otherwise>
                             </xsl:choose>
+                            <!--
                             <xsl:if test="not($force) and @xlink:to and not(document($structFile)//@ID[. = @xlink:to])">
-                                <xsl:message terminate="yes">No ID found: <xsl:value-of select="@xlink:to"/></xsl:message>
+                                <xsl:message terminate="yes">Fatal: No ID found: <xsl:value-of select="@xlink:to"/></xsl:message>
                             </xsl:if>
+                            -->
                             <xsl:choose>
                                 <xsl:when test="@xlink:to and @xlink:to = $externalPhysicalRootId">
                                     <xsl:attribute name="xlink:to" select="$myPhysicalRootId"/>
