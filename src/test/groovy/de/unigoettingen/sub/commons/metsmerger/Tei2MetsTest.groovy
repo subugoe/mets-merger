@@ -58,6 +58,20 @@ class Tei2MetsTest extends AbstractTransformerTest {
             log.info('TEI transformed')
         }
     }
+    
+    @Test
+    void checkStructLink () {
+        log.info('Entering checkStructLink:')
+        for (tei in TEIFILES) {
+            log.info('Transforming TEI File ' + tei.toString())
+            def converter = new Tei2Mets(tei)
+            converter.setIdentifier('1234')
+            log.info('Identifier is set to ' +  converter.getIdentifier())
+            converter.transform()
+            log.info('Checking if Ids in structLink section are resolvable for result of TEI to METS for ' + tei.toString())
+            assertTrue('XPathes for ID Links check failed!', checkStructLink(converter.result))
+        }
+    }
 
     @Test
     void testTei2MetsXSDValidate () {
