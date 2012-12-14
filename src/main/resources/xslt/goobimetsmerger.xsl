@@ -44,6 +44,10 @@
     <xsl:param name="structFileParam"/>
     <xsl:param name="copyPhysicalStructMapParam" select="false()"/>
     <xsl:param name="fileSectionParam" select="'PRESENTATION'"/>
+    <!-- 
+    Create even if there are errors
+    -->
+    <xsl:param name="forceParam" select="false()"/>
     <!--
     This is needed to make sure that structLink Elements match the generated
     structure, otherwise the merge will fail if there is a structLink section
@@ -66,6 +70,9 @@
         as="xs:string"/>
     <xsl:variable name="overwriteStructLink"
         select="if ($overwriteStructLinkParam castable as xs:boolean) then xs:boolean($overwriteStructLinkParam) else false()"
+        as="xs:boolean"/>
+    <xsl:variable name="force"
+        select="if ($forceParam castable as xs:boolean) then xs:boolean($forceParam) else false()"
         as="xs:boolean"/>
     <!--
     TODO:
@@ -207,6 +214,9 @@
                         <xsl:copy copy-namespaces="no" exclude-result-prefixes="METS xlink">
                             <!-- copy unknown attributes -->
                             <xsl:copy-of select="@* except @xlink:from except @xlink:to"/>
+                            <xsl:if test="not($force) and @xlink:from and not(document($structFile)//@ID[. = @xlink:from])">
+                                <xsl:message terminate="yes">No ID found: <xsl:value-of select="@xlink:from"/></xsl:message>
+                            </xsl:if>
                             <xsl:choose>
                                 <xsl:when
                                     test="@xlink:from and @xlink:from = $externalLogicalRootId">
@@ -216,6 +226,9 @@
                                     <xsl:copy-of select="@xlink:from"/>
                                 </xsl:otherwise>
                             </xsl:choose>
+                            <xsl:if test="not($force) and @xlink:to and not(document($structFile)//@ID[. = @xlink:to])">
+                                <xsl:message terminate="yes">No ID found: <xsl:value-of select="@xlink:to"/></xsl:message>
+                            </xsl:if>
                             <xsl:choose>
                                 <xsl:when test="@xlink:to and @xlink:to = $externalPhysicalRootId">
                                     <xsl:attribute name="xlink:to" select="$myPhysicalRootId"/>

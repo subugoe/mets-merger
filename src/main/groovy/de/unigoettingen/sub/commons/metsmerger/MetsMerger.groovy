@@ -44,7 +44,7 @@ class MetsMerger extends AbstractTransformer {
     protected File out
     //Configuration of Stylesheet
     /** Parameters of the stylesheet */
-    def static paramPrototypes = ['structFileParam': '', 'copyPhysicalStructMapParam': 'false', 'fileSectionParam': '', 'overwriteStructLinkParam': 'true']
+    def static paramPrototypes = ['structFileParam': '', 'copyPhysicalStructMapParam': 'false', 'fileSectionParam': '', 'overwriteStructLinkParam': 'true', 'forceParam': 'false']
     
     static {
         paramPrototypes.keySet().each { name ->
