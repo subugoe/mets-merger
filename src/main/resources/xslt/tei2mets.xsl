@@ -17,7 +17,7 @@
   MA 02110-1301 USA.
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:TEI="http://www.tei-c.org/ns/1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:DC="http://purl.org/dc/elements/1.1/"
-    xmlns:MODS="http://www.loc.gov/mods/v3" xmlns:METS="http://www.loc.gov/METS/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:DV="http://dfg-viewer.de/"
+    xmlns:MODS="http://www.loc.gov/mods/v3" xmlns:METS="http://www.loc.gov/METS/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:DV="http://dfg-viewer.de/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" exclude-result-prefixes="xs" version="2.0">
     <xd:doc scope="stylesheet">
         <xd:desc>
@@ -66,7 +66,7 @@
         <group width="0" locationPrefix="{$localPrefix}" locationSuffix=".jpg">PRESENTATION</group>
     </xsl:variable>
     <xsl:template match="/">
-        <METS:mets>
+        <METS:mets xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-3.xsd http://www.loc.gov/METS/ http://www.loc.gov/standards/mets/version17/mets.v1-7.xsd">
             <xsl:if test="$identifier = 'REPLACEME'">
                 <xsl:comment>Replace the string 'REPLACEME' with the real dentifier using sed, if no
                     param was given
