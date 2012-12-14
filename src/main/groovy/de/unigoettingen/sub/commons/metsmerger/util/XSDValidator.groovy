@@ -28,6 +28,7 @@ import javax.xml.validation.Schema
 import javax.xml.validation.SchemaFactory
 
 import org.w3c.dom.Document
+import org.xml.sax.SAXParseException
 
 /**
      * This class is a wrapper around the Java validation API. It's main purpose
@@ -69,7 +70,7 @@ class XSDValidator {
             def validator = s.newValidator()
             try {
                 validator.validate(new DOMSource(doc))
-            } catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException | SAXParseException e) {
                 log.error('Not valid ' + e.getMessage())
                 log.error('Can not valide document', e)
                 return false
