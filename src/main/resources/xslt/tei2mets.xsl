@@ -16,7 +16,9 @@
   the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301 USA.
 -->
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:TEI="http://www.tei-c.org/ns/1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:DC="http://purl.org/dc/elements/1.1/" xmlns:MODS="http://www.loc.gov/mods/v3" xmlns:METS="http://www.loc.gov/METS/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:DV="http://dfg-viewer.de/" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" exclude-result-prefixes="xs" version="2.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:TEI="http://www.tei-c.org/ns/1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:DC="http://purl.org/dc/elements/1.1/"
+    xmlns:MODS="http://www.loc.gov/mods/v3" xmlns:METS="http://www.loc.gov/METS/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:DV="http://dfg-viewer.de/"
+    xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" exclude-result-prefixes="xs" version="2.0">
     <xd:doc scope="stylesheet">
         <xd:desc>
             <xd:p>
@@ -44,12 +46,14 @@
             </mets:xmlData>
         </mets:mdWrap>
     </mets:dmdSec>
+    * There might be two or more head elements for a div, ignore them
     -->
     <xsl:output encoding="UTF-8" exclude-result-prefixes="#all" indent="yes"/>
     <xsl:param name="identifier" select="string('REPLACEME-IDENTIFIER')"/>
     <xsl:param name="locationPrefix">string('REPLACEME-LOCATION_PREFIX')</xsl:param>
     <xsl:param name="localPrefix">string('REPLACEME-LOCAL_PREFIX')</xsl:param>
     <xsl:param name="locationSuffix">string('REPLACEME-LOCATION_SUFFIX')</xsl:param>
+    <xsl:param name="multipleHead" select="true()" as="xs:boolean"/>
     <xsl:variable name="physPrefix">phys</xsl:variable>
     <xsl:variable name="locPrefix">loc</xsl:variable>
     <xsl:variable name="filePrefix">file</xsl:variable>
@@ -138,27 +142,24 @@
                     </xsl:attribute>
                 </METS:smLink>
                 <xsl:for-each select="//TEI:head">
-                    <xsl:variable name="childPbs" select="ancestor::TEI:div[1]/descendant::TEI:pb"/>
-                    <xsl:variable name="from">
+                    <xsl:if test="not(preceding-sibling::TEI:head)">
+                        <xsl:variable name="childPbs" select="ancestor::TEI:div[1]/descendant::TEI:pb"/>
+                        <xsl:variable name="from">
+                            <!--
                         <xsl:value-of select="$locPrefix"/>
                         <xsl:text>_</xsl:text>
                         <xsl:number format="00000001" value="count(preceding::TEI:head) + 5"/>
-                    </xsl:variable>
-                    <xsl:choose>
-                        <xsl:when test="count($childPbs) = 0">
-                            <METS:smLink>
-                                <xsl:attribute name="xlink:from">
-                                    <xsl:value-of select="$from"/>
-                                </xsl:attribute>
-                                <xsl:attribute name="xlink:to">
-                                    <xsl:value-of select="$physPrefix"/>
+                        -->
+                            <xsl:call-template name="createId">
+                                <xsl:with-param name="prefix">
+                                    <xsl:value-of select="$locPrefix"/>
                                     <xsl:text>_</xsl:text>
-                                    <xsl:number format="00000001" value="count(preceding::TEI:pb) + 1"/>
-                                </xsl:attribute>
-                            </METS:smLink>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:for-each select="$childPbs">
+                                </xsl:with-param>
+                                <xsl:with-param name="node" select="."/>
+                            </xsl:call-template>
+                        </xsl:variable>
+                        <xsl:choose>
+                            <xsl:when test="count($childPbs) = 0">
                                 <METS:smLink>
                                     <xsl:attribute name="xlink:from">
                                         <xsl:value-of select="$from"/>
@@ -166,12 +167,26 @@
                                     <xsl:attribute name="xlink:to">
                                         <xsl:value-of select="$physPrefix"/>
                                         <xsl:text>_</xsl:text>
-                                        <xsl:number format="00000001" value="count(preceding::TEI:pb) +1"/>
+                                        <xsl:number format="00000001" value="count(preceding::TEI:pb) + 1"/>
                                     </xsl:attribute>
                                 </METS:smLink>
-                            </xsl:for-each>
-                        </xsl:otherwise>
-                    </xsl:choose>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:for-each select="$childPbs">
+                                    <METS:smLink>
+                                        <xsl:attribute name="xlink:from">
+                                            <xsl:value-of select="$from"/>
+                                        </xsl:attribute>
+                                        <xsl:attribute name="xlink:to">
+                                            <xsl:value-of select="$physPrefix"/>
+                                            <xsl:text>_</xsl:text>
+                                            <xsl:number format="00000001" value="count(preceding::TEI:pb) +1"/>
+                                        </xsl:attribute>
+                                    </METS:smLink>
+                                </xsl:for-each>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:if>
                 </xsl:for-each>
             </METS:structLink>
         </METS:mets>
@@ -294,21 +309,43 @@
         </xsl:choose>
     </xsl:template>
     <xsl:template match="TEI:head">
-        <xsl:attribute name="ID">
+        <xsl:if test="parent::TEI:div/count(child::TEI:head) > 1">
+            <xsl:message>Div element contains more then one head, only using the first one!</xsl:message>
+        </xsl:if>
+        <xsl:if test="not(preceding-sibling::TEI:head)">
+            <xsl:attribute name="ID">
+                <!--
             <xsl:value-of select="$locPrefix"/>
             <xsl:text>_</xsl:text>
             <xsl:number format="00000001" value="count(preceding::TEI:head) + 5"/>
-        </xsl:attribute>
-        <xsl:attribute name="TYPE">
-            <xsl:text>Chapter</xsl:text>
-        </xsl:attribute>
-        <xsl:attribute name="LABEL">
-            <!-- Use this to remove line seperators -->
-            <!--
+            -->
+                <xsl:call-template name="createId">
+                    <xsl:with-param name="prefix">
+                        <xsl:value-of select="$locPrefix"/>
+                        <xsl:text>_</xsl:text>
+                    </xsl:with-param>
+                    <xsl:with-param name="node" select="."/>
+                </xsl:call-template>
+            </xsl:attribute>
+            <xsl:if test="$multipleHead and following-sibling::TEI:head">
+                <xsl:attribute name="DMDID">
+                    <xsl:call-template name="createId">
+                        <xsl:with-param name="prefix" select="'dmdSec_'"/>
+                        <xsl:with-param name="node" select="parent::TEI:div"/>
+                    </xsl:call-template>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:attribute name="TYPE">
+                <xsl:text>Chapter</xsl:text>
+            </xsl:attribute>
+            <xsl:attribute name="LABEL">
+                <!-- Use this to remove line seperators -->
+                <!--
                 <xsl:value-of select="replace(normalize-space(.), '- ', '')"/>
             -->
-            <xsl:value-of select="normalize-space(.)"/>
-        </xsl:attribute>
+                <xsl:value-of select="normalize-space(.)"/>
+            </xsl:attribute>
+        </xsl:if>
     </xsl:template>
     <xsl:template match="text()"/>
     <xsl:template name="metsHeader">
@@ -325,6 +362,32 @@
                 </METS:xmlData>
             </METS:mdWrap>
         </METS:dmdSec>
+        <!-- Create DMD Sects for divs with multiple headings -->
+        <xsl:if test="$multipleHead">
+            <xsl:for-each select="//TEI:div[count(child::TEI:head) >1 ]">
+                <METS:dmdSec>
+                    <xsl:attribute name="ID">
+                        <xsl:call-template name="createId">
+                            <xsl:with-param name="prefix" select="'dmdSec_'"/>
+                            <xsl:with-param name="node" select="."/>
+                        </xsl:call-template>
+                    </xsl:attribute>
+                    <METS:mdWrap MDTYPE="MODS">
+                        <METS:xmlData>
+                            <MODS:mods>
+                                <xsl:for-each select="./TEI:head">
+                                    <MODS:titleInfo>
+                                        <MODS:title>
+                                            <xsl:value-of select="."/>
+                                        </MODS:title>
+                                    </MODS:titleInfo>
+                                </xsl:for-each>
+                            </MODS:mods>
+                        </METS:xmlData>
+                    </METS:mdWrap>
+                </METS:dmdSec>
+            </xsl:for-each>
+        </xsl:if>
         <METS:amdSec ID="amdSec_00000001">
             <METS:rightsMD ID="rights_00000001">
                 <METS:mdWrap MDTYPE="OTHER" OTHERMDTYPE="DVRIGHTS" MIMETYPE="text/xml">
@@ -348,5 +411,10 @@
                 </METS:mdWrap>
             </METS:digiprovMD>
         </METS:amdSec>
+    </xsl:template>
+    <xsl:template name="createId">
+        <xsl:param name="prefix"/>
+        <xsl:param name="node" select="."/>
+        <xsl:value-of select="concat($prefix, generate-id($node))"/>
     </xsl:template>
 </xsl:stylesheet>
