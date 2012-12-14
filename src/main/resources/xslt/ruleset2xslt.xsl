@@ -16,12 +16,9 @@
   the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301 USA.
 -->
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:goobi="http://meta.goobi.org/v1.5.1/" xmlns:gdz="http://gdz.sub.uni-goettingen.de/"
-    xmlns:mods="http://www.loc.gov/mods/v3" xmlns:mets="http://www.loc.gov/METS/"
-    xmlns:xslo="http://www.w3.org/1999/XSL/TransformAlias"
-    xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    exclude-result-prefixes="xd" version="2.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:goobi="http://meta.goobi.org/v1.5.1/" xmlns:gdz="http://gdz.sub.uni-goettingen.de/" xmlns:mods="http://www.loc.gov/mods/v3"
+    xmlns:mets="http://www.loc.gov/METS/" xmlns:xslo="http://www.w3.org/1999/XSL/TransformAlias" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exclude-result-prefixes="xd" version="2.0">
     <xd:doc scope="stylesheet">
         <xd:desc>
             <xd:p>
@@ -44,12 +41,8 @@
     -->
     <!-- This is a stupid method to use params via JAXP, which are typed as String.
     Pass an empty tring to set the variables to  -->
-    <xsl:variable name="createDMDSects"
-        select="if ($createDMDSectsParam castable as xs:boolean) then xs:boolean($createDMDSectsParam) else true()"
-        as="xs:boolean"/>
-    <xsl:variable name="addOrderLabel"
-        select="if ($addOrderLabelParam castable as xs:boolean) then xs:boolean($addOrderLabelParam) else false()"
-        as="xs:boolean"/>
+    <xsl:variable name="createDMDSects" select="if ($createDMDSectsParam castable as xs:boolean) then xs:boolean($createDMDSectsParam) else true()" as="xs:boolean"/>
+    <xsl:variable name="addOrderLabel" select="if ($addOrderLabelParam castable as xs:boolean) then xs:boolean($addOrderLabelParam) else false()" as="xs:boolean"/>
     <!--
     <xsl:variable name="configurableResult" select="if ($configurableResultParam castable as xs:boolean) then xs:boolean($configurableResultParam) else false()" as="xs:boolean"/>
     -->
@@ -74,18 +67,13 @@
             <xslo:param name="copyLabelParam" select="false()"/>
             <xsl:comment>Should references to administrative metadata (ADMID attributes) be copied?</xsl:comment>
             <xslo:param name="copyADMParam" select="false()"/>
-            <xslo:variable name="copyLabel"
-                select="if ($copyLabelParam castable as xs:boolean) then xs:boolean($copyLabelParam) else false()"
-                as="xs:boolean"/>
-            <xslo:variable name="copyADM"
-                select="if ($copyADMParam castable as xs:boolean) then xs:boolean($copyADMParam) else false()"
-                as="xs:boolean"/>
+            <xslo:variable name="copyLabel" select="if ($copyLabelParam castable as xs:boolean) then xs:boolean($copyLabelParam) else false()" as="xs:boolean"/>
+            <xslo:variable name="copyADM" select="if ($copyADMParam castable as xs:boolean) then xs:boolean($copyADMParam) else false()" as="xs:boolean"/>
             <xsl:if test="$createDMDSects">
                 <xslo:param name="createGoobiMETSParam" select="true()"/>
-                <xslo:variable name="createGoobiMETS"
-                    select="if ($createGoobiMETSParam castable as xs:boolean) then xs:boolean($createGoobiMETSParam) else false()"
-                    as="xs:boolean"/>
+                <xslo:variable name="createGoobiMETS" select="if ($createGoobiMETSParam castable as xs:boolean) then xs:boolean($createGoobiMETSParam) else false()" as="xs:boolean"/>
             </xsl:if>
+            <xslo:variable name="addSchemaLocation" select="true()"/>
             <xslo:preserve-space elements="*"/>
             <xslo:template match="/">
                 <xslo:apply-templates/>
@@ -101,9 +89,7 @@
             </xslo:template>
             <xsl:if test="$createDMDSects">
                 <xsl:variable name="InternalName">
-                    <xsl:value-of
-                        select="//WriteXPath[text() ='./mods:mods/mods:titleInfo/#mods:title']/../InternalName/text()"
-                    />
+                    <xsl:value-of select="//WriteXPath[text() ='./mods:mods/mods:titleInfo/#mods:title']/../InternalName/text()"/>
                 </xsl:variable>
                 <xslo:template name="generateDMDID">
                     <xslo:text>DMDLOG_</xslo:text>
@@ -120,8 +106,7 @@
                     <xslo:copy>
                         <xslo:apply-templates select="@* | node()"/>
                     </xslo:copy>
-                    <xslo:for-each
-                        select="//mets:structMap[@TYPE = 'LOGICAL']/mets:div/descendant::mets:div">
+                    <xslo:for-each select="//mets:structMap[@TYPE = 'LOGICAL']/mets:div/descendant::mets:div">
                         <xslo:if test="not(@DMDID) and @LABEL">
                             <xslo:variable name="id">
                                 <xslo:call-template name="generateDMDID"/>
@@ -135,23 +120,23 @@
                                         <mods:mods>
                                             <xslo:choose>
                                                 <xslo:when test="$createGoobiMETS = true()">
-                                                  <mods:extension>
-                                                  <goobi:goobi>
-                                                  <goobi:metadata>
-                                                  <xsl:attribute name="name">
-                                                  <xsl:value-of select="$InternalName"/>
-                                                  </xsl:attribute>
-                                                  <xslo:value-of select="@LABEL"/>
-                                                  </goobi:metadata>
-                                                  </goobi:goobi>
-                                                  </mods:extension>
+                                                    <mods:extension>
+                                                        <goobi:goobi>
+                                                            <goobi:metadata>
+                                                                <xsl:attribute name="name">
+                                                                    <xsl:value-of select="$InternalName"/>
+                                                                </xsl:attribute>
+                                                                <xslo:value-of select="@LABEL"/>
+                                                            </goobi:metadata>
+                                                        </goobi:goobi>
+                                                    </mods:extension>
                                                 </xslo:when>
                                                 <xslo:otherwise>
-                                                  <mods:titleInfo>
-                                                  <mods:title>
-                                                  <xslo:value-of select="@LABEL"/>
-                                                  </mods:title>
-                                                  </mods:titleInfo>
+                                                    <mods:titleInfo>
+                                                        <mods:title>
+                                                            <xslo:value-of select="@LABEL"/>
+                                                        </mods:title>
+                                                    </mods:titleInfo>
                                                 </xslo:otherwise>
                                             </xslo:choose>
                                         </mods:mods>
@@ -174,8 +159,7 @@
                             </xslo:copy>
                         </xslo:when>
                         <xsl:if test="$addOrderLabel">
-                            <xslo:when
-                                test="./ancestor::mets:structMap[@TYPE = 'PHYSICAL'] and @ORDER and not(@ORDERLABEL)">
+                            <xslo:when test="./ancestor::mets:structMap[@TYPE = 'PHYSICAL'] and @ORDER and not(@ORDERLABEL)">
                                 <xslo:copy>
                                     <xslo:attribute name="ORDERLABEL">
                                         <xslo:value-of select="@ORDER"/>
@@ -195,8 +179,7 @@
             <xsl:if test="$addOrderLabel and not($createDMDSects)">
                 <xslo:template match="mets:div">
                     <xslo:choose>
-                        <xslo:when
-                            test="./ancestor::mets:structMap[@TYPE = 'PHYSICAL'] and @ORDER and not(@ORDERLABEL)">
+                        <xslo:when test="./ancestor::mets:structMap[@TYPE = 'PHYSICAL'] and @ORDER and not(@ORDERLABEL)">
                             <xslo:copy>
                                 <xslo:attribute name="ORDERLABEL">
                                     <xslo:value-of select="@ORDER"/>
@@ -273,6 +256,15 @@
                 </xslo:choose>
             </xslo:attribute>
         </xslo:template>
+        <xslo:template match="mets:mets">
+            <xslo:copy>
+                <xslo:if test="$addSchemaLocation and not(@xsi:schemaLocation)">
+                    <xslo:attribute name="xsi:schemaLocation"
+                        select="'http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-3.xsd http://www.loc.gov/METS/ http://www.loc.gov/standards/mets/version17/mets.v1-7.xsd'"/>
+                </xslo:if>
+                <xslo:apply-templates select="@* | node()"/>
+            </xslo:copy>
+        </xslo:template>
         <xslo:template match="mods:mods">
             <xslo:copy>
                 <mods:extension>
@@ -281,23 +273,17 @@
                             <xsl:variable name="path">
                                 <xsl:choose>
                                     <!-- The Path should be used in a loop -->
-                                    <xsl:when
-                                        test="contains(concat('.', substring(WriteXPath, string-length('./mods:mods') + 1)), '#')">
-                                        <xsl:value-of
-                                            select="translate(concat('.', substring(WriteXPath, string-length('./mods:mods') + 1)), '#', '')"
-                                        />
+                                    <xsl:when test="contains(concat('.', substring(WriteXPath, string-length('./mods:mods') + 1)), '#')">
+                                        <xsl:value-of select="translate(concat('.', substring(WriteXPath, string-length('./mods:mods') + 1)), '#', '')"/>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        <xsl:value-of
-                                            select="concat('.', substring(WriteXPath, string-length('./mods:mods') + 1))"
-                                        />
+                                        <xsl:value-of select="concat('.', substring(WriteXPath, string-length('./mods:mods') + 1))"/>
                                     </xsl:otherwise>
                                 </xsl:choose>
                             </xsl:variable>
                             <xsl:variable name="loop">
                                 <xsl:choose>
-                                    <xsl:when
-                                        test="contains(concat('.', substring(WriteXPath, string-length('./mods:mods') + 1)), '#')">
+                                    <xsl:when test="contains(concat('.', substring(WriteXPath, string-length('./mods:mods') + 1)), '#')">
                                         <xsl:value-of select="true()"/>
                                     </xsl:when>
                                     <xsl:otherwise>
@@ -319,26 +305,25 @@
                                 -->
                                 </xsl:attribute>
                                 <xsl:choose>
-                                    <xsl:when
-                                        test="not(FirstnameXPath) and not(LastnameXPath) and not(DisplayNameXPath) and not(IdentifierXPath)">
+                                    <xsl:when test="not(FirstnameXPath) and not(LastnameXPath) and not(DisplayNameXPath) and not(IdentifierXPath)">
                                         <xsl:choose>
                                             <xsl:when test="$loop = true()">
                                                 <xslo:for-each>
-                                                  <xsl:attribute name="select">
-                                                  <xsl:call-template name="sanitisePath">
-                                                  <xsl:with-param name="path" select="$path"/>
-                                                  </xsl:call-template>
-                                                  </xsl:attribute>
-                                                  <xsl:call-template name="goobiMetadata">
-                                                  <xsl:with-param name="name" select="InternalName"/>
-                                                  <xsl:with-param name="path" select="'.'"/>
-                                                  </xsl:call-template>
+                                                    <xsl:attribute name="select">
+                                                        <xsl:call-template name="sanitisePath">
+                                                            <xsl:with-param name="path" select="$path"/>
+                                                        </xsl:call-template>
+                                                    </xsl:attribute>
+                                                    <xsl:call-template name="goobiMetadata">
+                                                        <xsl:with-param name="name" select="InternalName"/>
+                                                        <xsl:with-param name="path" select="'.'"/>
+                                                    </xsl:call-template>
                                                 </xslo:for-each>
                                             </xsl:when>
                                             <xsl:otherwise>
                                                 <xsl:call-template name="goobiMetadata">
-                                                  <xsl:with-param name="name" select="InternalName"/>
-                                                  <xsl:with-param name="path" select="$path"/>
+                                                    <xsl:with-param name="name" select="InternalName"/>
+                                                    <xsl:with-param name="path" select="$path"/>
                                                 </xsl:call-template>
                                             </xsl:otherwise>
                                         </xsl:choose>
@@ -347,16 +332,16 @@
                                         <xsl:choose>
                                             <xsl:when test="$loop = true()">
                                                 <xslo:for-each>
-                                                  <xsl:attribute name="select">
-                                                  <xsl:call-template name="selectorParser">
-                                                  <xsl:with-param name="str">
-                                                  <xsl:call-template name="sanitisePath">
-                                                  <xsl:with-param name="path" select="$path"/>
-                                                  </xsl:call-template>
-                                                  </xsl:with-param>
-                                                  </xsl:call-template>
-                                                  </xsl:attribute>
-                                                  <xsl:call-template name="personMetadata"/>
+                                                    <xsl:attribute name="select">
+                                                        <xsl:call-template name="selectorParser">
+                                                            <xsl:with-param name="str">
+                                                                <xsl:call-template name="sanitisePath">
+                                                                    <xsl:with-param name="path" select="$path"/>
+                                                                </xsl:call-template>
+                                                            </xsl:with-param>
+                                                        </xsl:call-template>
+                                                    </xsl:attribute>
+                                                    <xsl:call-template name="personMetadata"/>
                                                 </xslo:for-each>
                                             </xsl:when>
                                             <xsl:otherwise>
@@ -474,19 +459,16 @@
                 <xsl:when test="string($containsAny) = 'true'">
                     <xsl:choose>
                         <!-- The order of the whe clauses is very important here! -->
-                        <xsl:when
-                            test="starts-with($str, $startChar) or starts-with($str, $endChar)">
+                        <xsl:when test="starts-with($str, $startChar) or starts-with($str, $endChar)">
                             <xsl:value-of select="substring($str, 1, $charWidth)"/>
                         </xsl:when>
                         <xsl:when test="not(contains($str, $startChar))">
                             <xsl:value-of select="substring-before($str, $endChar)"/>
                         </xsl:when>
-                        <xsl:when
-                            test="string-length(substring-before($str,$startChar)) &lt; string-length(substring-before($str,$endChar))">
+                        <xsl:when test="string-length(substring-before($str,$startChar)) &lt; string-length(substring-before($str,$endChar))">
                             <xsl:value-of select="substring-before($str, $startChar)"/>
                         </xsl:when>
-                        <xsl:when
-                            test="string-length(substring-before($str,$startChar)) &gt; string-length(substring-before($str,$endChar))">
+                        <xsl:when test="string-length(substring-before($str,$startChar)) &gt; string-length(substring-before($str,$endChar))">
                             <xsl:value-of select="substring-before($str, $endChar)"/>
                         </xsl:when>
                         <xsl:otherwise>
