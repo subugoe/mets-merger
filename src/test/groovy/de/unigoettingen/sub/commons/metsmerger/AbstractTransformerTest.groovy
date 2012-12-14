@@ -70,26 +70,24 @@ abstract class AbstractTransformerTest {
         return true
     }
     
-    //TODO: Try to get rid of Jaxen
     static Boolean checkUniquePath (Document doc, String path) {
-        //TODO: Use our own NamespaceContext
-        //Checks matches that occure more then once
-        def xpath = new DOMXPath(path)
+        XPathFactory factory = XPathFactory.newInstance();
+        XPath xpath = factory.newXPath();
+        xpath.setNamespaceContext(new NamespaceConstants())
+        XPathExpression expr = xpath.compile(path);
         log.info('Checking XPath \'' + path + '\'')
-        def nsContext = new SimpleNamespaceContext()
-        nsContext.addNamespace("xsl", NamespaceConstants.XSLT_NAMESPACE)
-        xpath.setNamespaceContext(nsContext)
-        def nodes = xpath.selectNodes(doc)
+        def nodes = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
         
-        if (nodes.size() > 0) {
-            log.warn('Got ' + nodes.size() + ' unepected results')
-            for (int i = 0; i < nodes.size(); i++) {
-                Element e = (Element) nodes.get(i)
-                log.error('Duplicate match attribute: ' + e.getAttribute("match"))
+        if (nodes.getLength() > 0) {
+            log.warn('Got ' + nodes.getLength() + ' unepected results for XPath ' + path)
+            //log.info('Result not empty for XPath ' + path + ' matches: ' + nodes.getLength())
+            for (int i = 0; i < nodes.getLength(); i++) {
+                log.error('Duplicate Match: ' + XmlUtil.serialize(nodes.item(i)))
             }
             return false
         }
         return true
+      
     }
 
     static Boolean diffMetsDocsSimilar (Document truth, Document generated) {
