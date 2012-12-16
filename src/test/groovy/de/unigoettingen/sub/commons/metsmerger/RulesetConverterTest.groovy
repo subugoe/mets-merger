@@ -43,9 +43,10 @@ import de.unigoettingen.sub.commons.metsmerger.util.NamespaceConstants
 class RulesetConverterTest extends AbstractTransformerTest {
     
     def static RULESETS = [this.getClass().getResource('/rulesets/archaeo18.xml'), 
-                          this.getClass().getResource('/rulesets/gdz.xml')]
+        this.getClass().getResource('/rulesets/gdz.xml')]
     
-    def static TESTFILE = this.getClass().getResource('/dfg-viewer-mets/PPN645063479.mets.xml')
+    def static TESTFILE_DMD = this.getClass().getResource('/dfg-viewer-mets/PPN645063479.mets.xml')
+    def static TESTFILE_ID = this.getClass().getResource('/tei/weimar-hs-2056.tei.xml')
     
     def static TEMPLATE_PATH = '//xsl:template[@match = following-sibling::xsl:template/@match]'
                       
@@ -83,7 +84,7 @@ class RulesetConverterTest extends AbstractTransformerTest {
     @Test
     void testDMDSects () {
         //This should test if for every label a DMD Sect is created
-       //First get the stylesheet from the ruleset
+        //First get the stylesheet from the ruleset
         def RulesetConverter converter
         converter = new RulesetConverter(RULESETS.get(0))
         //set option for DMD sections
@@ -101,7 +102,7 @@ class RulesetConverterTest extends AbstractTransformerTest {
         transformer.setParameter('copyLabelParam', 'true')
 
         try {
-            transformer.transform(new StreamSource(TESTFILE.openStream()), result)
+            transformer.transform(new StreamSource(TESTFILE_DMD.openStream()), result)
         } catch (TransformerException te) {
             log.error("Transformation failed ", te)
         }
@@ -112,6 +113,35 @@ class RulesetConverterTest extends AbstractTransformerTest {
         assertTrue('XPathes for DMD check failed!', dmdCheck(doc))
         
     }
+    
+    @Test
+    void testUniqueIDs () {
+        //First get the stylesheet from the ruleset
+        def RulesetConverter converter
+        converter = new RulesetConverter(RULESETS.get(0))
+        converter.transform()
+        //Use the result to transform
+        //def protected static Document transform (Source input, Source xslt, Map params) {
+        def factory = TransformerFactory.newInstance()
+        def transformer = factory.newTransformer(new DOMSource(converter.result))
+        def listener = new LogErrorListener()
+        transformer.setErrorListener(listener)
+        def result = new DOMResult()
+        //Set up TEI converter
+        def teiConverter = new Tei2Mets(TESTFILE_ID)
+        teiConverter.setIdentifier('1234')
             
+        teiConverter.transform()
+        try {
+            transformer.transform(new DOMSource(teiConverter.result), result)
+        } catch (TransformerException te) {
+            log.error("Transformation failed ", te)
+        }
+        if (listener.fatal) {
+            log.error('Transformation failed, check the log!')
+        }
+        def doc = (Document) result.getNode()
+        assertTrue('XPath for ID check failed!', checkUniquePath (doc, '//mets:*[@ID = following::mets:*/@ID]'))
+    }
+                
 }
-
