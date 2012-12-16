@@ -92,12 +92,9 @@
                     <xsl:value-of select="//WriteXPath[text() ='./mods:mods/mods:titleInfo/#mods:title']/../InternalName/text()"/>
                 </xsl:variable>
                 <xslo:template name="generateDMDID">
+                    <xslo:param name="node" select="."/>
                     <xslo:text>DMDLOG_</xslo:text>
-                    <!--
-                    <xslo:number format="0001" value="position()"/>
-                    <xslo:number format="0001" value="count(preceding::mets:div) + 1"/>
-                    -->
-                    <xslo:value-of select="generate-id(.)"/>
+                    <xslo:value-of select="generate-id($node)"/>
                 </xslo:template>
                 <xslo:template match="mets:dmdSec">
                     <!-- This copies just the MODS section, for debugging
@@ -109,7 +106,9 @@
                     <xslo:for-each select="//mets:structMap[@TYPE = 'LOGICAL']/mets:div/descendant::mets:div">
                         <xslo:if test="not(@DMDID) and @LABEL">
                             <xslo:variable name="id">
-                                <xslo:call-template name="generateDMDID"/>
+                                <xslo:call-template name="generateDMDID">
+                                    <xslo:with-param name="node" select="."/>
+                                </xslo:call-template>
                             </xslo:variable>
                             <mets:dmdSec>
                                 <xslo:attribute name="ID">
@@ -152,7 +151,9 @@
                             <xslo:copy>
                                 <xslo:if test="not(@DMDID) and @LABEL">
                                     <xslo:attribute name="DMDID">
-                                        <xslo:call-template name="generateDMDID"/>
+                                        <xslo:call-template name="generateDMDID">
+                                            <xslo:with-param name="node" select="."/>
+                                        </xslo:call-template>
                                     </xslo:attribute>
                                 </xslo:if>
                                 <xslo:apply-templates select="@* | node()"/>
