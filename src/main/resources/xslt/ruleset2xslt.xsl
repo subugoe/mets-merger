@@ -97,65 +97,39 @@
                     <xslo:value-of select="generate-id($node)"/>
                 </xslo:template>
                 <xslo:template match="mets:dmdSec">
-                    <!-- This copies just the MODS section, for debugging
-                    <xslo:copy-of select="."/>
-                     -->
                     <xslo:copy>
+                        <!-- Rewire the IDs, there might be collisions fom the generated DMD sections -->
+                        <xslo:if test="@DMDID">
+                            <xslo:attribute name="DMDID">
+                                <xslo:call-template name="generateDMDID">
+                                    <xslo:with-param name="node" select="//mets:dmdSec[@ID = @DMDID]"/>
+                                </xslo:call-template>
+                            </xslo:attribute>
+                        </xslo:if>
                         <xslo:apply-templates select="@* | node()"/>
                     </xslo:copy>
-                    <xslo:for-each select="//mets:structMap[@TYPE = 'LOGICAL']/mets:div/descendant::mets:div">
-                        <xslo:if test="not(@DMDID) and @LABEL">
-                            <xslo:variable name="id">
-                                <xslo:call-template name="generateDMDID">
-                                    <xslo:with-param name="node" select="."/>
-                                </xslo:call-template>
-                            </xslo:variable>
-                            <mets:dmdSec>
-                                <xslo:attribute name="ID">
-                                    <xslo:value-of select="$id"/>
-                                </xslo:attribute>
-                                <mets:mdWrap MDTYPE="MODS">
-                                    <mets:xmlData>
-                                        <mods:mods>
-                                            <xslo:choose>
-                                                <xslo:when test="$createGoobiMETS = true()">
-                                                    <mods:extension>
-                                                        <goobi:goobi>
-                                                            <goobi:metadata>
-                                                                <xsl:attribute name="name">
-                                                                    <xsl:value-of select="$InternalName"/>
-                                                                </xsl:attribute>
-                                                                <xslo:value-of select="@LABEL"/>
-                                                            </goobi:metadata>
-                                                        </goobi:goobi>
-                                                    </mods:extension>
-                                                </xslo:when>
-                                                <xslo:otherwise>
-                                                    <mods:titleInfo>
-                                                        <mods:title>
-                                                            <xslo:value-of select="@LABEL"/>
-                                                        </mods:title>
-                                                    </mods:titleInfo>
-                                                </xslo:otherwise>
-                                            </xslo:choose>
-                                        </mods:mods>
-                                    </mets:xmlData>
-                                </mets:mdWrap>
-                            </mets:dmdSec>
-                        </xslo:if>
-                    </xslo:for-each>
                 </xslo:template>
                 <xslo:template match="mets:div">
                     <xslo:choose>
                         <xslo:when test="./ancestor::mets:structMap[@TYPE = 'LOGICAL']">
                             <xslo:copy>
-                                <xslo:if test="not(@DMDID) and @LABEL">
-                                    <xslo:attribute name="DMDID">
-                                        <xslo:call-template name="generateDMDID">
-                                            <xslo:with-param name="node" select="."/>
-                                        </xslo:call-template>
-                                    </xslo:attribute>
-                                </xslo:if>
+                                <xslo:choose>
+                                    <xslo:when test="not(@DMDID) and @LABEL">
+                                        <xslo:attribute name="DMDID">
+                                            <xslo:call-template name="generateDMDID">
+                                                <xslo:with-param name="node" select="."/>
+                                            </xslo:call-template>
+                                        </xslo:attribute>
+                                    </xslo:when>
+                                    <xslo:when test="@DMDID">
+                                        <!-- Rewrite DMDIDs to avoid collisions with generated IDs -->
+                                        <xslo:attribute name="DMDID">
+                                            <xslo:call-template name="generateDMDID">
+                                                <xslo:with-param name="node" select="//mets:dmdSec[@ID = @DMDID]"/>
+                                            </xslo:call-template>
+                                        </xslo:attribute>
+                                    </xslo:when>
+                                </xslo:choose>
                                 <xslo:apply-templates select="@* | node()"/>
                             </xslo:copy>
                         </xslo:when>
@@ -199,32 +173,6 @@
         </xslo:stylesheet>
     </xsl:template>
     <xsl:template match="METS">
-        <!--
-        <xslo:template match="mets:div">
-            <mets:div>
-                <xslo:attribute name="TYPE">
-                    <xslo:choose>
-                        <xsl:for-each select="DocStruct">
-                            <xslo:when test="@TYPE=''">
-                                <xsl:attribute name="test">
-                                    <xsl:text>@TYPE='</xsl:text>
-                                    <xsl:value-of select="MetsType"/>
-                                    <xsl:text>'</xsl:text>
-                                </xsl:attribute>
-                                <xslo:text>
-                                    <xsl:value-of select="InternalName"/>
-                                </xslo:text>
-                            </xslo:when>
-                        </xsl:for-each>
-                        <xslo:otherwise>
-                            <xslo:message terminate="yes">No Mapping found!</xslo:message>
-                        </xslo:otherwise>
-                    </xslo:choose>
-                </xslo:attribute>
-                <xslo:apply-templates select="@*[not(name()='TYPE')] | node()"/>
-            </mets:div>
-        </xslo:template>
-        -->
         <xsl:comment>Filter Stuff out which is generated by Goobi if requested.</xsl:comment>
         <xslo:template match="mets:div/@LABEL">
             <xslo:if test="$copyLabel = true()">
@@ -257,15 +205,69 @@
                 </xslo:choose>
             </xslo:attribute>
         </xslo:template>
+        <!-- Match the root -->
         <xslo:template match="mets:mets">
             <xslo:copy>
                 <xslo:if test="$addSchemaLocation and not(@xsi:schemaLocation)">
                     <xslo:attribute name="xsi:schemaLocation"
                         select="'http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-3.xsd http://www.loc.gov/METS/ http://www.loc.gov/standards/mets/version17/mets.v1-7.xsd'"/>
                 </xslo:if>
-                <xslo:apply-templates select="@* | node()"/>
+                <xslo:apply-templates select="@*"/>
+                <xslo:apply-templates select="//mets:dmdSec"/>
+                <xsl:if test="$createDMDSects">
+                    <xslo:call-template name="convertLabels"/>
+                </xsl:if>
+                <xslo:apply-templates select="*[not(self::mets:dmdSec)]"/>
             </xslo:copy>
         </xslo:template>
+        <xsl:if test="$createDMDSects">
+            <xslo:template name="convertLabels">
+                <xsl:variable name="InternalName">
+                    <xsl:value-of select="//WriteXPath[text() ='./mods:mods/mods:titleInfo/#mods:title']/../InternalName/text()"/>
+                </xsl:variable>
+                <xslo:for-each select="//mets:structMap[@TYPE = 'LOGICAL']/mets:div/descendant::mets:div">
+                    <xslo:if test="not(@DMDID) and @LABEL">
+                        <xslo:variable name="id">
+                            <xslo:call-template name="generateDMDID">
+                                <xslo:with-param name="node" select="."/>
+                            </xslo:call-template>
+                        </xslo:variable>
+                        <mets:dmdSec>
+                            <xslo:attribute name="ID">
+                                <xslo:value-of select="$id"/>
+                            </xslo:attribute>
+                            <mets:mdWrap MDTYPE="MODS">
+                                <mets:xmlData>
+                                    <mods:mods>
+                                        <xslo:choose>
+                                            <xslo:when test="$createGoobiMETS = true()">
+                                                <mods:extension>
+                                                    <goobi:goobi>
+                                                        <goobi:metadata>
+                                                            <xsl:attribute name="name">
+                                                                <xsl:value-of select="$InternalName"/>
+                                                            </xsl:attribute>
+                                                            <xslo:value-of select="@LABEL"/>
+                                                        </goobi:metadata>
+                                                    </goobi:goobi>
+                                                </mods:extension>
+                                            </xslo:when>
+                                            <xslo:otherwise>
+                                                <mods:titleInfo>
+                                                    <mods:title>
+                                                        <xslo:value-of select="@LABEL"/>
+                                                    </mods:title>
+                                                </mods:titleInfo>
+                                            </xslo:otherwise>
+                                        </xslo:choose>
+                                    </mods:mods>
+                                </mets:xmlData>
+                            </mets:mdWrap>
+                        </mets:dmdSec>
+                    </xslo:if>
+                </xslo:for-each>
+            </xslo:template>
+        </xsl:if>
         <xslo:template match="mods:mods">
             <xslo:copy>
                 <mods:extension>
