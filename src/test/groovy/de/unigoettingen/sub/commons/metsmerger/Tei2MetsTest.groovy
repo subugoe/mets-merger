@@ -89,5 +89,18 @@ class Tei2MetsTest extends AbstractTransformerTest {
         }
     }
     
+    
+    @Test
+    void testTei2MetsUniqueIDs () {
+        for (tei in TEIFILES) {
+            log.info('Validating generated IDs for TEI File ' + tei.toString())
+            def converter = new Tei2Mets(tei)
+            converter.setIdentifier('1234')
+            converter.transform()
+            def doc = converter.result
+            assertTrue('XPath for ID check failed!', checkUniquePath (doc, '//mets:*[@ID = following::mets:*/@ID]'))
+        }
+    }
+    
 }
 
