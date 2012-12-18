@@ -40,7 +40,7 @@ class MetsMergerTest {
     static Boolean DELETE_TMP_FILES = false
     
     def static TEST_DATA = [new TestData(this.getClass().getResource("/rulesets/archaeo18.xml"), this.getClass().getResource("/processes/rom-38301.goobi.mets.xml"), this.getClass().getResource("/tei/rom-heyne1798.tei.xml")),
-        new TestData(this.getClass().getResource("/rulesets/archaeo18.xml"), this.getClass().getResource("/processes/weimar-41874.goobi.mets.xml"), this.getClass().getResource("/tei/weimar-hs-2057.tei.xml")),
+        new TestData(this.getClass().getResource("/rulesets/archaeo18.xml"), this.getClass().getResource("/processes/weimar-41874.goobi.mets.xml"), this.getClass().getResource("/tei/weimar-hs-2056.tei.xml")),
         new TestData(this.getClass().getResource("/rulesets/archaeo18.xml"), this.getClass().getResource("/processes/bern-41873.goobi.mets.xml"), this.getClass().getResource("/tei/bern-mss-muel-507.tei.xml"))
     ]
 
@@ -70,6 +70,16 @@ class MetsMergerTest {
             testSet.converter = new MetsMerger(testSet.dfgViewerMets, testSet.processMets)
             testSet.resultFile = File.createTempFile('metsMerger-result', '.xml')
             log.info('Result file will be ' + testSet.resultFile.getAbsolutePath())
+        }
+    }
+    
+        @Test
+    void checkFiles () {
+        for (testSet in TEST_DATA) {
+            assertNotNull('DFG Testfile is null!', testSet.dfgViewerMets)
+            assertNotNull('Goobi Testfile is null!', testSet.processMets)
+            assertTrue('DFG File does not exist!', new File(testSet.dfgViewerMets.toURI()).exists())
+            assertTrue('Goobi File does not exist!', new File(testSet.processMets.toURI()).exists())
         }
     }
     

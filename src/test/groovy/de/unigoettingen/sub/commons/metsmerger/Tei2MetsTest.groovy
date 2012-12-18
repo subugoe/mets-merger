@@ -37,7 +37,7 @@ class Tei2MetsTest extends AbstractTransformerTest {
     
     def static TEIFILES = [this.getClass().getResource('/tei/rom-heyne1798.tei.xml'),
                            this.getClass().getResource('/tei/bern-mss-muel-507.tei.xml'),
-                           this.getClass().getResource('/tei/weimar-hs-2057.tei.xml')]
+                           this.getClass().getResource('/tei/weimar-hs-2056.tei.xml')]
     
     @Test
     void testGetInstance () {
