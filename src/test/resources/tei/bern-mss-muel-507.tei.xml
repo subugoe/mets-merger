@@ -3,6 +3,7 @@
       <TEI:fileDesc>
          <TEI:titleStmt>
             <TEI:title>Übersetzung Handschrift Bern einbändig</TEI:title>
+             <TEI:title type="display">Vorlesung 1780</TEI:title>
            <TEI:author>
                     <TEI:persName ref="#CerlID:cnp01084713">Niklaus Friedrich von Mülinen</TEI:persName>
                 </TEI:author>
@@ -12405,41 +12406,38 @@
           nachher der <TEI:term>Pallast Buspoli</TEI:term> geworden.<TEI:lb/>
                         </TEI:p>
           
-          <TEI:p>Der <TEI:term>
+              <TEI:p>Der <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1005932">
                                 <TEI:emph>Pal. Spada</TEI:emph>
-          </TEI:term>. Hier ist <TEI:term>eine Statue von <TEI:persName ref="#CerlID:cnp00396166">
+              </TEI:term>. Hier ist <TEI:term ref="#http://arachne.uni-koeln.de/item/objekt/148559">eine Statue von <TEI:persName ref="#CerlID:cnp00396166">
                                     <TEI:emph>Pompeius</TEI:emph>
                                 </TEI:persName>
                             </TEI:term>
                             <TEI:lb/>
                         </TEI:p>
           
-          <TEI:p>Der <TEI:term>
+              <TEI:p>Der <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1000469">
                                 <TEI:emph>Pal. Verospi</TEI:emph>
                             </TEI:term> war ehmahls besonders weg<TEI:expan>en</TEI:expan> einem<TEI:lb/>
           
-          <TEI:term>
+                  <TEI:term ref="#http://arachne.uni-koeln.de/item/objekt/19753">
               <TEI:persName ref="#CerlID:cnp00554429">
                                     <TEI:emph>Jupiter</TEI:emph>
                                 </TEI:persName>
-                            </TEI:term> bekannt der aber auch im <TEI:term>
+                  </TEI:term> bekannt der aber auch im <TEI:term ref="#http://arachne.uni-koeln.de/item/bauwerk/2107851">
                                 <TEI:emph>Clementino</TEI:emph>
                             </TEI:term> ist.<TEI:lb/>
                         </TEI:p>
           
           <TEI:p>
-                            <TEI:term>
+              <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1000341">
                                 <TEI:emph>Villa Aldovrandini</TEI:emph>
                             </TEI:term> zu <TEI:placeName ref="#GettyID:7007013">
                                 <TEI:emph>Frascati</TEI:emph>
                             </TEI:placeName>. Ist weg<TEI:expan>en</TEI:expan> ein Wandgemähld<TEI:expan>e</TEI:expan>
                             <TEI:lb/>
           
-          sehr bekant. <TEI:bibl>
-                                <TEI:ref>
-                                    <TEI:emph>Nupt: Aldovrandini.</TEI:emph>
-                                </TEI:ref>
-                            </TEI:bibl>
+          sehr bekant. <TEI:term ref="#CensusID:10007607 #http://arachne.uni-koeln.de/item/objekt/205225">
+                                    <TEI:emph>Nupt: Aldovrandini.</TEI:emph></TEI:term>
                             <TEI:lb/>
                         </TEI:p>
           
@@ -12447,14 +12445,14 @@
             
           
          <TEI:pb n="S. 132"/>
-              <TEI:p>Der <TEI:term>Pal. zu <TEI:placeName ref="#GettyID:7044047">
+              <TEI:p>Der <TEI:term ref="#http://arachne.uni-koeln.de/item/bauwerk/2108088">Pal. zu <TEI:placeName ref="#GettyID:7044047">
                                     <TEI:emph>Capo di Monte</TEI:emph>
                                 </TEI:placeName>
                             </TEI:term>. <TEI:date when="1738">A<TEI:hi rend="sup">o</TEI:hi>. 1738</TEI:date>. gebaut ist aber<TEI:lb/>
           
           schon wieder verlaßen. Zu <TEI:placeName ref="#GettyID:7004474">
                                 <TEI:emph>Napoli</TEI:emph>
-                            </TEI:placeName>. <TEI:term>Das farnesische</TEI:term>
+          </TEI:placeName>. <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1000001">Das farnesische</TEI:term>
                             <TEI:lb/>
           
           ganze <TEI:emph>Museum</TEI:emph> kam hierher unter <TEI:persName ref="#CerlID:cnp00545908">
@@ -12501,7 +12499,7 @@
                             </TEI:persName>.<TEI:lb/>
                         </TEI:p>
           
-              <TEI:p>Der <TEI:term>Pal. <TEI:emph>Caraffa</TEI:emph> zu <TEI:placeName ref="#GettyID:7004474">
+              <TEI:p>Der <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1000247">Pal. <TEI:emph>Caraffa</TEI:emph> zu <TEI:placeName ref="#GettyID:7004474">
                                     <TEI:emph>Neapel</TEI:emph>
                                 </TEI:placeName>
                             </TEI:term>. Das ganze <TEI:emph>Museum</TEI:emph> ist nach<TEI:lb/>
@@ -12516,7 +12514,7 @@
           
           Zu <TEI:placeName ref="#GettyID:7003947">
                                 <TEI:emph>Catania</TEI:emph>
-                            </TEI:placeName> ist das <TEI:term>
+          </TEI:placeName> ist das <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1005840">
                                 <TEI:emph>Mus: Biscari</TEI:emph>
                             </TEI:term> sehr schön.<TEI:lb/>
           
@@ -12535,15 +12533,15 @@
           Die <TEI:emph>Gallerei</TEI:emph> des <TEI:persName ref="#CerlID:cnp01237196">groß Herzogs</TEI:persName> ist sehr weitläuftig. Ein<TEI:gap/>
                             <TEI:lb/>
           
-          Cammer daneben die die <TEI:emph>Tribuna</TEI:emph> heißt enthält <TEI:term>die schöne <TEI:persName ref="#CerlID:cnp00588078">
+          Cammer daneben die die <TEI:emph>Tribuna</TEI:emph> heißt enthält <TEI:term ref="#http://arachne.uni-koeln.de/item/objekt/5841">die schöne <TEI:persName ref="#CerlID:cnp00588078">
                                     <TEI:emph>Ve</TEI:emph>
                                 </TEI:persName>
                             </TEI:term>
                             <TEI:gap/>
                             <TEI:lb/>
           
-              <TEI:term>Der <TEI:persName ref="#CerlID:cnp00542358">Faun</TEI:persName>
-              </TEI:term>. <TEI:term>der Schleiffer</TEI:term>, <TEI:term>der Ringer</TEI:term>. <TEI:term>Ein <TEI:persName ref="#CerlID:cnp00579062">
+              <TEI:term ref="#http://arachne.uni-koeln.de/item/objekt/5891">Der <TEI:persName ref="#CerlID:cnp00542358">Faun</TEI:persName>
+              </TEI:term>. <TEI:term ref="#CensusID:156131 #http://arachne.uni-koeln.de/item/objekt/5814">der Schleiffer</TEI:term>, <TEI:term ref="#http://arachne.uni-koeln.de/item/gruppen/400097 #http://arachne.uni-koeln.de/item/objekt/5897 #http://arachne.uni-koeln.de/item/objekt/34735">der Ringer</TEI:term>. <TEI:term ref="#http://arachne.uni-koeln.de/item/objekt/6399">Ein <TEI:persName ref="#CerlID:cnp00579062">
                                     <TEI:emph>Bachus</TEI:emph>
                                 </TEI:persName>
                             </TEI:term>. Sonst<TEI:lb/>
@@ -12568,7 +12566,7 @@
                             <TEI:lb/>
                         </TEI:p>
           
-          <TEI:p>Diese <TEI:emph>Gallerie</TEI:emph> wird auch <TEI:term>Mus. florentinum</TEI:term>, <TEI:term>
+              <TEI:p>Diese <TEI:emph>Gallerie</TEI:emph> wird auch <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1005767">Mus. florentinum</TEI:term>, <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1000498">
                                 <TEI:emph>Mus. Mediceum</TEI:emph>
                             </TEI:term>
                             <TEI:lb/>
@@ -12633,14 +12631,14 @@
                             </TEI:bibl> enthällt 72. Statuen darunter nur 3. <TEI:emph>Bronzen</TEI:emph>
                             <TEI:lb/>
           
-              <TEI:term>eine <TEI:persName ref="#CerlID:cnp00544188">Minerva</TEI:persName>
-                            </TEI:term> <TEI:term>ein Genius</TEI:term> und ein <TEI:term>
+              <TEI:term ref="#http://arachne.uni-koeln.de/item/objekt/6240">eine <TEI:persName ref="#CerlID:cnp00544188">Minerva</TEI:persName>
+              </TEI:term> <TEI:term ref="#CensusID:155494 #http://arachne.uni-koeln.de/item/objekt/6052">ein Genius</TEI:term> und ein <TEI:term ref="#CensusID:155496">
                                 
                                     <TEI:emph>Haruspex</TEI:emph>
                                 
                             </TEI:term>. Auch hier<TEI:lb/>
           
-          sind die Zeichnung<TEI:expan>en</TEI:expan> vom <TEI:term>
+          sind die Zeichnung<TEI:expan>en</TEI:expan> vom <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1000358">
                                 <TEI:emph>Campiglio</TEI:emph>
                             </TEI:term>.<TEI:lb/>
                         </TEI:p>
@@ -12695,7 +12693,7 @@
           
           Antiquitæten Saal, und izt ist daselbst die comple-<TEI:lb/>
           
-          teste <TEI:term>Sammlung von Gypsabgüßen von Antiken</TEI:term>.<TEI:lb/>
+          teste Sammlung von Gypsabgüßen von Antiken.<TEI:lb/>
                         </TEI:p>
           
           <TEI:p>Venedig<TEI:lb/>
@@ -12703,18 +12701,18 @@
           In dem Vorsahl der <TEI:term>Bibliothæc di S<TEI:hi rend="sup">t</TEI:hi>. <TEI:emph>Marco</TEI:emph>
                             </TEI:term> ist eine<TEI:lb/>
           
-          Antiquitæten Sammlung ein Geschenk des <TEI:term>Hauses <TEI:persName ref="#CerlID:cnp00567846">
+          Antiquitæten Sammlung ein Geschenk des <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1000197">Hauses <TEI:persName ref="#CerlID:cnp00567846">
                                     <TEI:emph>Grimani</TEI:emph>
                                 </TEI:persName>
                             </TEI:term>.<TEI:lb/>
           
-          Es sind vortrefl Stüke. Besonders <TEI:term>ein <TEI:persName ref="#CerlID:cnp00971385">
+          Es sind vortrefl Stüke. Besonders <TEI:term ref="#http://arachne.uni-koeln.de/item/objekt/22263">ein <TEI:persName ref="#CerlID:cnp00971385">
                                     <TEI:emph>August</TEI:emph>
                                 </TEI:persName>
-                            </TEI:term>, <TEI:term>ein<TEI:lb/>
+          </TEI:term>, <TEI:term ref="#http://arachne.uni-koeln.de/item/objekt/22373">ein<TEI:lb/>
           
                                 <TEI:persName ref="#CerlID:cnp00977487">Agrippa</TEI:persName>
-                            </TEI:term> <TEI:term>ein <TEI:persName ref="#CerlID:cnp00549963">
+          </TEI:term> <TEI:term ref="#http://arachne.uni-koeln.de/item/objekt/22179">ein <TEI:persName ref="#CerlID:cnp00549963">
                                     <TEI:emph>Ganimed</TEI:emph>
                                 </TEI:persName>
                             </TEI:term>. etc.<TEI:lb/>
@@ -12733,7 +12731,7 @@
                                 <TEI:emph>Verona</TEI:emph>
                             </TEI:placeName>.<TEI:lb/>
           
-          Ein <TEI:term>
+          Ein <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1000591">
               <TEI:emph>Cabinet</TEI:emph> des sel. <TEI:persName ref="#CerlID:cnp00913744">
                                     <TEI:emph>Maffei</TEI:emph>
                                 </TEI:persName>
@@ -12747,7 +12745,7 @@
           
           Das <TEI:term>
                                 <TEI:emph>Mus: Villaqua</TEI:emph>
-          </TEI:term>. – <TEI:term>Eine schöne <TEI:persName ref="#CerlID:cnp00588078">
+          </TEI:term>. – <TEI:term ref="#http://arachne.uni-koeln.de/item/objekt/22454">Eine schöne <TEI:persName ref="#CerlID:cnp00588078">
                                     <TEI:emph>Venus</TEI:emph>
                                 </TEI:persName>
                             </TEI:term> etc.<TEI:lb/>
@@ -12792,7 +12790,7 @@
           <TEI:p>
               <TEI:placeName ref="#GettyID:7005688">
                                 <TEI:emph>Turino</TEI:emph>
-                            </TEI:placeName>. <TEI:term>
+              </TEI:placeName>. <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1005957">
                                 <TEI:emph>Museo del Rè</TEI:emph>
                             </TEI:term> Hier ist auch ein antiquen <TEI:emph>Cabi-<TEI:lb/>
           
@@ -12871,7 +12869,7 @@
           <TEI:p>
                             <TEI:placeName ref="#GettyID:7003321">Wien</TEI:placeName> <TEI:lb/>
           
-          In den <TEI:term>kayserl. Gebäuden</TEI:term> sollen viele schöne<TEI:lb/>
+          In den <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1002364">kayserl. Gebäuden</TEI:term> sollen viele schöne<TEI:lb/>
           
           Statuen zerstreut seyn.<TEI:lb/>
           
@@ -12910,7 +12908,7 @@
           
           antiquarium, wo 354. Busten seyn sollen, sind<TEI:lb/>
           
-          theils in der <TEI:term>Churfürsten kapelle</TEI:term>
+          theils in der <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1000645">Churfürsten kapelle</TEI:term>
                             <TEI:lb/>
           
           <TEI:bibl>
@@ -12931,7 +12929,7 @@
                             <TEI:placeName ref="#GettyID:7005179">Manheim</TEI:placeName>
                             <TEI:lb/>
           
-          Die <TEI:term>Samml. von den Abgüßen</TEI:term> von den vornemsten<TEI:lb/>
+          Die <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1000644">Samml. von den Abgüßen</TEI:term> von den vornemsten<TEI:lb/>
           
           Römischen Haubtstatuen.<TEI:lb/>
           
@@ -12950,9 +12948,9 @@
                             <TEI:placeName ref="#GettyID:7004455">Dresden</TEI:placeName>
                             <TEI:lb/>
           
-          Hier ist außert <TEI:placeName ref="#GettyID:1000080">Italien</TEI:placeName> die <TEI:term>Schönste Sammlung</TEI:term>, der<TEI:lb/>
+          Hier ist außert <TEI:placeName ref="#GettyID:1000080">Italien</TEI:placeName> die <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1005934">Schönste Sammlung</TEI:term>, der<TEI:lb/>
           
-          fond davon ist die <TEI:term>
+          fond davon ist die <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1000243">
                                 <TEI:emph>Gallerie Chigi</TEI:emph>
           </TEI:term> die <TEI:persName ref="#CerlID:cnp01005310">K. August</TEI:persName>
                             <TEI:lb/>
@@ -12962,7 +12960,7 @@
           <TEI:emph>Albani</TEI:emph>
                             </TEI:persName> für 10000. <TEI:emph>Scudi</TEI:emph> gekauft, nachher<TEI:lb/>
           
-          auch aus der <TEI:term>Samml. des <TEI:persName ref="#CerlID:cnp00396391">Pr. Eugen</TEI:persName>
+          auch aus der <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1002363">Samml. des <TEI:persName ref="#CerlID:cnp00396391">Pr. Eugen</TEI:persName>
                             </TEI:term> für 6000. <TEI:emph>Sc</TEI:emph>.<TEI:lb/>
           
           das vorzüglichste ist der <TEI:term ref="#http://arachne.uni-koeln.de/item/rezeption/350622">
@@ -12971,7 +12969,7 @@
                                 <TEI:ref target="#http://digi.ub.uni-heidelberg.de/diglit/leplat1733/0127">N. 122.</TEI:ref>
                             </TEI:bibl> Die<TEI:lb/>
           
-          <TEI:term>
+              <TEI:term ref="#http://arachne.uni-koeln.de/item/objekt/5391">
                                 <TEI:persName ref="#CerlID:cnp00397192">
                                     <TEI:emph>Agripina</TEI:emph>
                                 </TEI:persName>
@@ -12990,7 +12988,7 @@
                             </TEI:bibl>
                             <TEI:lb/>
           
-          Eine <TEI:term>
+          Eine <TEI:term ref="#http://arachne.uni-koeln.de/item/objekt/5275">
               <TEI:persName ref="#CerlID:cnp00588078">
                                     <TEI:emph>Venus Medica</TEI:emph>
                                 </TEI:persName>
@@ -13014,7 +13012,7 @@
           bahr. Daneben sind auch <TEI:emph>Busten</TEI:emph> u. <TEI:emph>Basreliefs</TEI:emph>
                             <TEI:lb/>
           
-          vorzügl. eine <TEI:term>Vase mit einem 
+          vorzügl. eine <TEI:term ref="#http://arachne.uni-koeln.de/item/objekt/214805">Vase mit einem 
                                     <TEI:emph>Bachanal</TEI:emph>
                                 
                             </TEI:term>. <TEI:bibl>
@@ -13033,7 +13031,7 @@
                                 <TEI:ref target="#http://digi.ub.uni-heidelberg.de/diglit/leplat1733/0009">N. 3.</TEI:ref>
                             </TEI:bibl> Etruscisch<TEI:del>e</TEI:del>, u ein<TEI:lb/>
           
-          <TEI:term>Sarkophag mit einem 
+              <TEI:term ref="#http://arachne.uni-koeln.de/item/objekt/5418">Sarkophag mit einem 
                                     <TEI:emph>Bachanal</TEI:emph>
                                 
                             </TEI:term> <TEI:bibl>
@@ -13060,9 +13058,9 @@
                         </TEI:p>
           
           <TEI:p>
-                            <TEI:placeName ref="#GettyID:7004431">Cassel</TEI:placeName>.<TEI:lb/>
+              <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1000643"><TEI:placeName ref="#GettyID:7004431">Cassel</TEI:placeName></TEI:term>.<TEI:lb/>
           
-          <TEI:term>Allerhand Antiken</TEI:term>. Vorzügl sind die geschnitnen<TEI:lb/>
+         Allerhand Antiken. Vorzügl sind die geschnitnen<TEI:lb/>
           
           Steine. Auch sind einiche <TEI:emph>Busten</TEI:emph>.<TEI:lb/>
           
@@ -13083,7 +13081,7 @@
               <TEI:term>Ein <TEI:persName ref="#CerlID:cnp01259620">
                                     <TEI:emph>Homer</TEI:emph>
                                 </TEI:persName>
-                            </TEI:term>. <TEI:term>
+              </TEI:term>. <TEI:term ref="#http://arachne.uni-koeln.de/item/objekt/37436">
                                 <TEI:persName ref="#CerlID:cnp00871103">
                                     <TEI:emph>Adrian</TEI:emph>
                                 </TEI:persName>
@@ -13115,7 +13113,7 @@
             <TEI:lb/>
           
          <TEI:pb n="S. 138"/>
-              Der <TEI:persName ref="#CerlID:cnp00961376">Landgraf</TEI:persName> hat lezt <TEI:term>3. <TEI:persName ref="#CerlID:cnp00542641">
+              Der <TEI:persName ref="#CerlID:cnp00961376">Landgraf</TEI:persName> hat lezt <TEI:term ref="#http://arachne.uni-koeln.de/item/objekt/8267 #http://arachne.uni-koeln.de/item/objekt/8297">3. <TEI:persName ref="#CerlID:cnp00542641">
                                     <TEI:emph>Appoll</TEI:emph>
                                 </TEI:persName> Statuen</TEI:term> gekauft<TEI:lb/>
           
@@ -13133,7 +13131,7 @@
           
           <TEI:emph>Buste</TEI:emph>, was er in der Hand hält ist vielleicht<TEI:lb/>
           
-          sonst ein zerbrochnes Instrument. <TEI:term>Eine be-<TEI:lb/>
+          sonst ein zerbrochnes Instrument. <TEI:term ref="#http://arachne.uni-koeln.de/item/objekt/48466">Eine be-<TEI:lb/>
           
           wafnete <TEI:persName ref="#CerlID:cnp00544188">
                                     <TEI:emph>Minverva</TEI:emph>
@@ -13150,7 +13148,7 @@
                                     <TEI:emph>Faun</TEI:emph>
                                 </TEI:persName> mit der Flöte</TEI:term>.<TEI:lb/>
           
-              <TEI:term>Ein <TEI:persName ref="#CerlID:cnp00587024">Paris</TEI:persName>
+              <TEI:term ref="#http://arachne.uni-koeln.de/item/objekt/8269">Ein <TEI:persName ref="#CerlID:cnp00587024">Paris</TEI:persName>
                             </TEI:term>. <TEI:term>Ein schöner Fechter</TEI:term> über Lebensgrö-<TEI:lb/>
           
           ße. <TEI:term>Ein Ringer mit einem Salbengefäße</TEI:term>.<TEI:lb/>
@@ -13170,7 +13168,7 @@
           <TEI:p>
                             <TEI:placeName ref="#GettyID:7013260">Hannover</TEI:placeName>.<TEI:lb/>
           
-          D. <TEI:term>Walmodische Samml.</TEI:term>
+          D. <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1000632">Walmodische Samml.</TEI:term>
                             <TEI:lb/>
           
               <TEI:term>Der <TEI:persName ref="#CerlID:cnp00588989">Perseus</TEI:persName> und <TEI:persName ref="#CerlID:cnp00578206">Andromeda</TEI:persName>
@@ -13185,7 +13183,7 @@
           <TEI:p>
                             <TEI:placeName ref="#GettyID:7003712">Berlin</TEI:placeName>.<TEI:lb/>
           
-          Hier war eine <TEI:term>Brandenburgische Samml.</TEI:term> Hernach kam<TEI:lb/>
+          Hier war eine <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1000310">Brandenburgische Samml.</TEI:term> Hernach kam<TEI:lb/>
           
           die von <TEI:persName ref="#CerlID:cnp00288141">Churf: Karl von der Pfalz</TEI:persName> und die von <TEI:persName ref="#CerlID:cnp00445125">
                                 <TEI:emph>Bellori</TEI:emph>
@@ -13204,7 +13202,7 @@
             
           
          <TEI:pb n="S. 139"/>
-              <TEI:p>Ein Theil der <TEI:term>Samml. des <TEI:persName ref="#CerlID:cnp00404780">Kard. Polignak</TEI:persName>
+              <TEI:p>Ein Theil der <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1000448">Samml. des <TEI:persName ref="#CerlID:cnp00404780">Kard. Polignak</TEI:persName>
                             </TEI:term> kaufte der<TEI:lb/>
           
                   <TEI:persName ref="#CerlID:cnp01261252">König <TEI:add>v. Pr.</TEI:add>
@@ -13220,13 +13218,13 @@
           
           gröstenthl. an den <TEI:persName ref="#CerlID:cnp01261252">König von Pr.</TEI:persName> gekommen.<TEI:lb/>
           
-          Diese Statuen stehen theils zu <TEI:term>
+          Diese Statuen stehen theils zu <TEI:term ref="#http://arachne.uni-koeln.de/item/topographie/8006556">
               <TEI:placeName ref="#GettyID:1004256">
                                     <TEI:emph>Charlottenburg</TEI:emph>
                                 </TEI:placeName>
                             </TEI:term> theils<TEI:lb/>
           
-          zu <TEI:term>S<TEI:hi rend="sup">t</TEI:hi>. <TEI:emph>Soucy</TEI:emph>.</TEI:term>
+          zu <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1000306">S<TEI:hi rend="sup">t</TEI:hi>. <TEI:emph>Soucy</TEI:emph>.</TEI:term>
                             <TEI:lb/>
           
           <TEI:bibl>
@@ -13251,7 +13249,7 @@
                                 </TEI:persName>
                              einiche stüke an sich gebracht<TEI:lb/>
           
-          besonders <TEI:term>ein <TEI:persName ref="#CerlID:cnp00578329">
+          besonders <TEI:term ref="#http://arachne.uni-koeln.de/item/objekt/211456">ein <TEI:persName ref="#CerlID:cnp00578329">
                                     <TEI:emph>Antinous</TEI:emph>
                                 </TEI:persName>
                             </TEI:term>. Auch einiche Stüke aus<TEI:lb/>
@@ -13263,24 +13261,24 @@
                             </TEI:placeName>.<TEI:lb/>
                         </TEI:p>
           
-          <TEI:p>Unter den <TEI:term>
+          <TEI:p>Unter den 
                                 <TEI:emph>Polygnacschen</TEI:emph>
-                            </TEI:term> ist <TEI:del>die <TEI:unclear/>
+                             ist <TEI:del>die <TEI:unclear/>
                             </TEI:del>
                             <TEI:lb/>
           
           die <TEI:persName ref="#CerlID:cnp01427472">Familie <TEI:emph>Lycomedis</TEI:emph>
                             </TEI:persName> das berühmteste. Es sind 10.<TEI:lb/>
           
-          Figuren. <TEI:term>
+          Figuren. <TEI:term ref="#http://arachne.uni-koeln.de/item/relief/1517402">
               <TEI:persName ref="#CerlID:cnp01427472">
                                     <TEI:emph>Lycomeds frau</TEI:emph>
                                 </TEI:persName>
-                            </TEI:term> <TEI:term>7 Töchter</TEI:term> <TEI:term>
+                             7 Töchter 
                                 <TEI:persName ref="#CerlID:cnp00541741">
                                     <TEI:emph>Achill</TEI:emph>
                                 </TEI:persName>
-                            </TEI:term> und <TEI:term>
+                             und 
                                 <TEI:persName ref="#CerlID:cnp00561330">Uliss</TEI:persName>
                             </TEI:term>
                             <TEI:lb/>
@@ -13302,7 +13300,7 @@
           
           ergänzt also sehr ungewiß ob es diese Familie sey<TEI:lb/>
           
-          Auch ist in dieser Samml. <TEI:term>ein sizendes Mädchen das mit<TEI:lb/>
+          Auch ist in dieser Samml. <TEI:term ref="#http://arachne.uni-koeln.de/item/objekt/25470">ein sizendes Mädchen das mit<TEI:lb/>
           
           Knöcheln spie<TEI:del>h</TEI:del>lt</TEI:term>. <TEI:term>Eine <TEI:persName ref="#CerlID:cnp00542688">Isis</TEI:persName>
                             </TEI:term> aus schwarzem Marmor<TEI:lb/>
@@ -13317,7 +13315,7 @@
           kleinem <TEI:persName ref="#CerlID:cnp00587177">
                                     <TEI:emph>Pyrrhus</TEI:emph>
                                 </TEI:persName>
-              </TEI:term>. <TEI:term>Ein <TEI:persName ref="#CerlID:cnp00542641">
+              </TEI:term>. <TEI:term ref="#http://arachne.uni-koeln.de/item/objekt/25462">Ein <TEI:persName ref="#CerlID:cnp00542641">
                                     <TEI:emph>Apollo</TEI:emph>
                                 </TEI:persName>
                             </TEI:term>
@@ -13327,7 +13325,7 @@
             
           
          <TEI:pb n="S. 140"/>
-          In <TEI:term>
+              In <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1000306">
                                 <TEI:emph>Sans Soucy</TEI:emph>
                             </TEI:term> sind schöne neue Statuen besonders<TEI:lb/>
           
@@ -13336,12 +13334,12 @@
                                 </TEI:persName> von <TEI:persName>
                                     <TEI:emph>Covston</TEI:emph>
                                 </TEI:persName>
-              </TEI:term> und <TEI:term>ein <TEI:persName ref="#CerlID:cnp00575540">
+              <TEI:note type="certainty" resp="Abraham">nicht antik</TEI:note></TEI:term> und <TEI:term>ein <TEI:persName ref="#CerlID:cnp00575540">
                                     <TEI:emph>Mercur</TEI:emph>
               </TEI:persName> v. <TEI:persName ref="#CerlID:cnp01320618">
                                     <TEI:emph>Pigalle</TEI:emph>
                                 </TEI:persName>
-                            </TEI:term>
+                  <TEI:note type="certainty" resp="Abraham">nicht antik</TEI:note></TEI:term>
                             <TEI:lb/>
                         </TEI:p>
           
@@ -13354,7 +13352,7 @@
           <TEI:p>
                             <TEI:placeName ref="#GettyID:7006809">Leyden</TEI:placeName>.<TEI:lb/>
           
-          Auf der <TEI:term>Universitæts Bibl.</TEI:term> 86. Steinschrift<TEI:expan>en</TEI:expan> und <TEI:emph>Reliefs</TEI:emph>
+          Auf der <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1000681">Universitæts Bibl.</TEI:term> 86. Steinschrift<TEI:expan>en</TEI:expan> und <TEI:emph>Reliefs</TEI:emph>
                             <TEI:lb/>
           
           60 <TEI:emph>Busten</TEI:emph> und <TEI:emph>Statuen</TEI:emph>. Alles ein Geschenk vn <TEI:persName>Hrn.<TEI:lb/>
@@ -13381,7 +13379,7 @@
                             </TEI:placeName>
                             <TEI:lb/>
           
-          Ehedem war <TEI:term>eine Saml.</TEI:term> hier in den Gärten vertheilt<TEI:lb/>
+          Ehedem war <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1000606">eine Saml.</TEI:term> hier in den Gärten vertheilt<TEI:lb/>
           
           unter dem izig<TEI:expan>en</TEI:expan> Könige ist dieser Garten Rasiert<TEI:lb/>
           
@@ -13442,7 +13440,7 @@
           
          <TEI:pb n="S. 141"/>
           <TEI:p>
-                            <TEI:placeName ref="#GettyID:7008038">Paris</TEI:placeName> Auf der königlichen Bibliothek ist izt <TEI:term>die Samml. der<TEI:lb/>
+              <TEI:placeName ref="#GettyID:7008038">Paris</TEI:placeName> Auf der königlichen Bibliothek ist izt <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1005704">die Samml. der<TEI:lb/>
           
           antiqen</TEI:term> des <TEI:persName ref="#CerlID:cnp01099958">
                                 <TEI:emph>Caylus</TEI:emph>
@@ -13450,11 +13448,11 @@
                         </TEI:p>
           
           <TEI:p>
-                            <TEI:term>
+                            
                                 <TEI:placeName ref="#GettyID:7007905">
                                     <TEI:emph>San Ildefonso</TEI:emph>
                                 </TEI:placeName>
-                            </TEI:term> 2. Meil<TEI:expan>en</TEI:expan> von <TEI:placeName ref="#GettyID:7008661">
+                             2. Meil<TEI:expan>en</TEI:expan> von <TEI:placeName ref="#GettyID:7008661">
                                 <TEI:emph>Segovia</TEI:emph>
                             </TEI:placeName>. Hier sind Gärten wo<TEI:lb/>
           
@@ -13464,14 +13462,14 @@
           
           Statuen, 200. <TEI:emph>Busten</TEI:emph> und <TEI:emph>Basreliefs</TEI:emph>. Dies ist zum<TEI:lb/>
           
-          theil die <TEI:term>Samml der <TEI:persName ref="#CerlID:cnp01260633">Königin Christine</TEI:persName>
+          theil die <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1000315">Samml der <TEI:persName ref="#CerlID:cnp01260633">Königin Christine</TEI:persName>
                             </TEI:term> <TEI:term>Ein üniker<TEI:lb/>
           
                                 <TEI:persName ref="#CerlID:cnp00558205">
                                     <TEI:emph>Neptun</TEI:emph>
                                 </TEI:persName>
-                            </TEI:term>. <TEI:term>Die <TEI:persName ref="#CerlID:cnp00539388">Musen</TEI:persName>
-                            </TEI:term> und <TEI:term>2. <TEI:emph>genii</TEI:emph>
+                            </TEI:term>. <TEI:term ref="#http://arachne.uni-koeln.de/item/objekt/11657 #http://arachne.uni-koeln.de/item/objekt/30767 #http://arachne.uni-koeln.de/item/objekt/11647 #http://arachne.uni-koeln.de/item/objekt/11653 #http://arachne.uni-koeln.de/item/objekt/11656 #http://arachne.uni-koeln.de/item/objekt/11673 #http://arachne.uni-koeln.de/item/objekt/11675 #http://arachne.uni-koeln.de/item/objekt/11676">Die <TEI:persName ref="#CerlID:cnp00539388">Musen</TEI:persName>
+                            </TEI:term> und <TEI:term ref="#http://arachne.uni-koeln.de/item/objekt/11642">2. <TEI:emph>genii</TEI:emph>
                             </TEI:term>
                             <TEI:lb/>
           
@@ -13503,7 +13501,7 @@
                                 <TEI:emph>Toledo</TEI:emph>
                             </TEI:placeName>. Auch hier sind einiche Antiken<TEI:lb/>
           
-          sowohl im <TEI:term>Pallast als im Park</TEI:term>.<TEI:lb/>
+          sowohl im <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1000319">Pallast als im Park</TEI:term>.<TEI:lb/>
           
           <TEI:bibl>
               <TEI:ref target="#http://hdl.handle.net/2027/uc2.ark:/13960/t1td9pb38?urlappend=%3Bseq=238">
@@ -13528,18 +13526,18 @@
                             <TEI:lb/>
                         </TEI:p>
           
-              <TEI:p>Die <TEI:term>Saml des <TEI:persName ref="#CerlID:cnp00368551">Gr. <TEI:emph>Pembrok</TEI:emph>
+              <TEI:p>Die <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1000087">Saml des <TEI:persName ref="#CerlID:cnp00368551">Gr. <TEI:emph>Pembrok</TEI:emph>
           </TEI:persName> zu <TEI:placeName ref="#GettyID:7011225">
                                     <TEI:emph>Wildenhuys</TEI:emph>
                                 </TEI:placeName>
                             </TEI:term> . Hiehin ist<TEI:lb/>
           
-          die <TEI:term>Samml des <TEI:persName ref="#CerlID:cnp01099927">
+          die <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1000181">Samml des <TEI:persName ref="#CerlID:cnp01099927">
                                     <TEI:emph>Card Mazarins</TEI:emph>
                                 </TEI:persName>
                             </TEI:term> gekommen. Vieles von<TEI:lb/>
           
-          der <TEI:term>Arondelisch<TEI:expan>en</TEI:expan> Samml</TEI:term> und vieles ist nachher im <TEI:placeName ref="#GettyID:7000874">Rom</TEI:placeName>
+          der <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1000009">Arondelisch<TEI:expan>en</TEI:expan> Samml</TEI:term> und vieles ist nachher im <TEI:placeName ref="#GettyID:7000874">Rom</TEI:placeName>
                             <TEI:lb/>
           
           gekauft word<TEI:expan>en</TEI:expan>.<TEI:lb/>
@@ -13574,7 +13572,7 @@
           griechischer Umschrift. Viele Schöne Sarkophagi.<TEI:lb/>
                         </TEI:p>
           
-              <TEI:p>Die <TEI:term>Samml. des <TEI:persName ref="#CerlID:cnp00577018">
+              <TEI:p>Die <TEI:term ref="#http://arachne.uni-koeln.de/item/sammlungen/1000009">Samml. des <TEI:persName ref="#CerlID:cnp00577018">
                                     <TEI:emph>Gr Arondel.</TEI:emph>
                                 </TEI:persName>
                             </TEI:term> Ist noch zum theil in <TEI:placeName ref="#GettyID:7011931">Oxford</TEI:placeName>

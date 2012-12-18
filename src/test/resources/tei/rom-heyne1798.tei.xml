@@ -6,10 +6,14 @@
         <fileDesc>
             <titleStmt>
                 <title>ARCHAEO18 Manuscript</title>
+                <title type="display">Vorlesung 1798</title>
             <author>unbekannt</author>
-                <respStmt><resp>Transkription:</resp> <persName>Max Ruckhäberle</persName></respStmt> 
-                <respStmt><resp>Identifikation und Auszeichnung von Entitäten in TEI/XML:</resp> <persName>Stefanie Abraham (Personen, Orte, Kunstwerke),</persName> <persName>Judith Dinse (Literatur),</persName> <persName>Julian Geisler (Personen),</persName> <persName>Max Ruckhäberle (Literatur),</persName> <persName>Cäcilia Schröer (Orte),</persName> <persName>Arne Ulrich (Orte, Personen)</persName></respStmt>
-                    <respStmt><resp>Fachwissenschaftliche Redaktion:</resp> <persName>Dr. Daniel Graepler,</persName> <persName>Dr. Hildegard Wiegel</persName></respStmt></titleStmt>
+                <respStmt><resp>Bearbeitung:</resp> <orgName>SUB Göttingen und Archäologisches Institut</orgName></respStmt> 
+            </titleStmt>
+            <editionStmt><p>Die Mitschrift von unbekannter Hand entstand laut Titelblatt im Sommer 1798. Es handelt sich um eine recht gleichmäßig geschriebene Abschrift, vermutlich eine vom Autor selbst angefertigte Reinschrift, worauf häufige Verbesserungen im Text und das sorgfältig angelegte Inhaltsverzeichnis nebst Literaturliste am Ende des Textes hinweisen könnten. Typische Kopistenfehler sind nicht erkennbar. Wenige Stellen im fortlaufenden Text könnten auf eine zweite Hand hindeuten (S. 175-176).</p>
+                <p>Die Handschrift gehört zwar zu den kürzeren Mitschriften von Heynes Vorlesung, doch ist sie inhaltlich ergiebig, da der Gedankengang meist konzis und verständlich wiedergegeben ist.</p>
+                <p>In späterer Zeit wurde das Manuskript von fremder Hand (wahrscheinlich sogar von verschiedenen Personen) mit zahlreichen Zusätzen und Literaturnachträgen versehen. Diese Zusätze sind größtenteils auf Englisch abgefasst, was darauf hindeuten könnte, dass sich das Manuskript später in britischem Besitz befand. Der jüngste Literaturnachtrag ist: „Tour to the Sepulchres of etruria in 1839. By Mrs. Hamilton Gray. With numerous illustrations. London 1840.  Lond. &amp; P.Obs. January 3. 1841.“</p>
+                <p>Die Handschrift wurde der Bibliothek des Deutschen Archäologischen Instituts laut eingeklebtem Zettel von „Giorgio Sangiorgi, Comm[endatore], Roma“ „in omaggio e in memoria del professor Ludwig Curtius“ geschenkt. Nach der Inventarnummer geschah dies 1959. Mehr ist über die Provenienz nicht bekannt.</p></editionStmt>
             <publicationStmt>
                 <p></p>
             </publicationStmt>
@@ -504,7 +508,7 @@
                     
                         <p><bibl><ref target="#http://resolver.sub.uni-goettingen.de/purl?PPN622625942">Mengs Gedanken üb. die Schönheit. ed. Fueßly; Zürch <choice><sic>1764.</sic> <corr>1762.</corr></choice></ref></bibl><lb/></p>
                     
-                        <p><bibl><ref target="#">Winkelmann Briefe an Freunde in der Schweitz. <emph>p 127.</emph></ref></bibl><lb/></p>
+                    <p><bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/winckelmann1778/0134">Winkelmann Briefe an Freunde in der Schweitz. <emph>p 127.</emph></ref></bibl><lb/></p>
                     
                         <p><bibl><ref target="#http://opac.sub.uni-goettingen.de/DB=1/PPNSET?PPN=145992535">v. Ramdohr Charis.</ref></bibl><lb/></p>
                     
@@ -2606,7 +2610,7 @@
                                     
                                     
                                     <pb/>
-                                        <bibl><ref target="#"><term ref="#http://arachne.uni-koeln.de/item/objekt/26776"><emph>Galeria Iust. T. 1. 51.</emph></term></ref></bibl> Dieß Modell ist auch bey dem <persName ref="#CerlID:cnp00165641">Heil<expan>igen</expan><lb/>
+                                        <bibl><ref target="#http://arachne.uni-koeln.de/item/buchseite/41646"><term ref="#http://arachne.uni-koeln.de/item/objekt/26776"><emph>Galeria Iust. T. 1. 51.</emph></term></ref></bibl> Dieß Modell ist auch bey dem <persName ref="#CerlID:cnp00165641">Heil<expan>igen</expan><lb/>
                                     Bartholomäus</persName> gebraucht worden. Die Hauptfigur<lb/>
                                         vom <emph><persName ref="#CerlID:cnp00588624">Marsyas</persName> pendens</emph> steht <term ref="#CensusID:151517 #http://arachne.uni-koeln.de/item/objekt/5810">in <placeName ref="#GettyID:7000457">Florenz</placeName></term>. <bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/maffei1704/0048"><emph>Racolta. 31.</emph></ref></bibl><lb/>
                                         Ein andrer im <bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/gori1734bd3/0049"><emph><term ref="#CensusID:155778 #http://arachne.uni-koeln.de/item/objekt/5808">Mus. Flor. T. 3. <choice><sic>43.</sic> <corr>13.</corr></choice></term></emph></ref></bibl> Ein Modell darnach<lb/>
@@ -3055,7 +3059,7 @@
                                         
                                         
                                         <pb/>
-                                            <bibl><ref target="#">Perrier 57.</ref></bibl></emph> <term>Eine andre Idee<note type="certainty" resp="Wiegel">unidentifiziert</note></term> ist im <bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/visconti1782bd1/0160"><emph>Mus. Clem. 1. 46.</emph></ref></bibl><lb/>
+                                            <bibl><ref target="#http://arachne.uni-koeln.de/books/Perrier1638">Perrier 57.</ref></bibl></emph> <term>Eine andre Idee<note type="certainty" resp="Wiegel">unidentifiziert</note></term> ist im <bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/visconti1782bd1/0160"><emph>Mus. Clem. 1. 46.</emph></ref></bibl><lb/>
                                         liegend, aber in andrer Stellung., einer von den schönsten.<lb/>
                                         Seine Glatze mit Epheu bekränzt, mit einer Traube<lb/>
                                             und einem Becher. <emph><bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/giustiniani1640bd1/0139"><term ref="#http://arachne.uni-koeln.de/item/objekt/26768">Giust. 1. 138</term>.</ref></bibl> <bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/sandrart1675b/0020"><term>Sandrart. 1. N.<note type="certainty" resp="Wiegel">unidentifiziert</note></term></ref></bibl> <bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/sandrart1679b/0044"><term>2. NN.<note type="certainty" resp="Wiegel">unidentifiziert</note></term></ref></bibl></emph><lb/>
@@ -3403,7 +3407,7 @@
                                         wurden. Man nennt diese in der Kunst Pancratiasten.<lb/>
                                             Erst <persName ref="#CerlID:cnp00396916">Winkelmann</persName> und <persName ref="#CerlID:cnp00400145">Mengs</persName> entdekten das frappante Kenn-<lb/>
                                         zeichen, geschwollne Ohren, daran, die sich auch beym<lb/>
-                                        Heroen <persName ref="#CerlID:cnp00543824">Castor</persName> fanden. Dergleichen siehe <bibl><ref target="#"><term><emph>Winkelm monum. t 65.</emph><note type="certainty" resp="Wiegel">verloren</note></term></ref></bibl><lb/>
+                                            Heroen <persName ref="#CerlID:cnp00543824">Castor</persName> fanden. Dergleichen siehe <bibl><ref target="#http://resolver.sub.uni-goettingen.de/purl?PPN636562301"><term><emph>Winkelm monum. t 65.</emph><note type="certainty" resp="Wiegel">verloren</note></term></ref></bibl><lb/>
                                         
                                         
                                         
@@ -3788,7 +3792,7 @@
                                     sitzenden <persName ref="#CerlID:cnp00574918">Hercules</persName> zu denken, mit der <persName ref="#CerlID:cnp00553686">Hebe</persName> im Arme.<lb/>
                                         <emph><persName ref="#CerlID:cnp00347395">Visconti</persName></emph> im <bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/visconti1784bd2/0030"><term ref="#http://arachne.uni-koeln.de/item/reproduktion/3060213"><emph>Pio Clem. II.</emph></term></ref></bibl> - <emph><bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/gori1732bd2/0042"><term ref="#http://arachne.uni-koeln.de/item/reproduktion/3060213">Mus. Flor. 2. 5.</term></ref></bibl> <bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/visconti1784bd2/0030"><term ref="#http://arachne.uni-koeln.de/item/reproduktion/3060213">Pio Clem<lb/>
                                     tab.</term> <gap/></ref></bibl></emph> enthalten Gemmen mit derselben Vorstellung.<lb/>
-                                        <bibl><ref target="#"><term><emph>Caylus 3. 55.</emph><note type="certainty" resp="Wiegel">unidentifiziert</note></term></ref></bibl> Unten am Blocke steht der Name des<lb/>
+                                        <bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/caylus1759bd3/0307"><term><emph>Caylus 3. 55.</emph><note type="certainty" resp="Wiegel">unidentifiziert</note></term></ref></bibl> Unten am Blocke steht der Name des<lb/>
                                         Künstlers: <emph><persName ref="#CerlID:cnp01288198">Apollonius</persName></emph>, Sohn des <persName ref="#CerlID:cnp01303719">Nestors</persName>. Dieser Name<lb/>
                                     komt aber sonst nirgends vor.<lb/></p>
                                     
@@ -3866,7 +3870,7 @@
                                         sein Hauptattribut <del>ist</del> ein Delphin. Wir haben kein einz<expan>iges</expan><lb/>
                                         ausserordentl<expan>iches</expan> Stück vom <persName ref="#CerlID:cnp00558205">Neptun</persName>. Der bekanteste<lb/>
                                             steht <term ref="#http://arachne.uni-koeln.de/item/objekt/5908">zu <placeName ref="#GettyID:7000874">Rom</placeName> in <emph>Villa Medice</emph></term>, wovon kein Kupfer ist.<lb/>
-                                            <emph><bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/leplat1733/0067"><term ref="#http://arachne.uni-koeln.de/item/objekt/5205">Marbre de Dresde <choice><sic>63.</sic> <corr>61.</corr></choice></term></ref></bibl> <bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/leplat1733/0157"><term ref="#http://arachne.uni-koeln.de/item/objekt/5206">153.</term></ref></bibl> <bibl><ref target="#	http://resolver.sub.uni-goettingen.de/purl?PPN668845406"><term>Numism. Musei Albani<lb/>
+                                            <emph><bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/leplat1733/0067"><term ref="#http://arachne.uni-koeln.de/item/objekt/5205">Marbre de Dresde <choice><sic>63.</sic> <corr>61.</corr></choice></term></ref></bibl> <bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/leplat1733/0157"><term ref="#http://arachne.uni-koeln.de/item/objekt/5206">153.</term></ref></bibl> <bibl><ref target="#http://resolver.sub.uni-goettingen.de/purl?PPN668845406"><term>Numism. Musei Albani<lb/>
                                                 T. 1. pl. 40.<note type="certainty" resp="Wiegel">unidentifiziert</note></term></ref></bibl></emph> <term ref="#http://arachne.uni-koeln.de/item/objekt/21156">Der aus dem Hause <emph>Verospi</emph></term>; jetzt im<lb/>
                                             <bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/visconti1782bd1/0147"><emph>Clem. 1. 33.</emph></ref></bibl> Ein <term ref="#http://arachne.uni-koeln.de/item/objekt/11620">Colossal-Neptun zu <placeName ref="#GettyID:7007905"><emph>S. Ildefonso</emph></placeName></term>.<lb/>
                                             <term>Ein von <emph><persName ref="#CerlID:cnp00404698">Cavaceppi</persName></emph> ergänzter<note type="certainty" resp="Wiegel">unidentifiziert</note></term> bey dem Engländer <emph><persName ref="#CerlID:cnp00053309">Skip-<lb/>
@@ -4088,7 +4092,7 @@
                                 
                                 
                                     <pb/>
-                                        Eine <term>Bronce im Pallaste <emph>Barberini</emph><note type="certainty" resp="Wiegel">unidentifiziert</note></term>, und im <bibl><ref target="#"><emph><term ref="#CensusID:155494 #http://arachne.uni-koeln.de/item/objekt/6052">Mus. Flor.<lb/>
+                                        Eine <term>Bronce im Pallaste <emph>Barberini</emph><note type="certainty" resp="Wiegel">unidentifiziert</note></term>, und im <bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/gori1731ga"><emph><term ref="#CensusID:155494 #http://arachne.uni-koeln.de/item/objekt/6052">Mus. Flor.<lb/>
                                             45. 46.</term></emph></ref></bibl> Eine <term ref="#http://arachne.uni-koeln.de/item/objekt/14755 #http://arachne.uni-koeln.de/item/objekt/14758">Gruppe in <emph>villa Borgh.</emph></term> 2 Genien ueber<lb/>
                                     einander, <emph><bibl><ref target="#">Breguenzi p. 73.</ref></bibl> <bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/montfaucon1722a/0257">Montfauc. pl. 194 No 2.</ref></bibl></emph><lb/>
                                         <term ref="#CensusID:10008664 #http://arachne.uni-koeln.de/item/objekt/11641 #http://arachne.uni-koeln.de/item/objekt/11642 #http://arachne.uni-koeln.de/item/objekt/56124">Eine 2te ist aus dem Pallaste <emph>Odeschalti</emph> nach <emph>S. Ildefonso</emph><lb/>
@@ -4544,7 +4548,7 @@
         
                                 <pb/>
                                 Stücken, bey den Beinen gefaßt</term>, unter die Fechter.<lb/>
-                                <emph><bibl><ref target="#http://arachne.uni-koeln.de/item/buchseite/182548">Perrier. 13.</ref></bibl> <bibl><ref target="#">Boissard 6. 2.</ref></bibl></emph> im Pallaste Farnese.<lb/>
+                                    <emph><bibl><ref target="#http://arachne.uni-koeln.de/item/buchseite/182548">Perrier. 13.</ref></bibl> <bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/boissard1602bd6">Boissard 6. 2.</ref></bibl></emph> im Pallaste Farnese.<lb/>
                                 Es ist der Kopf von <persName ref="#CerlID:cnp00394493">Commodus</persName>. <persName ref="#CerlID:cnp00396916">Winkelmann</persName> sagt, es<lb/>
                                 sey <persName ref="#CerlID:cnp00578829">Atreus</persName>, wie er seines Bruders Sohn tödten will. Allein<lb/>
                                 es ist angesetzt. Eine Menge Statuen haben Commodus-<lb/>
@@ -5015,7 +5019,7 @@
                                 <p>2) Tritone, gewöhnlich mit doppelten Fischschwänzen,<lb/>
                                 im Gefolge des <persName ref="#CerlID:cnp00558205">Neptuns</persName> und der <persName ref="#CerlID:cnp00576691">Amphytrite</persName>, gewöhnlich<lb/>
                                 mit Schneckenhörnern, worauf sie blasen; besonders<lb/>
-                                    auf Reliefs. <bibl><ref target="#"><emph>Mus Flor. 1. 34.</emph></ref></bibl> <term ref="#http://arachne.uni-koeln.de/item/gruppen/400706 #http://arachne.uni-koeln.de/item/objekt/19405 #http://arachne.uni-koeln.de/item/objekt/19406 #http://arachne.uni-koeln.de/item/objekt/19407 #http://arachne.uni-koeln.de/item/objekt/19408">ein solcher mit<lb/>
+                                    auf Reliefs. <bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/gori1731bd1"><emph>Mus Flor. 1. 34.</emph></ref></bibl> <term ref="#http://arachne.uni-koeln.de/item/gruppen/400706 #http://arachne.uni-koeln.de/item/objekt/19405 #http://arachne.uni-koeln.de/item/objekt/19406 #http://arachne.uni-koeln.de/item/objekt/19407 #http://arachne.uni-koeln.de/item/objekt/19408">ein solcher mit<lb/>
                                 einer Nymphe scherzend</term>. Gewöhnlich haben die Seegottheiten<lb/>
                                 am Kopfe Stücke von Krebsscheeren als Attribut.<lb/>
                                     Es sind keine Hörner <bibl><ref target="#"><emph>N.</emph> <term ref="#http://arachne.uni-koeln.de/item/objekt/21157">35</term></ref></bibl> ist ein Tronc und vortrefflich.<lb/>
@@ -5125,7 +5129,7 @@
                                     <bibl><ref target="#http://arachne.uni-koeln.de/item/buchseite/205986"><emph>Stosch Gemmæ t. 55.</emph></ref></bibl> <term ref="#http://arachne.uni-koeln.de/item/objekt/14867">Ein andrer <date>1779</date> gefunden beym<lb/>
                                         Ritter <emph><persName ref="#CerlID:cnp00404636">Azara</persName></emph></term>. <emph><bibl><ref target="#http://resolver.sub.uni-goettingen.de/purl?PPN668844728">Guatani mon. 1784. T. 1.</ref></bibl></emph>, Portrait,<lb/>
                                     
-                                    <note><ab><bibl><ref target="#">Winkelm. Anmerk. p. 91</ref></bibl><lb/></ab></note>
+                                    <note><ab><bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/winckelmann1767/0121">Winkelm. Anmerk. p. 91</ref></bibl><lb/></ab></note>
                                     
                                     nicht idealisirt. <term ref="#CensusID:10007702 #http://arachne.uni-koeln.de/item/objekt/34988">Einen im Pall. Rondanini</term>:
                                     
@@ -5509,7 +5513,7 @@
                                     als comische Histriones mit Larven, die sich durch den<lb/>
                                     großen Mund auszeichnen, der dazu diente, den Schall<lb/>
                                         der Stimme zu vermehren. <emph><bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/visconti1790bd3/0124"><term ref="#http://arachne.uni-koeln.de/item/objekt/19871">Mus. Clem. III. 28.</term></ref></bibl> <bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/visconti1790bd3/0125"><term ref="#http://arachne.uni-koeln.de/item/objekt/19873">29.</term></ref></bibl><lb/>
-                                            <bibl><ref target="#"><term>Winkelm. mon.<note type="certainty" resp="Wiegel">unidentifiziert</note></term></ref></bibl></emph> Die Larven waren alle Karrikaturen,<lb/>
+                                            <bibl><ref target="#http://resolver.sub.uni-goettingen.de/purl?PPN636562301"><term>Winkelm. mon.<note type="certainty" resp="Wiegel">unidentifiziert</note></term></ref></bibl></emph> Die Larven waren alle Karrikaturen,<lb/>
                                     damit sie in der Ferne in den ungeheuren Amphitheatern<lb/>
                                     Wirkung thun konten.<lb/></p>
                                     
@@ -5814,7 +5818,7 @@
                                     
                                     
                                     <pb/>
-                                    <p><term ref="#http://arachne.uni-koeln.de/item/objekt/14835">Eine ganz bekleidete in <emph>V. Borghese.</emph></term> <emph><bibl><ref target="#">Perrier 46.</ref></bibl> <bibl><ref target="#http://dfg-viewer.de/v2/?set[image]=37&amp;set[zoom]=default&amp;set[debug]=0&amp;set[double]=0&amp;set[mets]=http%3A%2F%2Fgdz.sub.uni-goettingen.de%2Fmets_export.php%3FPPN%3DPPN635735547">Cava-<lb/>
+                                    <p><term ref="#http://arachne.uni-koeln.de/item/objekt/14835">Eine ganz bekleidete in <emph>V. Borghese.</emph></term> <emph><bibl><ref target="#http://arachne.uni-koeln.de/item/buchseite/67196">Perrier 46.</ref></bibl> <bibl><ref target="#http://dfg-viewer.de/v2/?set[image]=37&amp;set[zoom]=default&amp;set[debug]=0&amp;set[double]=0&amp;set[mets]=http%3A%2F%2Fgdz.sub.uni-goettingen.de%2Fmets_export.php%3FPPN%3DPPN635735547">Cava-<lb/>
                                         ceppi. <term ref="#http://arachne.uni-koeln.de/item/objekt/11507">5.</term></ref></bibl></emph> Viele Statuen sind erst durch Restauratoren <emph><term ref="#http://arachne.uni-koeln.de/item/rezeption/301366">Venus<lb/>
                                     victrix</term></emph> geworden; z.B. <bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/giustiniani1640bd1/0040"><emph>Gall. Giust. 39.</emph></ref></bibl> mit einem Apfel<lb/>
                                     in der Hand.<lb/></p>
@@ -5969,11 +5973,11 @@
                                                     <bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/cavalieri1585a/0053">Cavalieri <term ref="#CensusID:156330 #http://arachne.uni-koeln.de/item/gruppen/400859 #http://arachne.uni-koeln.de/item/objekt/5894 #http://arachne.uni-koeln.de/item/objekt/5895">II. 53.</term></ref></bibl></emph> - Najaden oder Quellnymphen<lb/>
                                             haben sich viele von alten Fontainen erhalten, in ganz<lb/>
                                             verschiednen Handlungen; und von alten Grotten.<lb/>
-                                                Gewöhnlich wunderlich ergänzt. <bibl><ref target="#"><emph>Racolta <term ref="#http://arachne.uni-koeln.de/item/objekt/26897">82.</term></emph></ref></bibl> eine<lb/>
+                                                Gewöhnlich wunderlich ergänzt. <bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/maffei1704/0099"><emph>Racolta <term ref="#http://arachne.uni-koeln.de/item/objekt/26897">82.</term></emph></ref></bibl> eine<lb/>
                                                 im P. Farnese, <bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/cavalieri1585a/0051"><emph>Cavalieri II. 51.</emph></ref></bibl> <term ref="#CensusID:160927 #http://arachne.uni-koeln.de/item/objekt/130346">mit einer Schreibfeder<lb/>
                                                     als <emph><persName ref="#CerlID:cnp00546579">Egeria</persName></emph> ergänzt</term>. - <term ref="#http://arachne.uni-koeln.de/item/rezeption/301966">Schlafende Najaden</term> siehe<lb/>
                                             <emph><bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/giustiniani1640bd1/0088">Giust. 87.</ref></bibl> <bibl><ref target="#http://opac.sub.uni-goettingen.de/DB=1/PPNSET?PPN=14568895X">Episcop 87.</ref></bibl></emph> <term>Ein berühmtes Stück mit einem<lb/>
-                                                Epigramm<note type="certainty" resp="Wiegel">verloren</note></term> <bibl><ref target="#"><emph>Boissard VI. 26.</emph></ref></bibl><lb/></p>
+                                                Epigramm<note type="certainty" resp="Wiegel">verloren</note></term> <bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/boissard1598bd4"><emph>Boissard VI. 26.</emph></ref></bibl><lb/></p>
                                             
                                             <p>Die <term ref="#CensusID:152103 #http://arachne.uni-koeln.de/item/objekt/21171">sog<expan>enannte</expan> <persName ref="#CerlID:cnp00395483">Cleopatra</persName></term>, die jetzt im <emph>Clem.</emph> steht. <emph><bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/visconti1784bd2/0168">II. <choice><sic>40.</sic> <corr>44.</corr></choice></ref></bibl> <bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/maffei1704/0025">Racolta<lb/>
                                             8</ref></bibl></emph>, aus dem <emph>Belvedere. <bibl><ref target="#http://opac.sub.uni-goettingen.de/DB=1/PPNSET?PPN=14568895X">Episcop. 35.</ref></bibl> <bibl><ref target="#http://arachne.uni-koeln.de/item/buchseite/182698">Perrier 88.</ref></bibl> <bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/sandrart1675b/0029">Sandrart<lb/>
@@ -6535,8 +6539,8 @@
                                         sind. <persName ref="#CerlID:cnp00400145">Mengs</persName> hielt es für Copie eines noch höhren<lb/>
                                     Kunstwerks. Es finden sich auch noch Reste von andren<lb/>
                                         Antiken der <persName ref="#CerlID:cnp01300351">Niobe</persName>, besonders unübertrefflich schöne Köpfe.<lb/>
-                                        z.B. <term>im Pallaste Farnese<note type="certainty" resp="Wiegel">unidentifiziert</note></term>; einer in <bibl><ref target="#"><term>Dresden. 156.<note type="certainty" resp="Wiegel">unidentifiziert</note></term></ref></bibl><lb/>
-                                    <bibl><ref target="#"><emph>Beger thes. Brand. p. 327.</emph></ref></bibl> - So auch Köpfe und Wie-<lb/>
+                                        z.B. <term>im Pallaste Farnese<note type="certainty" resp="Wiegel">unidentifiziert</note></term>; einer in <bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/leplat1733/0160"><term>Dresden. 156.<note type="certainty" resp="Wiegel">unidentifiziert</note></term></ref></bibl><lb/>
+                                        <bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/beger1696ga"><emph>Beger thes. Brand. p. 327.</emph></ref></bibl> - So auch Köpfe und Wie-<lb/>
                                         derhohlungen der Söhne und Töchter. <bibl><ref target="#http://arachne.uni-koeln.de/item/buchseite/5758"><emph>Mus. Cap. <term ref="#http://arachne.uni-koeln.de/item/objekt/15951 #http://arachne.uni-koeln.de/item/objekt/15890">42.</term></emph></ref></bibl> <term ref="#http://arachne.uni-koeln.de/item/objekt/5222">Der<lb/>
                                     todte Sohn</term> in <bibl><ref target="#http://digi.ub.uni-heidelberg.de/diglit/leplat1733/0122"><emph>Marbre 117.</emph></ref></bibl> Es muß also die ganze Idee<lb/>
                                     von mehrern Künstlern behandelt worden seyn. Reliefs<lb/>
@@ -7486,7 +7490,7 @@
                         gleichwohl in alten Schriften nichts findet. Auch <persName ref="#CerlID:cnp01238749">Plinius</persName><lb/>
                         sagt davon nichts; er schrieb überh<expan>aupt</expan> sehr flüchtig.<lb/></p>
                         
-                            <p><bibl><ref target="#	http://resolver.sub.uni-goettingen.de/purl?PPN635723840"><emph>(Buonarotti) Vasi anticchi. Firenze <choice><sic>1717</sic> <corr>1716</corr></choice>. fol.</emph></ref></bibl><lb/></p>
+                            <p><bibl><ref target="#http://resolver.sub.uni-goettingen.de/purl?PPN635723840"><emph>(Buonarotti) Vasi anticchi. Firenze <choice><sic>1717</sic> <corr>1716</corr></choice>. fol.</emph></ref></bibl><lb/></p>
                         
                         <p>Die Lampen in den Gräbern. Sie gebrauchten wenig<lb/>
                         Wachslichter, sondern hohe Leuchter, auf denen die Lampen standen.<lb/></p>
@@ -7757,7 +7761,7 @@
                         von der Heil.g  merkwürdig; nicht für die Kunst.<lb/></p>
                         
                         <p><bibl><ref target="#http://arachne.uni-koeln.de/books/Bosio1632"><emph>Roma sotteranea</emph> von <emph>Ant. Basio., Rom 1632. gr fol.</emph></ref></bibl><lb/>
-                        <bibl><ref target="#http://arachne.uni-koeln.de/books/Bosio1651Vol1 http://arachne.uni-koeln.de/books/Bosio1651Vol2"><emph>P. Aringhus R. sutteranea novissima 2. fol. 1651.</emph></ref></bibl><lb/>
+                        <bibl><ref target="#http://arachne.uni-koeln.de/books/Bosio1651Vol1 #http://arachne.uni-koeln.de/books/Bosio1651Vol2"><emph>P. Aringhus R. sutteranea novissima 2. fol. 1651.</emph></ref></bibl><lb/>
                         weit vollständiger. <bibl><ref target="#">Paris 1689</ref></bibl>. <bibl><ref target="#http://arachne.uni-koeln.de/books/Bosio1737Vol1 #http://arachne.uni-koeln.de/books/Bosio1746Vol2 #http://arachne.uni-koeln.de/books/Bosio1754Vol3"><emph>Sc<del>lu</del>ultere ê pitture<lb/>
                         sacre. 3 T. Rom 1737. fol.</emph></ref></bibl><lb/></p>
                         
@@ -7855,7 +7859,7 @@
                         <p>Das Landvolk nahm dazu <emph>Amurca</emph>, Hefen von Oel.<lb/>
                         Die Griechen nennen dergleichen Statuen <emph><foreign xml:lang="gr">τα χονον</foreign></emph>.<lb/></p>
                         
-                            <p><emph><bibl><ref target="#http://resolver.sub.uni-goettingen.de/purl?PPN352846038_0001 http://resolver.sub.uni-goettingen.de/purl?PPN352846038_0002">Novi Comm. Soc. Gott. T. 1. 2.</ref></bibl></emph><lb/></p>
+                            <p><emph><bibl><ref target="#http://resolver.sub.uni-goettingen.de/purl?PPN352846038_0001 #http://resolver.sub.uni-goettingen.de/purl?PPN352846038_0002">Novi Comm. Soc. Gott. T. 1. 2.</ref></bibl></emph><lb/></p>
                         <p><bibl><ref target="#http://resolver.sub.uni-goettingen.de/purl?PPN556514408">Neue Biblioth. der Sch. W.</ref></bibl><lb/></p>
                         
                         <p>Man achtete schon seit frühen Zeiten bey den Griechen das<lb/>
