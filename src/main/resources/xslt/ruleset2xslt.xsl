@@ -97,6 +97,9 @@
                     <xslo:value-of select="generate-id($node)"/>
                 </xslo:template>
                 <xslo:template match="mets:dmdSec">
+                    <xslo:if test="@DMDID">
+                        <xslo:comment>DMDID was <xslo:value-of select="@DMDID"/></xslo:comment>
+                    </xslo:if>
                     <xslo:copy>
                         <!-- Rewire the IDs, there might be collisions fom the generated DMD sections -->
                         <xslo:if test="@DMDID">
@@ -112,6 +115,9 @@
                 <xslo:template match="mets:div">
                     <xslo:choose>
                         <xslo:when test="./ancestor::mets:structMap[@TYPE = 'LOGICAL']">
+                            <xslo:if test="@DMDID">
+                                <xslo:comment>DMDID was <xslo:value-of select="@DMDID"/></xslo:comment>
+                            </xslo:if>
                             <xslo:copy>
                                 <xslo:choose>
                                     <xslo:when test="not(@DMDID) and @LABEL">
