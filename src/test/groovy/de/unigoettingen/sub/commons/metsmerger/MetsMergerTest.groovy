@@ -73,7 +73,7 @@ class MetsMergerTest {
         }
     }
     
-        @Test
+    @Test
     void checkFiles () {
         for (testSet in TEST_DATA) {
             assertNotNull('DFG Testfile is null!', testSet.dfgViewerMets)
@@ -131,12 +131,12 @@ class MetsMergerTest {
         }
     }
     
-        @Test
+    @Test
     void testTUniqueIDs () {
         for (testSet in TEST_DATA) {
             testSet.converter.transform()
             log.info('Validating generated IDs for TEI File ' + testSet.processMets.toString())
-            def doc = testSet.converter..result
+            def doc = testSet.converter.result
             assertTrue('XPath for ID check failed!', checkUniquePath (doc, '//mets:*[@ID = following::mets:*/@ID]'))
         }
     }
