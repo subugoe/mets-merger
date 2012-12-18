@@ -121,6 +121,16 @@ class MetsMergerTest {
         }
     }
     
+        @Test
+    void testTUniqueIDs () {
+        for (testSet in TEST_DATA) {
+            testSet.converter.transform()
+            log.info('Validating generated IDs for TEI File ' + testSet.processMets.toString())
+            def doc = testSet.converter..result
+            assertTrue('XPath for ID check failed!', checkUniquePath (doc, '//mets:*[@ID = following::mets:*/@ID]'))
+        }
+    }
+    
     @AfterClass
     static void cleanUp () {
         for (testSet in TEST_DATA) {

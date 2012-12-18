@@ -88,8 +88,7 @@ class Tei2MetsTest extends AbstractTransformerTest {
             
         }
     }
-    
-    
+        
     @Test
     void testTei2MetsUniqueIDs () {
         for (tei in TEIFILES) {
