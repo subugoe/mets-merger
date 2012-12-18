@@ -35,8 +35,9 @@ import de.unigoettingen.sub.commons.metsmerger.util.XSDValidator
 @Log4j
 class Tei2MetsTest extends AbstractTransformerTest {
     
-    def static TEIFILES = [this.getClass().getResource('/tei/rom-heyne1798.tei.xml'), 
-        this.getClass().getResource('/tei/weimar-hs-2057.tei.xml')]
+    def static TEIFILES = [this.getClass().getResource('/tei/rom-heyne1798.tei.xml'),
+                           this.getClass().getResource('/tei/bern-mss-muel-507.tei.xml'),
+                           this.getClass().getResource('/tei/weimar-hs-2057.tei.xml')]
     
     @Test
     void testGetInstance () {
@@ -44,6 +45,14 @@ class Tei2MetsTest extends AbstractTransformerTest {
         log.trace('Stylesheet is ' + converter.stylesheet.toString())
     }
 
+    @Test
+    void checkFiles () {
+        for (tei in TEIFILES) {
+            assertNotNull('Testfile is null!', tei)
+            assertTrue('File does not exist!', new File(tei.toURI()).exists()) 
+        }
+    }
+    
     @Test
     void testTei2MetsTransform () {
         for (tei in TEIFILES) {
