@@ -145,11 +145,6 @@
                     <xsl:if test="not(preceding-sibling::TEI:head)">
                         <xsl:variable name="childPbs" select="ancestor::TEI:div[1]/descendant::TEI:pb"/>
                         <xsl:variable name="from">
-                            <!--
-                        <xsl:value-of select="$locPrefix"/>
-                        <xsl:text>_</xsl:text>
-                        <xsl:number format="00000001" value="count(preceding::TEI:head) + 5"/>
-                        -->
                             <xsl:call-template name="createId">
                                 <xsl:with-param name="prefix">
                                     <xsl:value-of select="$locPrefix"/>
@@ -314,11 +309,6 @@
         </xsl:if>
         <xsl:if test="not(preceding-sibling::TEI:head)">
             <xsl:attribute name="ID">
-                <!--
-            <xsl:value-of select="$locPrefix"/>
-            <xsl:text>_</xsl:text>
-            <xsl:number format="00000001" value="count(preceding::TEI:head) + 5"/>
-            -->
                 <xsl:call-template name="createId">
                     <xsl:with-param name="prefix">
                         <xsl:value-of select="$locPrefix"/>
@@ -339,11 +329,9 @@
                 <xsl:text>Chapter</xsl:text>
             </xsl:attribute>
             <xsl:attribute name="LABEL">
-                <!-- Use this to remove line seperators -->
-                <!--
-                <xsl:value-of select="replace(normalize-space(.), '- ', '')"/>
-            -->
-                <xsl:value-of select="normalize-space(.)"/>
+                <xsl:call-template name="cleanLabel">
+                    <xsl:with-param name="str" select="."></xsl:with-param>
+                </xsl:call-template>
             </xsl:attribute>
         </xsl:if>
     </xsl:template>
@@ -417,4 +405,13 @@
         <xsl:param name="node" select="."/>
         <xsl:value-of select="concat($prefix, generate-id($node))"/>
     </xsl:template>
+
+    <xsl:template name="cleanLabel">
+        <xsl:param name="str"/>
+        <xsl:variable name="labelString" select="string($str)"/>
+        <xsl:variable name="labelWithoutHyphen" select="replace($labelString, '-\s?&#xA;\s*','')"></xsl:variable>
+        <xsl:variable name="labelClean" select="replace($labelWithoutHyphen, '&#xA;\s*',' ')"></xsl:variable>
+        <xsl:value-of select="normalize-space($labelClean)"/>
+    </xsl:template>
+    
 </xsl:stylesheet>
