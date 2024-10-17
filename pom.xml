@@ -26,7 +26,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> 
         <gmavenVersion>1.4</gmavenVersion>
         <gmavenProviderSelection>2.0</gmavenProviderSelection>
-        <groovyVersion>2.0.5</groovyVersion>
+        <groovyVersion>2.4.21</groovyVersion>
     </properties>
     <dependencies>
         <dependency>
